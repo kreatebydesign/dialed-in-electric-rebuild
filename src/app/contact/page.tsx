@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Contact | Request Electrical or Generator Service | Dialed In Electric",
+  title: {
+    absolute: "Contact | Request Electrical or Generator Service | Dialed In Electric",
+  },
   description:
     "Call or email Dialed In Electric for generator installation, panel upgrades, and electrical service in Roseburg, OR. CCB# 228668. 541-817-6480.",
   keywords: [

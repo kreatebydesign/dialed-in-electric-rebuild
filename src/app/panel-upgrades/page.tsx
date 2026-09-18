@@ -6,9 +6,11 @@ import CTABanner from "@/components/ui/CTABanner";
 import Button from "@/components/ui/Button";
 
 export const metadata: Metadata = {
-  title: "Panel Upgrade Roseburg OR | 200 Amp Service Upgrade | Dialed In Electric",
+  title: {
+    absolute: "Panel & Service Upgrades in Roseburg, OR | Dialed In Electric",
+  },
   description:
-    "Panel and service upgrades in Roseburg, OR. 100→200A upgrades, meter-main combos, permit and inspection handled. Licensed electrician. CCB# 228668. Call 541-817-6480.",
+    "Electrical panel and 200-amp service upgrades in Roseburg and Douglas County. 100→200A upgrades, meter-main combos, permits, and inspection handled. Call 541-817-6480.",
   keywords: [
     "panel upgrade Roseburg OR",
     "200 amp panel upgrade Roseburg",
@@ -19,9 +21,9 @@ export const metadata: Metadata = {
   ],
   alternates: { canonical: "/panel-upgrades" },
   openGraph: {
-    title: "Panel Upgrade Roseburg OR | 200 Amp Service Upgrade | Dialed In Electric",
+    title: "Panel & Service Upgrades in Roseburg, OR | Dialed In Electric",
     description:
-      "Panel and service upgrades in Roseburg, OR. 100→200A, meter-main combos, permit included. Licensed electrician. CCB# 228668.",
+      "Electrical panel and 200-amp service upgrades in Roseburg and Douglas County. Permits and inspection included. CCB# 228668.",
     url: "https://dialedinelectricroseburg.com/panel-upgrades",
   },
 };
@@ -31,14 +33,50 @@ const serviceSchema = {
   "@type": "Service",
   name: "Electrical Panel and Service Upgrade",
   description:
-    "Panel and service upgrades in Roseburg, OR. Includes load evaluation, permit, new panel, breakers, labeling, riser or service entrance work, and inspection coordination.",
+    "Panel and service upgrades in Roseburg and Douglas County, OR. Includes load evaluation, permit, new panel, breakers, labeling, riser or service entrance work, and inspection coordination.",
   provider: {
     "@type": "LocalBusiness",
     "@id": "https://dialedinelectricroseburg.com/#business",
   },
-  areaServed: { "@type": "City", name: "Roseburg", containedInPlace: { "@type": "State", name: "Oregon" } },
+  areaServed: [
+    {
+      "@type": "City",
+      name: "Roseburg",
+      containedInPlace: { "@type": "State", name: "Oregon" },
+    },
+    {
+      "@type": "AdministrativeArea",
+      name: "Douglas County",
+      containedInPlace: { "@type": "State", name: "Oregon" },
+    },
+  ],
   serviceType: "Panel Upgrade",
   url: "https://dialedinelectricroseburg.com/panel-upgrades",
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    {
+      "@type": "ListItem",
+      position: 1,
+      name: "Home",
+      item: "https://dialedinelectricroseburg.com/",
+    },
+    {
+      "@type": "ListItem",
+      position: 2,
+      name: "Electrical Services",
+      item: "https://dialedinelectricroseburg.com/electrical-services",
+    },
+    {
+      "@type": "ListItem",
+      position: 3,
+      name: "Panel & Service Upgrades",
+      item: "https://dialedinelectricroseburg.com/panel-upgrades",
+    },
+  ],
 };
 
 function BoltIcon({ className }: { className?: string }) {
@@ -93,6 +131,10 @@ export default function PanelUpgradesPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
       />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
 
       {/* Hero */}
       <section className="relative min-h-[52vh] flex items-center overflow-hidden bg-charcoal-deep">
@@ -127,7 +169,7 @@ export default function PanelUpgradesPage() {
             <div className="flex items-center gap-3 mb-4">
               <div className="h-px w-8 bg-amber" aria-hidden="true" />
               <span className="text-amber text-[11px] font-bold tracking-[0.18em] uppercase">
-                Panel Upgrades · Roseburg, OR
+                Panel Upgrades · Roseburg &amp; Douglas County
               </span>
             </div>
             <h1 className="text-4xl sm:text-5xl lg:text-[54px] font-extrabold text-white leading-[1.06] tracking-tight mb-4">
@@ -135,7 +177,7 @@ export default function PanelUpgradesPage() {
               <span className="text-amber">in Roseburg, OR</span>
             </h1>
             <p className="text-[16px] text-white/65 leading-relaxed max-w-lg mb-8">
-              100→200A upgrades, panel replacements, and service entrance work. Permit included. Most residential jobs are done in one day. CCB# 228668.
+              100→200A upgrades, panel replacements, and service entrance work for homes and shops throughout Roseburg and Douglas County. Permit included. Most residential jobs are done in one day. CCB# 228668.
             </p>
             <div className="flex flex-col sm:flex-row gap-3">
               <Button as="link" href="/contact" variant="primary" size="lg">

@@ -192,7 +192,9 @@ export async function generateMetadata({
   if (!city) return {};
 
   return {
-    title: `Electrician in ${city.name}, OR | Generator & Electrical Service | Dialed In Electric`,
+    title: {
+      absolute: `Electrician in ${city.name}, OR | Generator & Electrical Service | Dialed In Electric`,
+    },
     description: city.metaDescription,
     keywords: [
       `electrician ${city.name} OR`,

@@ -13,11 +13,11 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: {
-    default: "Electrician Roseburg OR | Generator Installation | Dialed In Electric",
+    default: "Electrician & Generac Installer in Roseburg, OR | Dialed In Electric",
     template: "%s | Dialed In Electric",
   },
   description:
-    "Licensed electrician in Roseburg, OR. Generac standby generator installation, panel upgrades, new home wiring, and commercial electrical. Same-week availability. CCB# 228668.",
+    "Licensed Roseburg electrician specializing in Generac generators, panel upgrades, EV chargers, new construction and commercial electrical work throughout Douglas County.",
   keywords: [
     "generator installation Roseburg OR",
     "backup generator Roseburg",
@@ -30,9 +30,7 @@ export const metadata: Metadata = {
   authors: [{ name: "Dialed In Electric Inc." }],
   creator: "Dialed In Electric Inc.",
   metadataBase: new URL("https://dialedinelectricroseburg.com"),
-  alternates: {
-    canonical: "/",
-  },
+  // Canonicals are set per-page. Do not inherit "/" onto child routes.
   verification: {
     google: "dkQWFvw6CPfAhk-sDHzwxHYWHZNfK524ME-pf8pmJmI",
   },
@@ -41,9 +39,9 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: "https://dialedinelectricroseburg.com",
     siteName: "Dialed In Electric",
-    title: "Electrician Roseburg OR | Generator Installation | Dialed In Electric",
+    title: "Electrician & Generac Installer in Roseburg, OR | Dialed In Electric",
     description:
-      "Licensed electrician in Roseburg, OR. Generac standby generator installation, panel upgrades, and clean electrical work. Same-week availability. CCB# 228668.",
+      "Licensed Roseburg electrician specializing in Generac generators, panel upgrades, EV chargers, new construction and commercial electrical work throughout Douglas County.",
     images: [
       {
         url: "/images/og-default.jpg",
@@ -55,9 +53,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Electrician Roseburg OR | Generator Installation | Dialed In Electric",
+    title: "Electrician & Generac Installer in Roseburg, OR | Dialed In Electric",
     description:
-      "Licensed electrician in Roseburg, OR. Generac standby generators, panel upgrades, and clean electrical work built to code.",
+      "Licensed Roseburg electrician specializing in Generac generators, panel upgrades, EV chargers, new construction and commercial electrical work throughout Douglas County.",
     images: ["/images/og-default.jpg"],
   },
   robots: {

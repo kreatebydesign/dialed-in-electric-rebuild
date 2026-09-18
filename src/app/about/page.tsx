@@ -5,7 +5,9 @@ import CTABanner from "@/components/ui/CTABanner";
 import Button from "@/components/ui/Button";
 
 export const metadata: Metadata = {
-  title: "About | Licensed Electrician in Roseburg, OR | Dialed In Electric",
+  title: {
+    absolute: "About | Licensed Electrician in Roseburg, OR | Dialed In Electric",
+  },
   description:
     "Dialed In Electric is a licensed electrical contractor based in Roseburg, OR. Generac certified, licensed since 2019, serving Douglas County. CCB# 228668.",
   keywords: [

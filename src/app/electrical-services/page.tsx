@@ -6,7 +6,9 @@ import Button from "@/components/ui/Button";
 import ServiceCard from "@/components/ui/ServiceCard";
 
 export const metadata: Metadata = {
-  title: "Electrical Services Roseburg OR | Panel, Wiring, EV Charger | Dialed In Electric",
+  title: {
+    absolute: "Electrical Services Roseburg OR | Panel, Wiring, EV Charger | Dialed In Electric",
+  },
   description:
     "Full-service electrical contractor in Roseburg, OR. Panel upgrades, new home wiring, commercial wiring, generator installation, and EV charger installation. Licensed & insured. CCB# 228668.",
   keywords: [

@@ -8,10 +8,18 @@ import CTABanner from "@/components/ui/CTABanner";
 import Button from "@/components/ui/Button";
 
 export const metadata: Metadata = {
-  title: "Electrician Roseburg OR | Generator Installation | Dialed In Electric",
+  title: {
+    absolute: "Electrician & Generac Installer in Roseburg, OR | Dialed In Electric",
+  },
   description:
-    "Licensed electrician in Roseburg, OR. Generac standby generator installation, panel upgrades, new home wiring, and commercial electrical. Same-week availability. CCB# 228668.",
+    "Licensed Roseburg electrician specializing in Generac generators, panel upgrades, EV chargers, new construction and commercial electrical work throughout Douglas County.",
   alternates: { canonical: "/" },
+  openGraph: {
+    title: "Electrician & Generac Installer in Roseburg, OR | Dialed In Electric",
+    description:
+      "Licensed Roseburg electrician specializing in Generac generators, panel upgrades, EV chargers, new construction and commercial electrical work throughout Douglas County.",
+    url: "https://dialedinelectricroseburg.com",
+  },
 };
 
 // ── Icons ──────────────────────────────────────────────────────────────────
@@ -310,7 +318,7 @@ export default function HomePage() {
                 Power outages in Douglas County aren&apos;t rare — storms, grid issues, wildfire season. A Generac standby generator kicks on automatically within seconds. No extension cords. No manual switching.
               </p>
               <p className="text-[16px] text-muted leading-relaxed mb-8">
-                We handle the full installation: site review, concrete pad, automatic transfer switch, electrical wiring, gas coordination, and a walkthrough when it's done.
+                We handle the full installation: site review, concrete pad, automatic transfer switch, electrical wiring, gas coordination, and a walkthrough when it&apos;s done.
               </p>
 
               {/* Feature list */}
@@ -562,14 +570,14 @@ export default function HomePage() {
         <div className="text-center mb-10">
           <div className="flex items-center justify-center gap-3 mb-4">
             <div className="h-px w-8 bg-amber" aria-hidden="true" />
-            <span className="text-amber text-[11px] font-bold tracking-[0.18em] uppercase">Reviews</span>
+            <span className="text-amber text-[11px] font-bold tracking-[0.18em] uppercase">Customer Feedback</span>
             <div className="h-px w-8 bg-amber" aria-hidden="true" />
           </div>
           <h2 className="text-3xl lg:text-[40px] font-extrabold text-charcoal-deep tracking-tight mb-3">
             What Customers Say
           </h2>
           <p className="text-[15px] text-muted max-w-md mx-auto">
-            Real reviews from homeowners and builders across Douglas County.
+            Feedback from homeowners and builders we&apos;ve worked with across Douglas County.
           </p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5">

@@ -17,16 +17,7 @@ const companyLinks = [
   { label: "Service Areas", href: "/service-areas" },
   { label: "FAQ", href: "/faq" },
   { label: "Contact", href: "/contact" },
-  { label: "Careers", href: "/careers" },
 ];
-
-function BoltIcon() {
-  return (
-    <svg viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5" aria-hidden="true">
-      <path d="M11.5 2L4 11.5h5.5L8 18l8-9h-5.5L11.5 2z" />
-    </svg>
-  );
-}
 
 export default function Footer() {
   const year = new Date().getFullYear();

@@ -9,9 +9,11 @@ import FAQItem from "@/components/ui/FAQItem";
 // ── Metadata ────────────────────────────────────────────────────────────────
 
 export const metadata: Metadata = {
-  title: "Generator Installation Roseburg OR | Generac Standby | Dialed In Electric",
+  title: {
+    absolute: "Generac Generator Installation in Roseburg, OR | Dialed In Electric",
+  },
   description:
-    "Generac standby generator installation in Roseburg, OR. We handle the full install — pad, transfer switch, gas coordination, and startup. Licensed electrician. Call 541-817-6480.",
+    "Generac standby generator installation in Roseburg and Douglas County. Full install — pad, automatic transfer switch, gas coordination, permits, and startup. Call 541-817-6480.",
   keywords: [
     "generator installation Roseburg OR",
     "backup generator installation Roseburg",
@@ -23,9 +25,9 @@ export const metadata: Metadata = {
   ],
   alternates: { canonical: "/generators" },
   openGraph: {
-    title: "Generator Installation Roseburg OR | Generac Standby | Dialed In Electric",
+    title: "Generac Generator Installation in Roseburg, OR | Dialed In Electric",
     description:
-      "Generac standby generator installation in Roseburg, OR. We handle the full install — pad, transfer switch, gas coordination, and startup. Licensed. CCB# 228668.",
+      "Generac standby generator installation in Roseburg and Douglas County. Pad, transfer switch, gas coordination, permits, and startup. CCB# 228668.",
     url: "https://dialedinelectricroseburg.com/generators",
     images: [{ url: "/images/gallery/generac-generator-install-01.jpg", width: 1200, height: 630 }],
   },
@@ -51,13 +53,45 @@ const serviceSchema = {
       addressCountry: "US",
     },
   },
-  areaServed: {
-    "@type": "City",
-    name: "Roseburg",
-    containedInPlace: { "@type": "State", name: "Oregon" },
-  },
+  areaServed: [
+    {
+      "@type": "City",
+      name: "Roseburg",
+      containedInPlace: { "@type": "State", name: "Oregon" },
+    },
+    {
+      "@type": "AdministrativeArea",
+      name: "Douglas County",
+      containedInPlace: { "@type": "State", name: "Oregon" },
+    },
+  ],
   serviceType: "Generator Installation",
   url: "https://dialedinelectricroseburg.com/generators",
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    {
+      "@type": "ListItem",
+      position: 1,
+      name: "Home",
+      item: "https://dialedinelectricroseburg.com/",
+    },
+    {
+      "@type": "ListItem",
+      position: 2,
+      name: "Electrical Services",
+      item: "https://dialedinelectricroseburg.com/electrical-services",
+    },
+    {
+      "@type": "ListItem",
+      position: 3,
+      name: "Generac Generator Installation",
+      item: "https://dialedinelectricroseburg.com/generators",
+    },
+  ],
 };
 
 const faqSchema = {
@@ -221,6 +255,10 @@ export default function GeneratorsPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
 
       {/* ── 1. Hero ── */}
       <section className="relative min-h-[68vh] flex items-center overflow-hidden bg-charcoal-deep">
@@ -253,6 +291,8 @@ export default function GeneratorsPage() {
             <div className="flex items-center gap-2 mb-5 text-[12px] text-white/40">
               <Link href="/" className="hover:text-white/70 transition-colors">Home</Link>
               <span>/</span>
+              <Link href="/electrical-services" className="hover:text-white/70 transition-colors">Services</Link>
+              <span>/</span>
               <span className="text-white/60">Generators</span>
             </div>
 
@@ -260,7 +300,7 @@ export default function GeneratorsPage() {
             <div className="flex items-center gap-3 mb-5">
               <div className="h-px w-8 bg-amber" aria-hidden="true" />
               <span className="text-amber text-[11px] font-bold tracking-[0.18em] uppercase">
-                Generac Certified · Roseburg, OR
+                Generac Certified · Roseburg &amp; Douglas County
               </span>
             </div>
 
@@ -271,7 +311,7 @@ export default function GeneratorsPage() {
             </h1>
 
             <p className="text-[17px] text-white/65 leading-relaxed max-w-xl mb-9">
-              We handle the full install — site review, pad, wiring, transfer switch, gas hookup, and startup. Licensed &amp; insured. CCB# 228668.
+              Generac standby generator installation for homes and businesses throughout Roseburg and Douglas County. We handle the full install — site review, pad, wiring, transfer switch, gas hookup, and startup. Licensed &amp; insured. CCB# 228668.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-3 mb-9">
@@ -399,7 +439,7 @@ export default function GeneratorsPage() {
               <div className="flex items-center gap-3 mb-5">
                 <div className="h-px w-8 bg-amber" aria-hidden="true" />
                 <span className="text-amber text-[11px] font-bold tracking-[0.18em] uppercase">
-                  What's Included
+                  What&apos;s Included
                 </span>
               </div>
               <h2 className="text-3xl lg:text-[40px] font-extrabold text-charcoal-deep tracking-tight leading-tight mb-4">

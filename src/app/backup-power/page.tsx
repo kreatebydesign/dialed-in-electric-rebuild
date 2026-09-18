@@ -6,7 +6,9 @@ import CTABanner from "@/components/ui/CTABanner";
 import Button from "@/components/ui/Button";
 
 export const metadata: Metadata = {
-  title: "Manual Transfer Switch Installation Roseburg OR | Dialed In Electric",
+  title: {
+    absolute: "Manual Transfer Switch Installation Roseburg OR | Dialed In Electric",
+  },
   description:
     "Manual transfer switch installation in Roseburg, OR. Connect your portable generator to your home's circuits safely. Licensed electrician. CCB# 228668. Call 541-817-6480.",
   keywords: [

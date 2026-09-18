@@ -4,7 +4,9 @@ import Link from "next/link";
 import CTABanner from "@/components/ui/CTABanner";
 
 export const metadata: Metadata = {
-  title: "Projects | Electrical & Generator Work | Dialed In Electric",
+  title: {
+    absolute: "Projects | Electrical & Generator Work | Dialed In Electric",
+  },
   description:
     "Real project photos from Dialed In Electric in Roseburg, OR. Generator installs, panel upgrades, commercial wiring, and residential electrical work throughout Douglas County.",
   keywords: [

@@ -4,7 +4,9 @@ import Link from "next/link";
 import CTABanner from "@/components/ui/CTABanner";
 
 export const metadata: Metadata = {
-  title: "Electrician Service Areas | Roseburg, Sutherlin, Winston | Dialed In Electric",
+  title: {
+    absolute: "Electrician Service Areas | Roseburg, Sutherlin, Winston | Dialed In Electric",
+  },
   description:
     "Dialed In Electric serves Roseburg and all of Douglas County, OR. Generator installation, panel upgrades, residential and commercial electrical work in Sutherlin, Winston, Myrtle Creek, and surrounding communities.",
   keywords: [

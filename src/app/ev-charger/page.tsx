@@ -5,7 +5,9 @@ import CTABanner from "@/components/ui/CTABanner";
 import Button from "@/components/ui/Button";
 
 export const metadata: Metadata = {
-  title: "EV Charger Installation Roseburg OR | Level 2 Home Charging | Dialed In Electric",
+  title: {
+    absolute: "EV Charger Installation Roseburg OR | Level 2 Home Charging | Dialed In Electric",
+  },
   description:
     "EV charger installation in Roseburg, OR. Level 2 home charging circuit — properly sized, permitted, and labeled. Works with all major electric vehicles. CCB# 228668.",
   keywords: [

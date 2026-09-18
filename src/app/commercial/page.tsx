@@ -5,9 +5,11 @@ import CTABanner from "@/components/ui/CTABanner";
 import Button from "@/components/ui/Button";
 
 export const metadata: Metadata = {
-  title: "Commercial Electrical Contractor Roseburg OR | Dialed In Electric",
+  title: {
+    absolute: "Commercial Electrical Contractor in Roseburg, OR | Dialed In Electric",
+  },
   description:
-    "Commercial electrical contractor in Roseburg, OR. Tenant improvements, shop wiring, machine circuits, lighting, and service work throughout Douglas County. CCB# 228668.",
+    "Commercial electrical contractor in Roseburg and Douglas County. Tenant improvements, shop wiring, machine circuits, lighting, and service work. CCB# 228668. Call 541-817-6480.",
   keywords: [
     "commercial electrician Roseburg OR",
     "commercial electrical contractor Roseburg",
@@ -17,9 +19,9 @@ export const metadata: Metadata = {
   ],
   alternates: { canonical: "/commercial" },
   openGraph: {
-    title: "Commercial Electrical Contractor Roseburg OR | Dialed In Electric",
+    title: "Commercial Electrical Contractor in Roseburg, OR | Dialed In Electric",
     description:
-      "Commercial electrical in Roseburg, OR. Tenant improvements, shops, machine circuits, and service work. CCB# 228668.",
+      "Commercial electrical in Roseburg and Douglas County. Tenant improvements, shops, machine circuits, and service work. CCB# 228668.",
     url: "https://dialedinelectricroseburg.com/commercial",
   },
 };
@@ -29,18 +31,50 @@ const serviceSchema = {
   "@type": "Service",
   name: "Commercial Electrical Services",
   description:
-    "Commercial electrical contractor in Roseburg, OR. Tenant improvements, shop and warehouse wiring, machine circuits, lighting, service upgrades, and permit coordination throughout Douglas County.",
+    "Commercial electrical contractor in Roseburg and Douglas County, OR. Tenant improvements, shop and warehouse wiring, machine circuits, lighting, service upgrades, and permit coordination.",
   provider: {
     "@type": "LocalBusiness",
     "@id": "https://dialedinelectricroseburg.com/#business",
   },
-  areaServed: {
-    "@type": "City",
-    name: "Roseburg",
-    containedInPlace: { "@type": "State", name: "Oregon" },
-  },
+  areaServed: [
+    {
+      "@type": "City",
+      name: "Roseburg",
+      containedInPlace: { "@type": "State", name: "Oregon" },
+    },
+    {
+      "@type": "AdministrativeArea",
+      name: "Douglas County",
+      containedInPlace: { "@type": "State", name: "Oregon" },
+    },
+  ],
   serviceType: "Commercial Electrical",
   url: "https://dialedinelectricroseburg.com/commercial",
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    {
+      "@type": "ListItem",
+      position: 1,
+      name: "Home",
+      item: "https://dialedinelectricroseburg.com/",
+    },
+    {
+      "@type": "ListItem",
+      position: 2,
+      name: "Electrical Services",
+      item: "https://dialedinelectricroseburg.com/electrical-services",
+    },
+    {
+      "@type": "ListItem",
+      position: 3,
+      name: "Commercial Electrical",
+      item: "https://dialedinelectricroseburg.com/commercial",
+    },
+  ],
 };
 
 function BoltIcon({ className }: { className?: string }) {
@@ -113,6 +147,10 @@ export default function CommercialPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
       />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
 
       {/* Hero */}
       <section className="relative min-h-[52vh] flex items-center overflow-hidden bg-charcoal-deep">
@@ -148,7 +186,7 @@ export default function CommercialPage() {
             <div className="flex items-center gap-3 mb-4">
               <div className="h-px w-8 bg-amber" aria-hidden="true" />
               <span className="text-amber text-[11px] font-bold tracking-[0.18em] uppercase">
-                Commercial · Roseburg, OR
+                Commercial · Roseburg &amp; Douglas County
               </span>
             </div>
             <h1 className="text-4xl sm:text-5xl lg:text-[54px] font-extrabold text-white leading-[1.06] tracking-tight mb-4">
@@ -156,7 +194,7 @@ export default function CommercialPage() {
               <span className="text-amber">Contractor in Roseburg, OR</span>
             </h1>
             <p className="text-[16px] text-white/65 leading-relaxed max-w-lg mb-8">
-              Shops, tenant improvements, warehouses, and commercial service work throughout Douglas County. We pull permits, coordinate with other trades, and handle the inspection. CCB# 228668.
+              Shops, tenant improvements, warehouses, and commercial service work throughout Roseburg and Douglas County. We pull permits, coordinate with other trades, and handle the inspection. CCB# 228668.
             </p>
             <div className="flex flex-col sm:flex-row gap-3">
               <Button as="link" href="/contact" variant="primary" size="lg">

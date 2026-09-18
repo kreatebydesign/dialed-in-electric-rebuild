@@ -5,9 +5,11 @@ import CTABanner from "@/components/ui/CTABanner";
 import Button from "@/components/ui/Button";
 
 export const metadata: Metadata = {
-  title: "New Home Wiring Roseburg OR | New Construction Electrician | Dialed In Electric",
+  title: {
+    absolute: "New Construction & Commercial Wiring in Roseburg, OR | Dialed In Electric",
+  },
   description:
-    "New home wiring in Roseburg, OR. Rough-in through trim-out for new construction and additions. We work with builders, GCs, and owner-builders. Licensed electrician. CCB# 228668.",
+    "New home wiring and new construction electrical in Roseburg and Douglas County. Rough-in through trim-out for builders, GCs, and owner-builders. CCB# 228668.",
   keywords: [
     "new home wiring Roseburg OR",
     "new construction electrician Roseburg",
@@ -17,11 +19,62 @@ export const metadata: Metadata = {
   ],
   alternates: { canonical: "/new-home-wiring" },
   openGraph: {
-    title: "New Home Wiring Roseburg OR | Dialed In Electric",
+    title: "New Construction Wiring in Roseburg, OR | Dialed In Electric",
     description:
-      "New construction and home addition wiring in Roseburg, OR. Rough-in through trim-out, permit included. CCB# 228668.",
+      "New construction and home addition wiring in Roseburg and Douglas County. Rough-in through trim-out, permit included. CCB# 228668.",
     url: "https://dialedinelectricroseburg.com/new-home-wiring",
   },
+};
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  name: "New Home Wiring and New Construction Electrical",
+  description:
+    "New home wiring in Roseburg and Douglas County, OR. Rough-in through trim-out for new construction and additions. Work with builders, GCs, and owner-builders. Permits and inspections included.",
+  provider: {
+    "@type": "LocalBusiness",
+    "@id": "https://dialedinelectricroseburg.com/#business",
+  },
+  areaServed: [
+    {
+      "@type": "City",
+      name: "Roseburg",
+      containedInPlace: { "@type": "State", name: "Oregon" },
+    },
+    {
+      "@type": "AdministrativeArea",
+      name: "Douglas County",
+      containedInPlace: { "@type": "State", name: "Oregon" },
+    },
+  ],
+  serviceType: "New Construction Electrical",
+  url: "https://dialedinelectricroseburg.com/new-home-wiring",
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    {
+      "@type": "ListItem",
+      position: 1,
+      name: "Home",
+      item: "https://dialedinelectricroseburg.com/",
+    },
+    {
+      "@type": "ListItem",
+      position: 2,
+      name: "Electrical Services",
+      item: "https://dialedinelectricroseburg.com/electrical-services",
+    },
+    {
+      "@type": "ListItem",
+      position: 3,
+      name: "New Home Wiring",
+      item: "https://dialedinelectricroseburg.com/new-home-wiring",
+    },
+  ],
 };
 
 function BoltIcon({ className }: { className?: string }) {
@@ -62,6 +115,15 @@ const trimOutScope = [
 export default function NewHomeWiringPage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+
       {/* Hero */}
       <section className="relative min-h-[52vh] flex items-center overflow-hidden bg-charcoal-deep">
         <div className="absolute inset-0">
@@ -96,7 +158,7 @@ export default function NewHomeWiringPage() {
             <div className="flex items-center gap-3 mb-4">
               <div className="h-px w-8 bg-amber" aria-hidden="true" />
               <span className="text-amber text-[11px] font-bold tracking-[0.18em] uppercase">
-                New Construction · Roseburg, OR
+                New Construction · Roseburg &amp; Douglas County
               </span>
             </div>
             <h1 className="text-4xl sm:text-5xl lg:text-[54px] font-extrabold text-white leading-[1.06] tracking-tight mb-4">
@@ -104,7 +166,7 @@ export default function NewHomeWiringPage() {
               <span className="text-amber">in Roseburg, OR</span>
             </h1>
             <p className="text-[16px] text-white/65 leading-relaxed max-w-lg mb-8">
-              Rough-in through trim-out for new construction and home additions. We work with builders, general contractors, and owner-builders throughout Douglas County. Licensed &amp; insured. CCB# 228668.
+              Rough-in through trim-out for new construction and home additions throughout Roseburg and Douglas County. We work with builders, general contractors, and owner-builders. Licensed &amp; insured. CCB# 228668.
             </p>
             <div className="flex flex-col sm:flex-row gap-3">
               <Button as="link" href="/contact" variant="primary" size="lg">
