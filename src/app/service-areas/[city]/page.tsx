@@ -206,7 +206,7 @@ export async function generateMetadata({
     openGraph: {
       title: `Electrician in ${city.name}, OR | Dialed In Electric`,
       description: city.metaDescription,
-      url: `https://dialedinelectricroseburg.com/service-areas/${city.slug}`,
+      url: `https://www.dialedinelectricroseburg.com/service-areas/${city.slug}`,
     },
   };
 }

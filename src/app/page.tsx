@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     title: "Electrician & Generac Installer in Roseburg, OR | Dialed In Electric",
     description:
       "Licensed Roseburg electrician specializing in Generac generators, panel upgrades, EV chargers, new construction and commercial electrical work throughout Douglas County.",
-    url: "https://dialedinelectricroseburg.com",
+    url: "https://www.dialedinelectricroseburg.com",
   },
 };
 

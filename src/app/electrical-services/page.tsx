@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     title: "Electrical Services Roseburg OR | Dialed In Electric",
     description:
       "Panel upgrades, new home wiring, commercial wiring, generator installation, and EV chargers. Licensed electrician in Roseburg, OR. CCB# 228668.",
-    url: "https://dialedinelectricroseburg.com/electrical-services",
+    url: "https://www.dialedinelectricroseburg.com/electrical-services",
   },
 };
 

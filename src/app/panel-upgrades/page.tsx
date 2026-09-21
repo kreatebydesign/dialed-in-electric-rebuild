@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     title: "Panel & Service Upgrades in Roseburg, OR | Dialed In Electric",
     description:
       "Electrical panel and 200-amp service upgrades in Roseburg and Douglas County. Permits and inspection included. CCB# 228668.",
-    url: "https://dialedinelectricroseburg.com/panel-upgrades",
+    url: "https://www.dialedinelectricroseburg.com/panel-upgrades",
   },
 };
 
@@ -36,7 +36,7 @@ const serviceSchema = {
     "Panel and service upgrades in Roseburg and Douglas County, OR. Includes load evaluation, permit, new panel, breakers, labeling, riser or service entrance work, and inspection coordination.",
   provider: {
     "@type": "LocalBusiness",
-    "@id": "https://dialedinelectricroseburg.com/#business",
+    "@id": "https://www.dialedinelectricroseburg.com/#business",
   },
   areaServed: [
     {
@@ -51,7 +51,7 @@ const serviceSchema = {
     },
   ],
   serviceType: "Panel Upgrade",
-  url: "https://dialedinelectricroseburg.com/panel-upgrades",
+  url: "https://www.dialedinelectricroseburg.com/panel-upgrades",
 };
 
 const breadcrumbSchema = {
@@ -62,19 +62,19 @@ const breadcrumbSchema = {
       "@type": "ListItem",
       position: 1,
       name: "Home",
-      item: "https://dialedinelectricroseburg.com/",
+      item: "https://www.dialedinelectricroseburg.com/",
     },
     {
       "@type": "ListItem",
       position: 2,
       name: "Electrical Services",
-      item: "https://dialedinelectricroseburg.com/electrical-services",
+      item: "https://www.dialedinelectricroseburg.com/electrical-services",
     },
     {
       "@type": "ListItem",
       position: 3,
       name: "Panel & Service Upgrades",
-      item: "https://dialedinelectricroseburg.com/panel-upgrades",
+      item: "https://www.dialedinelectricroseburg.com/panel-upgrades",
     },
   ],
 };

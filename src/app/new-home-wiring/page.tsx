@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     title: "New Construction Wiring in Roseburg, OR | Dialed In Electric",
     description:
       "New construction and home addition wiring in Roseburg and Douglas County. Rough-in through trim-out, permit included. CCB# 228668.",
-    url: "https://dialedinelectricroseburg.com/new-home-wiring",
+    url: "https://www.dialedinelectricroseburg.com/new-home-wiring",
   },
 };
 
@@ -34,7 +34,7 @@ const serviceSchema = {
     "New home wiring in Roseburg and Douglas County, OR. Rough-in through trim-out for new construction and additions. Work with builders, GCs, and owner-builders. Permits and inspections included.",
   provider: {
     "@type": "LocalBusiness",
-    "@id": "https://dialedinelectricroseburg.com/#business",
+    "@id": "https://www.dialedinelectricroseburg.com/#business",
   },
   areaServed: [
     {
@@ -49,7 +49,7 @@ const serviceSchema = {
     },
   ],
   serviceType: "New Construction Electrical",
-  url: "https://dialedinelectricroseburg.com/new-home-wiring",
+  url: "https://www.dialedinelectricroseburg.com/new-home-wiring",
 };
 
 const breadcrumbSchema = {
@@ -60,19 +60,19 @@ const breadcrumbSchema = {
       "@type": "ListItem",
       position: 1,
       name: "Home",
-      item: "https://dialedinelectricroseburg.com/",
+      item: "https://www.dialedinelectricroseburg.com/",
     },
     {
       "@type": "ListItem",
       position: 2,
       name: "Electrical Services",
-      item: "https://dialedinelectricroseburg.com/electrical-services",
+      item: "https://www.dialedinelectricroseburg.com/electrical-services",
     },
     {
       "@type": "ListItem",
       position: 3,
       name: "New Home Wiring",
-      item: "https://dialedinelectricroseburg.com/new-home-wiring",
+      item: "https://www.dialedinelectricroseburg.com/new-home-wiring",
     },
   ],
 };

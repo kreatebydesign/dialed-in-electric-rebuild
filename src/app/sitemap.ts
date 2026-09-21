@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 
-const BASE_URL = "https://dialedinelectricroseburg.com";
+const BASE_URL = "https://www.dialedinelectricroseburg.com";
 
 const cityslugs = [
   "roseburg",

@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     title: "About Dialed In Electric | Roseburg, OR Electrician",
     description:
       "Licensed electrical contractor in Roseburg, OR since 2019. Generac certified, residential and commercial work throughout Douglas County. CCB# 228668.",
-    url: "https://dialedinelectricroseburg.com/about",
+    url: "https://www.dialedinelectricroseburg.com/about",
   },
 };
 

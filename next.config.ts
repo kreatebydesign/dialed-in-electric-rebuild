@@ -3,13 +3,8 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   async redirects() {
     return [
-      // Enforce apex hostname (www → non-www)
-      {
-        source: "/:path*",
-        has: [{ type: "host", value: "www.dialedinelectricroseburg.com" }],
-        destination: "https://dialedinelectricroseburg.com/:path*",
-        permanent: true,
-      },
+      // Host canonicalization is owned by Vercel Domains (apex → www).
+      // Do not add www → apex redirects here — that creates a redirect loop.
       // Legacy Wix URLs documented in notes/site-audit.md
       {
         source: "/services",

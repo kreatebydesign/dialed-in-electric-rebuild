@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     title: "Generac Generator Installation in Roseburg, OR | Dialed In Electric",
     description:
       "Generac standby generator installation in Roseburg and Douglas County. Pad, transfer switch, gas coordination, permits, and startup. CCB# 228668.",
-    url: "https://dialedinelectricroseburg.com/generators",
+    url: "https://www.dialedinelectricroseburg.com/generators",
     images: [{ url: "/images/gallery/generac-generator-install-01.jpg", width: 1200, height: 630 }],
   },
 };
@@ -43,7 +43,7 @@ const serviceSchema = {
     "Generac standby generator installation in Roseburg, OR. We handle the full install — site review, concrete pad, automatic transfer switch, electrical wiring, gas coordination, startup, and homeowner walkthrough.",
   provider: {
     "@type": "LocalBusiness",
-    "@id": "https://dialedinelectricroseburg.com/#business",
+    "@id": "https://www.dialedinelectricroseburg.com/#business",
     name: "Dialed In Electric Inc.",
     telephone: "+15418176480",
     address: {
@@ -66,7 +66,7 @@ const serviceSchema = {
     },
   ],
   serviceType: "Generator Installation",
-  url: "https://dialedinelectricroseburg.com/generators",
+  url: "https://www.dialedinelectricroseburg.com/generators",
 };
 
 const breadcrumbSchema = {
@@ -77,19 +77,19 @@ const breadcrumbSchema = {
       "@type": "ListItem",
       position: 1,
       name: "Home",
-      item: "https://dialedinelectricroseburg.com/",
+      item: "https://www.dialedinelectricroseburg.com/",
     },
     {
       "@type": "ListItem",
       position: 2,
       name: "Electrical Services",
-      item: "https://dialedinelectricroseburg.com/electrical-services",
+      item: "https://www.dialedinelectricroseburg.com/electrical-services",
     },
     {
       "@type": "ListItem",
       position: 3,
       name: "Generac Generator Installation",
-      item: "https://dialedinelectricroseburg.com/generators",
+      item: "https://www.dialedinelectricroseburg.com/generators",
     },
   ],
 };

@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     title: "Projects | Dialed In Electric — Roseburg, OR",
     description:
       "Generator installs, panel upgrades, commercial wiring, and residential electrical. Real work from Dialed In Electric in Roseburg, OR.",
-    url: "https://dialedinelectricroseburg.com/projects",
+    url: "https://www.dialedinelectricroseburg.com/projects",
   },
 };
 

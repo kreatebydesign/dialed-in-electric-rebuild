@@ -32,7 +32,7 @@ export default function PrivacyPage() {
           <p>
             Dialed In Electric Inc. (&ldquo;we,&rdquo; &ldquo;us,&rdquo; or &ldquo;our&rdquo;) respects your
             privacy. This policy describes how we handle information when you visit{" "}
-            <a href="https://dialedinelectricroseburg.com" className="text-amber hover:underline">
+            <a href="https://www.dialedinelectricroseburg.com" className="text-amber hover:underline">
               dialedinelectricroseburg.com
             </a>{" "}
             or contact us for electrical services.

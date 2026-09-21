@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     title: "EV Charger Installation Roseburg OR | Dialed In Electric",
     description:
       "Level 2 home EV charger installation in Roseburg, OR. Proper circuit, permit, and labeling. Works with Tesla, Ford, Chevy, Rivian, and all other EVs. CCB# 228668.",
-    url: "https://dialedinelectricroseburg.com/ev-charger",
+    url: "https://www.dialedinelectricroseburg.com/ev-charger",
   },
 };
 
@@ -34,7 +34,7 @@ const serviceSchema = {
     "Level 2 home EV charger installation in Roseburg, OR. Includes 40–60A dedicated circuit, outlet or hardwire connection, labeling, and permit coordination.",
   provider: {
     "@type": "LocalBusiness",
-    "@id": "https://dialedinelectricroseburg.com/#business",
+    "@id": "https://www.dialedinelectricroseburg.com/#business",
   },
   areaServed: {
     "@type": "City",
@@ -42,7 +42,7 @@ const serviceSchema = {
     containedInPlace: { "@type": "State", name: "Oregon" },
   },
   serviceType: "EV Charger Installation",
-  url: "https://dialedinelectricroseburg.com/ev-charger",
+  url: "https://www.dialedinelectricroseburg.com/ev-charger",
 };
 
 function BoltIcon({ className }: { className?: string }) {

@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     title: "FAQ | Dialed In Electric — Roseburg, OR",
     description:
       "Generator installation, panel upgrades, permits, and scheduling questions answered by Dialed In Electric in Roseburg, OR.",
-    url: "https://dialedinelectricroseburg.com/faq",
+    url: "https://www.dialedinelectricroseburg.com/faq",
   },
 };
 

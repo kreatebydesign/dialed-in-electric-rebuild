@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     title: "Contact Dialed In Electric | Roseburg, OR Electrician",
     description:
       "Call 541-817-6480 or email us. Generator installation, panel upgrades, and electrical service throughout Douglas County. CCB# 228668.",
-    url: "https://dialedinelectricroseburg.com/contact",
+    url: "https://www.dialedinelectricroseburg.com/contact",
   },
 };
 

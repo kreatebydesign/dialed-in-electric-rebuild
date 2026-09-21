@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     title: "Electrician Service Areas | Douglas County, OR | Dialed In Electric",
     description:
       "Licensed electrician serving Roseburg and all of Douglas County. Generator installs, panel upgrades, residential and commercial electrical throughout the region.",
-    url: "https://dialedinelectricroseburg.com/service-areas",
+    url: "https://www.dialedinelectricroseburg.com/service-areas",
   },
 };
 

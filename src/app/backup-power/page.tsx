@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     title: "Manual Transfer Switch Installation Roseburg OR | Dialed In Electric",
     description:
       "Connect your portable generator to your home circuits safely. Licensed transfer switch installation in Roseburg, OR. CCB# 228668.",
-    url: "https://dialedinelectricroseburg.com/backup-power",
+    url: "https://www.dialedinelectricroseburg.com/backup-power",
   },
 };
 
@@ -35,11 +35,11 @@ const serviceSchema = {
     "Manual transfer switch and interlock kit installation in Roseburg, OR. Safely connects a portable generator to essential home circuits during a power outage.",
   provider: {
     "@type": "LocalBusiness",
-    "@id": "https://dialedinelectricroseburg.com/#business",
+    "@id": "https://www.dialedinelectricroseburg.com/#business",
   },
   areaServed: { "@type": "City", name: "Roseburg", containedInPlace: { "@type": "State", name: "Oregon" } },
   serviceType: "Transfer Switch Installation",
-  url: "https://dialedinelectricroseburg.com/backup-power",
+  url: "https://www.dialedinelectricroseburg.com/backup-power",
 };
 
 function BoltIcon({ className }: { className?: string }) {

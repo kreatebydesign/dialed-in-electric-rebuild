@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     title: "Commercial Electrical Contractor in Roseburg, OR | Dialed In Electric",
     description:
       "Commercial electrical in Roseburg and Douglas County. Tenant improvements, shops, machine circuits, and service work. CCB# 228668.",
-    url: "https://dialedinelectricroseburg.com/commercial",
+    url: "https://www.dialedinelectricroseburg.com/commercial",
   },
 };
 
@@ -34,7 +34,7 @@ const serviceSchema = {
     "Commercial electrical contractor in Roseburg and Douglas County, OR. Tenant improvements, shop and warehouse wiring, machine circuits, lighting, service upgrades, and permit coordination.",
   provider: {
     "@type": "LocalBusiness",
-    "@id": "https://dialedinelectricroseburg.com/#business",
+    "@id": "https://www.dialedinelectricroseburg.com/#business",
   },
   areaServed: [
     {
@@ -49,7 +49,7 @@ const serviceSchema = {
     },
   ],
   serviceType: "Commercial Electrical",
-  url: "https://dialedinelectricroseburg.com/commercial",
+  url: "https://www.dialedinelectricroseburg.com/commercial",
 };
 
 const breadcrumbSchema = {
@@ -60,19 +60,19 @@ const breadcrumbSchema = {
       "@type": "ListItem",
       position: 1,
       name: "Home",
-      item: "https://dialedinelectricroseburg.com/",
+      item: "https://www.dialedinelectricroseburg.com/",
     },
     {
       "@type": "ListItem",
       position: 2,
       name: "Electrical Services",
-      item: "https://dialedinelectricroseburg.com/electrical-services",
+      item: "https://www.dialedinelectricroseburg.com/electrical-services",
     },
     {
       "@type": "ListItem",
       position: 3,
       name: "Commercial Electrical",
-      item: "https://dialedinelectricroseburg.com/commercial",
+      item: "https://www.dialedinelectricroseburg.com/commercial",
     },
   ],
 };

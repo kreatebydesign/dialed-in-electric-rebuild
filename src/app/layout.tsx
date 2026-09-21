@@ -29,7 +29,7 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "Dialed In Electric Inc." }],
   creator: "Dialed In Electric Inc.",
-  metadataBase: new URL("https://dialedinelectricroseburg.com"),
+  metadataBase: new URL("https://www.dialedinelectricroseburg.com"),
   // Canonicals are set per-page. Do not inherit "/" onto child routes.
   verification: {
     google: "dkQWFvw6CPfAhk-sDHzwxHYWHZNfK524ME-pf8pmJmI",
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://dialedinelectricroseburg.com",
+    url: "https://www.dialedinelectricroseburg.com",
     siteName: "Dialed In Electric",
     title: "Electrician & Generac Installer in Roseburg, OR | Dialed In Electric",
     description:
@@ -71,11 +71,11 @@ export const metadata: Metadata = {
 const localBusinessSchema = {
   "@context": "https://schema.org",
   "@type": ["LocalBusiness", "Electrician"],
-  "@id": "https://dialedinelectricroseburg.com/#business",
+  "@id": "https://www.dialedinelectricroseburg.com/#business",
   name: "Dialed In Electric Inc.",
   description:
     "Licensed electrical contractor in Roseburg, OR specializing in Generac standby generator installation, panel upgrades, new home wiring, and commercial electrical services.",
-  url: "https://dialedinelectricroseburg.com",
+  url: "https://www.dialedinelectricroseburg.com",
   telephone: "+15418176480",
   email: "Dialedinelectric@gmail.com",
   foundingDate: "2019",
@@ -109,7 +109,7 @@ const localBusinessSchema = {
   ],
   hasCredential: "Oregon CCB# 228668",
   priceRange: "$$",
-  image: "https://dialedinelectricroseburg.com/images/logo/dialed-in-electric-logo.png",
+  image: "https://www.dialedinelectricroseburg.com/images/logo/dialed-in-electric-logo.png",
 };
 
 export default function RootLayout({
