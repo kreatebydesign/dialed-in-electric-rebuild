@@ -3,7 +3,9 @@
 import { FormEvent, useState } from "react";
 import { trackEvent } from "@/lib/analytics";
 
-type Status = "idle" | "submitting" | "success" | "error" | "mailto_fallback";
+type Status = "idle" | "handoff" | "error";
+
+const BUSINESS_EMAIL = "Dialedinelectric@gmail.com";
 
 const SERVICES = [
   "Generac generator installation",
@@ -15,10 +17,37 @@ const SERVICES = [
   "Other electrical work",
 ] as const;
 
+function buildMailto(payload: {
+  name: string;
+  phone: string;
+  email: string;
+  service: string;
+  message: string;
+}) {
+  const subject = encodeURIComponent(
+    `Service request — ${payload.service || "Electrical work"} — ${payload.name}`
+  );
+  const body = encodeURIComponent(
+    [
+      `Name: ${payload.name}`,
+      `Phone: ${payload.phone}`,
+      payload.email ? `Email: ${payload.email}` : null,
+      payload.service ? `Service: ${payload.service}` : null,
+      "",
+      "Project details:",
+      payload.message,
+    ]
+      .filter(Boolean)
+      .join("\n")
+  );
+  return `mailto:${BUSINESS_EMAIL}?subject=${subject}&body=${body}`;
+}
+
 export default function ContactForm() {
   const [status, setStatus] = useState<Status>("idle");
   const [errorMessage, setErrorMessage] = useState("");
   const [started, setStarted] = useState(false);
+  const [mailtoHref, setMailtoHref] = useState("");
 
   function markStarted() {
     if (started) return;
@@ -26,9 +55,8 @@ export default function ContactForm() {
     trackEvent("quote_form_start", { location: "contact_page" });
   }
 
-  async function onSubmit(e: FormEvent<HTMLFormElement>) {
+  function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setStatus("submitting");
     setErrorMessage("");
 
     const form = e.currentTarget;
@@ -39,8 +67,14 @@ export default function ContactForm() {
       email: String(data.get("email") || "").trim(),
       service: String(data.get("service") || "").trim(),
       message: String(data.get("message") || "").trim(),
-      website: String(data.get("website") || "").trim(), // honeypot
+      website: String(data.get("website") || "").trim(),
     };
+
+    // Honeypot — bots only
+    if (payload.website) {
+      setStatus("handoff");
+      return;
+    }
 
     if (!payload.name || !payload.phone || !payload.message) {
       setStatus("error");
@@ -52,82 +86,74 @@ export default function ContactForm() {
       return;
     }
 
-    try {
-      const res = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
-      const json = (await res.json()) as {
-        ok?: boolean;
-        method?: string;
-        mailto?: string;
-        error?: string;
-      };
+    const href = buildMailto(payload);
+    setMailtoHref(href);
+    setStatus("handoff");
 
-      if (res.ok && json.ok && json.method === "endpoint") {
-        setStatus("success");
-        form.reset();
-        setStarted(false);
-        trackEvent("quote_form_submit_success", {
-          location: "contact_page",
-          method: "endpoint",
-        });
-        return;
-      }
-
-      if (res.ok && json.mailto) {
-        setStatus("mailto_fallback");
-        trackEvent("quote_form_submit_success", {
-          location: "contact_page",
-          method: "mailto_fallback",
-        });
-        window.location.href = json.mailto;
-        return;
-      }
-
-      setStatus("error");
-      setErrorMessage(json.error || "Something went wrong. Please call 541-817-6480.");
-      trackEvent("quote_form_submit_error", {
-        location: "contact_page",
-        reason: "api",
-      });
-    } catch {
-      setStatus("error");
-      setErrorMessage("Network error. Please call 541-817-6480 or email Dialedinelectric@gmail.com.");
-      trackEvent("quote_form_submit_error", {
-        location: "contact_page",
-        reason: "network",
-      });
-    }
+    // Mailto opens the visitor's email app — this is a handoff, not confirmed delivery.
+    // Do not fire quote_form_submit_success.
+    window.location.href = href;
   }
 
-  if (status === "success") {
+  if (status === "handoff") {
     return (
-      <div
-        className="bg-white border border-edge rounded-sm p-7 lg:p-8"
+        <div
+        className="bg-white border border-edge rounded-sm p-7 lg:p-8 relative overflow-hidden"
         role="status"
         aria-live="polite"
       >
-        <p className="text-[15px] font-extrabold text-charcoal-deep mb-2">Request received</p>
+        <div className="absolute top-0 left-0 right-0 h-0.5 bg-amber" aria-hidden="true" />
+        <p className="text-[15px] font-extrabold text-charcoal-deep mb-2">
+          Finish in your email app
+        </p>
+        <p className="text-[14px] text-muted leading-relaxed mb-4">
+          Your email app should open with a message addressed to{" "}
+          <span className="font-semibold text-charcoal">{BUSINESS_EMAIL}</span>. Send that
+          message to complete your request.
+        </p>
         <p className="text-[14px] text-muted leading-relaxed mb-5">
-          Thanks — we&apos;ll review your project details and get back to you. For faster help, call{" "}
+          If nothing opened, tap the button below, or call / email us directly.
+        </p>
+        <div className="flex flex-col sm:flex-row gap-3 mb-5">
+          {mailtoHref && (
+            <a
+              href={mailtoHref}
+              data-track="email_click"
+              data-track-location="contact_form_handoff"
+              className="inline-flex items-center justify-center h-12 px-7 bg-amber text-charcoal-deep font-semibold text-[15px] tracking-wide rounded-sm hover:bg-amber-dark transition-colors"
+            >
+              Open Email Again
+            </a>
+          )}
           <a
             href="tel:15418176480"
             data-track="phone_click"
-            data-track-location="contact_form_success"
+            data-track-location="contact_form_handoff"
+            className="inline-flex items-center justify-center h-12 px-7 bg-transparent text-charcoal border border-charcoal/25 font-semibold text-[15px] tracking-wide rounded-sm hover:bg-charcoal-deep hover:text-white hover:border-charcoal-deep transition-colors"
+          >
+            Call 541-817-6480
+          </a>
+        </div>
+        <p className="text-[13px] text-muted mb-4">
+          Or email{" "}
+          <a
+            href={`mailto:${BUSINESS_EMAIL}`}
+            data-track="email_click"
+            data-track-location="contact_form_handoff"
             className="text-amber font-semibold hover:underline"
           >
-            541-817-6480
+            {BUSINESS_EMAIL}
           </a>
-          .
         </p>
         <button
           type="button"
-          onClick={() => setStatus("idle")}
+          onClick={() => {
+            setStatus("idle");
+            setMailtoHref("");
+          }}
           className="text-[13px] font-semibold text-charcoal underline underline-offset-2 hover:text-amber"
         >
-          Send another request
+          Edit request details
         </button>
       </div>
     );
@@ -143,7 +169,7 @@ export default function ContactForm() {
       <div className="absolute top-0 left-0 right-0 h-0.5 bg-amber" aria-hidden="true" />
       <h2 className="text-[15px] font-extrabold text-charcoal-deep mb-1">Request a Quote</h2>
       <p className="text-[13px] text-muted leading-relaxed mb-6">
-        Tell us about the job. We&apos;ll follow up by phone or email — or call{" "}
+        Tell us about the job. We&apos;ll open your email app with the details filled in — or call{" "}
         <a
           href="tel:15418176480"
           data-track="phone_click"
@@ -238,26 +264,21 @@ export default function ContactForm() {
         />
       </div>
 
-      {(status === "error" || status === "mailto_fallback") && (
-        <p
-          className={`text-[13px] mb-4 ${status === "error" ? "text-red-700" : "text-charcoal"}`}
-          role="alert"
-        >
-          {status === "mailto_fallback"
-            ? "Opening your email app so the request reaches Dialed In Electric. If nothing opens, call 541-817-6480."
-            : errorMessage}
+      {status === "error" && (
+        <p className="text-[13px] mb-4 text-red-700" role="alert">
+          {errorMessage}
         </p>
       )}
 
       <button
         type="submit"
-        disabled={status === "submitting"}
-        className="inline-flex items-center justify-center h-12 px-7 w-full sm:w-auto bg-amber text-charcoal-deep font-semibold text-[15px] tracking-wide rounded-sm hover:bg-amber-dark hover:-translate-y-px hover:shadow-md transition-all duration-200 disabled:opacity-60 disabled:pointer-events-none"
+        className="inline-flex items-center justify-center h-12 px-7 w-full sm:w-auto bg-amber text-charcoal-deep font-semibold text-[15px] tracking-wide rounded-sm hover:bg-amber-dark hover:-translate-y-px hover:shadow-md transition-all duration-200"
       >
-        {status === "submitting" ? "Sending…" : "Send Request"}
+        Send Request
       </button>
       <p className="text-[12px] text-muted mt-4">
-        Oregon CCB# 228668 · Serving Roseburg and Douglas County
+        Opens your email to {BUSINESS_EMAIL} · Oregon CCB# 228668 · Serving Roseburg and Douglas
+        County
       </p>
     </form>
   );

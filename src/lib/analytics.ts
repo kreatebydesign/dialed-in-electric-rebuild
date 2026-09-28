@@ -11,8 +11,8 @@ export type AnalyticsEventName =
   | "email_click"
   | "request_service_click"
   | "quote_form_start"
-  | "quote_form_submit_success"
   | "quote_form_submit_error";
+  // quote_form_submit_success intentionally omitted — no confirmed server-side lead delivery.
 
 export type AnalyticsEventParams = Record<string, string | number | boolean | undefined>;
 
