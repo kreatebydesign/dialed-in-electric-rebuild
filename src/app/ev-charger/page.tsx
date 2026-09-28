@@ -36,13 +36,45 @@ const serviceSchema = {
     "@type": "LocalBusiness",
     "@id": "https://www.dialedinelectricroseburg.com/#business",
   },
-  areaServed: {
-    "@type": "City",
-    name: "Roseburg",
-    containedInPlace: { "@type": "State", name: "Oregon" },
-  },
+  areaServed: [
+    {
+      "@type": "City",
+      name: "Roseburg",
+      containedInPlace: { "@type": "State", name: "Oregon" },
+    },
+    {
+      "@type": "AdministrativeArea",
+      name: "Douglas County",
+      containedInPlace: { "@type": "State", name: "Oregon" },
+    },
+  ],
   serviceType: "EV Charger Installation",
   url: "https://www.dialedinelectricroseburg.com/ev-charger",
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    {
+      "@type": "ListItem",
+      position: 1,
+      name: "Home",
+      item: "https://www.dialedinelectricroseburg.com/",
+    },
+    {
+      "@type": "ListItem",
+      position: 2,
+      name: "Electrical Services",
+      item: "https://www.dialedinelectricroseburg.com/electrical-services",
+    },
+    {
+      "@type": "ListItem",
+      position: 3,
+      name: "EV Charger Installation",
+      item: "https://www.dialedinelectricroseburg.com/ev-charger",
+    },
+  ],
 };
 
 function BoltIcon({ className }: { className?: string }) {
@@ -121,6 +153,10 @@ export default function EvChargerPage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
 
       {/* Hero */}
@@ -248,9 +284,12 @@ export default function EvChargerPage() {
               </div>
               <div className="p-5 bg-surface rounded-sm border border-edge">
                 <p className="text-[13px] font-semibold text-charcoal mb-1">Do I need a panel upgrade first?</p>
-                <p className="text-[13px] text-muted leading-relaxed">
+                <p className="text-[13px] text-muted leading-relaxed mb-3">
                   Most homes with a 200A panel have room for an EV charger circuit. Homes on 100A service with a full panel may need an upgrade first. We check your panel during the estimate and tell you exactly what the job involves.
                 </p>
+                <Link href="/panel-upgrades" className="text-[13px] font-semibold text-amber hover:text-amber-light transition-colors">
+                  Learn about panel &amp; service upgrades →
+                </Link>
               </div>
             </div>
           </div>

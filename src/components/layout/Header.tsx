@@ -69,11 +69,20 @@ export default function Header() {
           <div className="hidden lg:flex items-center gap-4">
             <a
               href="tel:15418176480"
+              data-track="phone_click"
+              data-track-location="header_desktop"
               className="text-[13px] font-semibold text-charcoal hover:text-amber transition-colors tracking-wide"
             >
               541-817-6480
             </a>
-            <Button as="link" href="/contact" variant="primary" size="md">
+            <Button
+              as="link"
+              href="/contact"
+              variant="primary"
+              size="md"
+              data-track="request_service_click"
+              data-track-location="header_desktop"
+            >
               Request Service
             </Button>
           </div>
@@ -82,6 +91,8 @@ export default function Header() {
           <div className="flex lg:hidden items-center gap-3">
             <a
               href="tel:15418176480"
+              data-track="phone_click"
+              data-track-location="header_mobile"
               className="text-[13px] font-bold text-amber"
               aria-label="Call Dialed In Electric"
             >
@@ -133,6 +144,8 @@ export default function Header() {
               variant="primary"
               size="md"
               className="mt-3 w-full justify-center"
+              data-track="request_service_click"
+              data-track-location="header_mobile_menu"
             >
               Request Service
             </Button>

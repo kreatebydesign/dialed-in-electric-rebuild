@@ -37,9 +37,45 @@ const serviceSchema = {
     "@type": "LocalBusiness",
     "@id": "https://www.dialedinelectricroseburg.com/#business",
   },
-  areaServed: { "@type": "City", name: "Roseburg", containedInPlace: { "@type": "State", name: "Oregon" } },
+  areaServed: [
+    {
+      "@type": "City",
+      name: "Roseburg",
+      containedInPlace: { "@type": "State", name: "Oregon" },
+    },
+    {
+      "@type": "AdministrativeArea",
+      name: "Douglas County",
+      containedInPlace: { "@type": "State", name: "Oregon" },
+    },
+  ],
   serviceType: "Transfer Switch Installation",
   url: "https://www.dialedinelectricroseburg.com/backup-power",
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    {
+      "@type": "ListItem",
+      position: 1,
+      name: "Home",
+      item: "https://www.dialedinelectricroseburg.com/",
+    },
+    {
+      "@type": "ListItem",
+      position: 2,
+      name: "Electrical Services",
+      item: "https://www.dialedinelectricroseburg.com/electrical-services",
+    },
+    {
+      "@type": "ListItem",
+      position: 3,
+      name: "Backup Power",
+      item: "https://www.dialedinelectricroseburg.com/backup-power",
+    },
+  ],
 };
 
 function BoltIcon({ className }: { className?: string }) {
@@ -81,6 +117,10 @@ export default function BackupPowerPage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
 
       {/* Hero */}

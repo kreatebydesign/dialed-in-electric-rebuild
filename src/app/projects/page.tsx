@@ -216,6 +216,21 @@ export default function ProjectsPage() {
                   </div>
                 ))}
               </div>
+              <p className="mt-6 text-[13px] text-muted">
+                Planning similar work? See{" "}
+                <Link href="/generators" className="text-amber font-semibold hover:underline">
+                  Generac generator installation
+                </Link>
+                ,{" "}
+                <Link href="/panel-upgrades" className="text-amber font-semibold hover:underline">
+                  panel upgrades
+                </Link>
+                , or{" "}
+                <Link href="/commercial" className="text-amber font-semibold hover:underline">
+                  commercial electrical
+                </Link>
+                .
+              </p>
             </div>
           </div>
         </div>

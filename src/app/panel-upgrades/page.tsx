@@ -302,6 +302,20 @@ export default function PanelUpgradesPage() {
                   Homes that need a meter-main combo or have an older service entrance can run higher. We give you an itemized quote after the site review — not a number off the top of our head.
                 </p>
               </div>
+              <div className="p-6 bg-white border border-edge rounded-sm">
+                <h3 className="text-[15px] font-extrabold text-charcoal-deep mb-2">Adding an EV charger or generator?</h3>
+                <p className="text-[13px] text-muted leading-relaxed mb-3">
+                  Large loads often drive a panel upgrade. If you&apos;re planning a Level 2 charger or a standby generator, we can size the service correctly so you&apos;re not redoing work later.
+                </p>
+                <div className="flex flex-col gap-2">
+                  <Link href="/ev-charger" className="text-[13px] font-semibold text-amber hover:text-amber-light transition-colors">
+                    EV charger installation →
+                  </Link>
+                  <Link href="/generators" className="text-[13px] font-semibold text-amber hover:text-amber-light transition-colors">
+                    Generac standby generators →
+                  </Link>
+                </div>
+              </div>
               {/* Timeline */}
               <div className="p-6 bg-white border border-edge rounded-sm">
                 <h3 className="text-[15px] font-extrabold text-charcoal-deep mb-2">How long does it take?</h3>

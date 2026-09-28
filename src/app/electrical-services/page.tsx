@@ -183,7 +183,7 @@ export default function ElectricalServicesPage() {
               Electrical Services<br />in Roseburg, Oregon
             </h1>
             <p className="text-[16px] text-white/65 leading-relaxed max-w-lg mb-8">
-              Residential and commercial electrical for homes, new construction, shops, and businesses throughout Douglas County. Licensed, insured, and available most weeks.
+              Residential and commercial electrical for homes, new construction, shops, and businesses throughout Douglas County — including repairs, panel upgrades, generators, EV chargers, and new wiring. Licensed, insured, and available most weeks.
             </p>
             <div className="flex flex-col sm:flex-row gap-3">
               <Button as="link" href="/contact" variant="primary" size="lg">

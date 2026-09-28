@@ -50,9 +50,9 @@ export default function PrivacyPage() {
           </p>
           <h2 className="text-xl font-bold text-charcoal-deep pt-2">Website analytics</h2>
           <p>
-            Our site may use privacy-respecting hosting and analytics tools that collect aggregate
-            usage data such as pages visited and approximate location. This helps us improve the
-            site and is not used to sell personal data.
+            Our site may use privacy-respecting hosting tools and, when configured by our team,
+            analytics that collect aggregate usage data such as pages visited. This helps us
+            improve the site and is not used to sell personal data.
           </p>
           <h2 className="text-xl font-bold text-charcoal-deep pt-2">Third parties</h2>
           <p>

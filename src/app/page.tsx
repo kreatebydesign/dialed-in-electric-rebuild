@@ -12,12 +12,12 @@ export const metadata: Metadata = {
     absolute: "Electrician & Generac Installer in Roseburg, OR | Dialed In Electric",
   },
   description:
-    "Licensed Roseburg electrician specializing in Generac generators, panel upgrades, EV chargers, new construction and commercial electrical work throughout Douglas County.",
+    "Licensed electrician in Roseburg, OR for Generac generators, panel upgrades, EV chargers, new construction, and commercial electrical throughout Douglas County. Call 541-817-6480.",
   alternates: { canonical: "/" },
   openGraph: {
     title: "Electrician & Generac Installer in Roseburg, OR | Dialed In Electric",
     description:
-      "Licensed Roseburg electrician specializing in Generac generators, panel upgrades, EV chargers, new construction and commercial electrical work throughout Douglas County.",
+      "Licensed electrician in Roseburg, OR for Generac generators, panel upgrades, EV chargers, new construction, and commercial electrical throughout Douglas County.",
     url: "https://www.dialedinelectricroseburg.com",
   },
 };
@@ -183,8 +183,14 @@ const projectPhotos = [
 ];
 
 const serviceAreas = [
-  "Roseburg", "Sutherlin", "Winston", "Green",
-  "Melrose", "Garden Valley", "Lookingglass", "Wilbur",
+  { name: "Roseburg", slug: "roseburg" },
+  { name: "Sutherlin", slug: "sutherlin" },
+  { name: "Winston", slug: "winston" },
+  { name: "Green", slug: "green" },
+  { name: "Melrose", slug: "melrose" },
+  { name: "Garden Valley", slug: "garden-valley" },
+  { name: "Lookingglass", slug: "lookingglass" },
+  { name: "Wilbur", slug: "wilbur" },
 ];
 
 // ── Page ───────────────────────────────────────────────────────────────────
@@ -244,7 +250,14 @@ export default function HomePage() {
 
             {/* CTAs */}
             <div className="flex flex-col sm:flex-row gap-3 mb-10">
-              <Button as="link" href="/contact" variant="primary" size="lg">
+              <Button
+                as="link"
+                href="/contact"
+                variant="primary"
+                size="lg"
+                data-track="request_service_click"
+                data-track-location="home_hero"
+              >
                 <BoltIcon className="w-4 h-4" />
                 Request Service
               </Button>
@@ -595,8 +608,13 @@ export default function HomePage() {
               Serving:
             </span>
             {serviceAreas.map((city, i) => (
-              <span key={city} className="text-[13px] text-charcoal">
-                {city}
+              <span key={city.slug} className="text-[13px] text-charcoal">
+                <Link
+                  href={`/service-areas/${city.slug}`}
+                  className="hover:text-amber transition-colors"
+                >
+                  {city.name}
+                </Link>
                 {i < serviceAreas.length - 1 && (
                   <span className="text-amber mx-2">·</span>
                 )}

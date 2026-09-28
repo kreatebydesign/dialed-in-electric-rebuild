@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import ContactForm from "@/components/contact/ContactForm";
 
 export const metadata: Metadata = {
   title: {
     absolute: "Contact | Request Electrical or Generator Service | Dialed In Electric",
   },
   description:
-    "Call or email Dialed In Electric for generator installation, panel upgrades, and electrical service in Roseburg, OR. CCB# 228668. 541-817-6480.",
+    "Call, email, or request a quote from Dialed In Electric for generator installation, panel upgrades, and electrical service in Roseburg and Douglas County, OR. CCB# 228668. 541-817-6480.",
   keywords: [
     "contact electrician Roseburg OR",
     "call electrician Roseburg",
@@ -17,7 +18,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Contact Dialed In Electric | Roseburg, OR Electrician",
     description:
-      "Call 541-817-6480 or email us. Generator installation, panel upgrades, and electrical service throughout Douglas County. CCB# 228668.",
+      "Call 541-817-6480, email, or send a service request. Generator installation, panel upgrades, and electrical service throughout Douglas County. CCB# 228668.",
     url: "https://www.dialedinelectricroseburg.com/contact",
   },
 };
@@ -27,7 +28,7 @@ function CheckIcon({ className }: { className?: string }) {
     <svg className={className} viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
       <path
         fillRule="evenodd"
-        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 01-1.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
         clipRule="evenodd"
       />
     </svg>
@@ -52,21 +53,25 @@ function MailIcon() {
 }
 
 const serviceAreas = [
-  "Roseburg",
-  "Sutherlin",
-  "Winston",
-  "Green",
-  "Melrose",
-  "Garden Valley",
-  "Lookingglass",
-  "Wilbur",
+  { name: "Roseburg", slug: "roseburg" },
+  { name: "Sutherlin", slug: "sutherlin" },
+  { name: "Winston", slug: "winston" },
+  { name: "Green", slug: "green" },
+  { name: "Melrose", slug: "melrose" },
+  { name: "Garden Valley", slug: "garden-valley" },
+  { name: "Lookingglass", slug: "lookingglass" },
+  { name: "Wilbur", slug: "wilbur" },
+  { name: "Myrtle Creek", slug: "myrtle-creek" },
+  { name: "Oakland", slug: "oakland" },
+  { name: "Glide", slug: "glide" },
+  { name: "Canyonville", slug: "canyonville" },
 ];
 
 const steps = [
   {
     n: "01",
     title: "Reach Out",
-    body: "Call or email us with a few details about your project.",
+    body: "Call, email, or send the form with a few details about your project.",
   },
   {
     n: "02",
@@ -108,7 +113,7 @@ export default function ContactPage() {
             Need Electrical Work or a Generator Quote?
           </h1>
           <p className="text-[16px] text-white/60 leading-relaxed max-w-xl">
-            Give us a call or send an email. We&apos;ll talk through the project and let you know what to expect.
+            Call, email, or send a quick request. Dialed In Electric serves Roseburg and Douglas County — generators, panels, new construction, commercial, and EV chargers.
           </p>
         </div>
       </section>
@@ -118,8 +123,9 @@ export default function ContactPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-5 gap-8 lg:gap-16">
 
-            {/* Left — contact cards */}
+            {/* Left — form + call/email */}
             <div className="lg:col-span-3 flex flex-col gap-5">
+              <ContactForm />
 
               {/* Call card */}
               <div className="bg-charcoal-deep rounded-sm p-7 lg:p-8 relative overflow-hidden">
@@ -135,12 +141,16 @@ export default function ContactPage() {
                 </p>
                 <a
                   href="tel:15418176480"
+                  data-track="phone_click"
+                  data-track-location="contact_page"
                   className="inline-flex items-center justify-center gap-2 h-12 px-7 bg-amber text-charcoal-deep font-semibold text-[15px] tracking-wide rounded-sm hover:bg-amber-dark hover:-translate-y-px hover:shadow-md transition-all duration-200 w-full sm:w-auto"
                 >
                   <PhoneIcon />
                   Call 541-817-6480
                 </a>
-                <p className="text-[12px] text-white/35 mt-4">Mon–Fri, 7am–6pm · Same-day response most days</p>
+                <p className="text-[12px] text-white/35 mt-4">
+                  Same-day response most days · Or email anytime
+                </p>
               </div>
 
               {/* Email card */}
@@ -157,6 +167,8 @@ export default function ContactPage() {
                 </p>
                 <a
                   href="mailto:Dialedinelectric@gmail.com"
+                  data-track="email_click"
+                  data-track-location="contact_page"
                   className="inline-flex items-center justify-center gap-2 h-12 px-7 bg-transparent text-charcoal border border-charcoal/25 font-semibold text-[15px] tracking-wide rounded-sm hover:bg-charcoal-deep hover:text-white hover:border-charcoal-deep transition-all duration-200 w-full sm:w-auto"
                 >
                   <MailIcon />
@@ -186,13 +198,23 @@ export default function ContactPage() {
                 </p>
                 <ul className="grid grid-cols-2 gap-y-2 gap-x-3">
                   {serviceAreas.map((area) => (
-                    <li key={area} className="flex items-center gap-2 text-[13px] text-charcoal">
-                      <CheckIcon className="w-3.5 h-3.5 text-amber shrink-0" />
-                      {area}
+                    <li key={area.slug}>
+                      <Link
+                        href={`/service-areas/${area.slug}`}
+                        className="flex items-center gap-2 text-[13px] text-charcoal hover:text-amber transition-colors"
+                      >
+                        <CheckIcon className="w-3.5 h-3.5 text-amber shrink-0" />
+                        {area.name}
+                      </Link>
                     </li>
                   ))}
                 </ul>
-                <p className="text-[12px] text-muted mt-3">Serving all of Douglas County, OR</p>
+                <p className="text-[12px] text-muted mt-3">
+                  Serving{" "}
+                  <Link href="/service-areas" className="text-amber font-semibold hover:underline">
+                    all of Douglas County, OR
+                  </Link>
+                </p>
               </div>
 
               {/* License */}
@@ -203,6 +225,34 @@ export default function ContactPage() {
                   <p><span className="font-semibold">Oregon</span> licensed &amp; insured</p>
                   <p><span className="font-semibold">Generac</span> factory certified</p>
                 </div>
+              </div>
+
+              <div className="bg-white border border-edge rounded-sm p-5">
+                <p className="text-[11px] font-bold text-charcoal/50 tracking-[0.18em] uppercase mb-3">
+                  Popular Services
+                </p>
+                <ul className="flex flex-col gap-2 text-[13px]">
+                  <li>
+                    <Link href="/generators" className="text-charcoal hover:text-amber transition-colors">
+                      Generac generator installation
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/panel-upgrades" className="text-charcoal hover:text-amber transition-colors">
+                      Panel &amp; service upgrades
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/ev-charger" className="text-charcoal hover:text-amber transition-colors">
+                      EV charger installation
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/electrical-services" className="text-charcoal hover:text-amber transition-colors">
+                      All electrical services
+                    </Link>
+                  </li>
+                </ul>
               </div>
             </div>
           </div>

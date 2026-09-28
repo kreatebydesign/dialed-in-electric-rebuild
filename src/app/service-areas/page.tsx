@@ -152,9 +152,32 @@ export default function ServiceAreasPage() {
               <p className="text-[15px] text-muted leading-relaxed mb-4">
                 For most communities in Douglas County, scheduling within the week is typical. Rural areas further out — Glide, Canyonville, Lookingglass — we still serve, though scheduling may take a few extra days depending on what we have going.
               </p>
-              <p className="text-[15px] text-muted leading-relaxed">
+              <p className="text-[15px] text-muted leading-relaxed mb-6">
                 If you&apos;re not sure whether we cover your area, call us. We&apos;ll tell you straight.
               </p>
+              <p className="text-[13px] font-semibold text-charcoal mb-3">Common work we handle across the county:</p>
+              <ul className="flex flex-col gap-2 text-[13px]">
+                <li>
+                  <Link href="/generators" className="text-amber hover:underline">
+                    Generac standby generator installation
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/panel-upgrades" className="text-amber hover:underline">
+                    Panel &amp; service upgrades
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/electrical-services" className="text-amber hover:underline">
+                    Residential electrical services
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/commercial" className="text-amber hover:underline">
+                    Commercial electrical work
+                  </Link>
+                </li>
+              </ul>
             </div>
 
             <div className="relative rounded-sm overflow-hidden aspect-[4/3] lg:aspect-auto lg:h-[400px]">

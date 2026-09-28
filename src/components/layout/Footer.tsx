@@ -48,10 +48,20 @@ export default function Footer() {
               Licensed electrician serving Roseburg and Douglas County, Oregon. Generac certified. Built to code.
             </p>
             <div className="flex flex-col gap-1 text-sm">
-              <a href="tel:15418176480" className="text-amber hover:text-amber-light transition-colors font-semibold">
+              <a
+                href="tel:15418176480"
+                data-track="phone_click"
+                data-track-location="footer"
+                className="text-amber hover:text-amber-light transition-colors font-semibold"
+              >
                 541-817-6480
               </a>
-              <a href="mailto:Dialedinelectric@gmail.com" className="text-muted hover:text-white transition-colors">
+              <a
+                href="mailto:Dialedinelectric@gmail.com"
+                data-track="email_click"
+                data-track-location="footer"
+                className="text-muted hover:text-white transition-colors"
+              >
                 Dialedinelectric@gmail.com
               </a>
             </div>
@@ -101,7 +111,12 @@ export default function Footer() {
                 <p>Roseburg, OR 97471</p>
               </div>
               <div>
-                <a href="tel:15418176480" className="text-amber hover:text-amber-light transition-colors font-semibold block">
+                <a
+                  href="tel:15418176480"
+                  data-track="phone_click"
+                  data-track-location="footer_contact"
+                  className="text-amber hover:text-amber-light transition-colors font-semibold block"
+                >
                   541-817-6480
                 </a>
               </div>
@@ -111,6 +126,8 @@ export default function Footer() {
                 variant="primary"
                 size="md"
                 className="mt-1 w-full justify-center"
+                data-track="request_service_click"
+                data-track-location="footer"
               >
                 Request Service
               </Button>

@@ -46,6 +46,8 @@ export default function CTABanner({
             href={primaryHref}
             variant={isAmber ? "secondary" : "primary"}
             size="lg"
+            data-track="request_service_click"
+            data-track-location="cta_banner"
           >
             {primaryLabel}
           </Button>
@@ -55,6 +57,8 @@ export default function CTABanner({
               href={secondaryHref}
               variant={isAmber ? "outline-dark" : "outline-white"}
               size="lg"
+              data-track="phone_click"
+              data-track-location="cta_banner"
             >
               {secondaryLabel}
             </Button>

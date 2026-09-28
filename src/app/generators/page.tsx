@@ -666,7 +666,16 @@ export default function GeneratorsPage() {
               Straight answers. If your question isn&apos;t here,{" "}
               <Link href="/contact" className="text-amber hover:underline font-medium">
                 call us directly
-              </Link>.
+              </Link>
+              . Related:{" "}
+              <Link href="/backup-power" className="text-amber hover:underline font-medium">
+                portable transfer switches
+              </Link>
+              {" · "}
+              <Link href="/panel-upgrades" className="text-amber hover:underline font-medium">
+                panel upgrades
+              </Link>
+              .
             </p>
           </div>
 

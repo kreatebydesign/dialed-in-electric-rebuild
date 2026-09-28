@@ -6,7 +6,7 @@ import Button from "@/components/ui/Button";
 
 export const metadata: Metadata = {
   title: {
-    absolute: "New Construction & Commercial Wiring in Roseburg, OR | Dialed In Electric",
+    absolute: "New Home Wiring & New Construction Electrician in Roseburg, OR | Dialed In Electric",
   },
   description:
     "New home wiring and new construction electrical in Roseburg and Douglas County. Rough-in through trim-out for builders, GCs, and owner-builders. CCB# 228668.",
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   ],
   alternates: { canonical: "/new-home-wiring" },
   openGraph: {
-    title: "New Construction Wiring in Roseburg, OR | Dialed In Electric",
+    title: "New Home Wiring in Roseburg, OR | Dialed In Electric",
     description:
       "New construction and home addition wiring in Roseburg and Douglas County. Rough-in through trim-out, permit included. CCB# 228668.",
     url: "https://www.dialedinelectricroseburg.com/new-home-wiring",
@@ -286,6 +286,24 @@ export default function NewHomeWiringPage() {
               </ul>
             </div>
           </div>
+        </div>
+      </section>
+
+      <section className="py-10 bg-surface border-y border-edge">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-[14px] text-muted">
+          Need something adjacent? See{" "}
+          <Link href="/electrical-services" className="text-amber font-semibold hover:underline">
+            all electrical services
+          </Link>
+          ,{" "}
+          <Link href="/panel-upgrades" className="text-amber font-semibold hover:underline">
+            panel upgrades
+          </Link>
+          , or{" "}
+          <Link href="/commercial" className="text-amber font-semibold hover:underline">
+            commercial electrical
+          </Link>
+          .
         </div>
       </section>
 

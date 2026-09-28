@@ -148,17 +148,33 @@ export default function FAQPage() {
             ))}
           </div>
           <p className="mt-10 text-sm text-muted">
-            Looking for generator details? See{" "}
+            Looking for service details? See{" "}
             <Link href="/generators" className="text-amber hover:underline">
               Generac installation
+            </Link>
+            ,{" "}
+            <Link href="/backup-power" className="text-amber hover:underline">
+              backup power / transfer switches
             </Link>
             ,{" "}
             <Link href="/panel-upgrades" className="text-amber hover:underline">
               panel upgrades
             </Link>
-            , or{" "}
+            ,{" "}
+            <Link href="/ev-charger" className="text-amber hover:underline">
+              EV chargers
+            </Link>
+            ,{" "}
+            <Link href="/new-home-wiring" className="text-amber hover:underline">
+              new home wiring
+            </Link>
+            ,{" "}
             <Link href="/commercial" className="text-amber hover:underline">
               commercial electrical
+            </Link>
+            , or{" "}
+            <Link href="/service-areas" className="text-amber hover:underline">
+              Douglas County service areas
             </Link>
             .
           </p>

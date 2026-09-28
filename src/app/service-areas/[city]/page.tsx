@@ -264,8 +264,38 @@ export default async function CityPage({
   const city = cities.find((c) => c.slug === slug);
   if (!city) notFound();
 
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: "https://www.dialedinelectricroseburg.com/",
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Service Areas",
+        item: "https://www.dialedinelectricroseburg.com/service-areas",
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: `Electrician in ${city.name}`,
+        item: `https://www.dialedinelectricroseburg.com/service-areas/${city.slug}`,
+      },
+    ],
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+
       {/* Hero */}
       <section className="bg-charcoal-deep py-16 lg:py-24 relative overflow-hidden">
         <div
