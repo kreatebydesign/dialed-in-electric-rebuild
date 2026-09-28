@@ -5,10 +5,10 @@ import CTABanner from "@/components/ui/CTABanner";
 
 export const metadata: Metadata = {
   title: {
-    absolute: "Projects | Electrical & Generator Work | Dialed In Electric",
+    absolute: "Projects in Roseburg, OR | Generators, Panels & Electrical Work",
   },
   description:
-    "Real project photos from Dialed In Electric in Roseburg, OR. Generator installs, panel upgrades, commercial wiring, and residential electrical work throughout Douglas County.",
+    "Real project photos from Dialed In Electric in Roseburg and Douglas County — Generac installs, panel upgrades, commercial wiring, and residential electrical work. CCB# 228668.",
   keywords: [
     "electrician projects Roseburg OR",
     "generator installation photos Roseburg",
@@ -24,88 +24,127 @@ export const metadata: Metadata = {
   },
 };
 
+/**
+ * Project data model ready for future real case studies.
+ * Optional fields (location, year, services, serviceHref, workPerformed)
+ * can be filled when Jamie provides verified project details — leave empty until then.
+ */
 type Project = {
+  id: string;
   src: string;
   alt: string;
-  caption: string;
-  detail: string;
-  category: string;
+  title: string;
+  summary: string;
+  category: "Generators" | "Service Upgrades" | "Commercial" | "Residential";
+  location?: string;
+  year?: string;
+  services?: string[];
+  serviceHref?: string;
+  workPerformed?: string[];
 };
 
 const projects: Project[] = [
-  // Generators
   {
+    id: "generac-standby-install",
     src: "/images/gallery/generac-generator-install-01.jpg",
     alt: "Generac standby generator installation — Roseburg, OR",
-    caption: "Generac Standby Generator Install",
-    detail: "Full install: concrete pad, transfer switch, gas coordination, and startup. Roseburg, OR.",
+    title: "Generac Standby Generator Install",
+    summary: "Full install: concrete pad, transfer switch, gas coordination, and startup. Roseburg, OR.",
     category: "Generators",
+    location: "Roseburg, OR",
+    serviceHref: "/generators",
+    workPerformed: [
+      "Concrete pad poured and leveled",
+      "Standby generator installed",
+      "Automatic transfer switch wired in",
+      "Gas contractor coordinated for hookup",
+      "Startup, load test, and owner walkthrough",
+    ],
   },
   {
+    id: "transfer-switch-panel",
     src: "/images/gallery/generac-generator-install-02.jpg",
     alt: "Generac generator transfer switch panel integration",
-    caption: "Transfer Switch & Panel Integration",
-    detail: "Automatic transfer switch wired into the main panel with load management.",
+    title: "Transfer Switch & Panel Integration",
+    summary: "Automatic transfer switch wired into the main panel with load management.",
     category: "Generators",
+    serviceHref: "/generators",
   },
   {
+    id: "side-yard-generator",
     src: "/images/gallery/generator-install-side-yard.jpg",
     alt: "Generac generator set — side yard residential install",
-    caption: "Generator Set — Side Yard Install",
-    detail: "Residential standby generator mounted in side yard. Clean conduit run, proper clearances.",
+    title: "Generator Set — Side Yard Install",
+    summary: "Residential standby generator mounted in side yard. Clean conduit run, proper clearances.",
     category: "Generators",
+    serviceHref: "/generators",
   },
   {
+    id: "propane-generator-tank",
     src: "/images/gallery/propane-generator-tank-install.jpg",
     alt: "Propane-fueled standby generator with dedicated tank",
-    caption: "Propane Generator With Dedicated Tank",
-    detail: "Customer preferred propane over natural gas. Tank placement, gas line, and generator startup.",
+    title: "Propane Generator With Dedicated Tank",
+    summary: "Propane fuel path with dedicated tank placement, gas line coordination, and generator startup.",
     category: "Generators",
+    serviceHref: "/generators",
   },
-  // Service Upgrades
   {
+    id: "panel-upgrade-interior",
     src: "/images/gallery/electrical-panel-interior.jpg",
     alt: "200 amp electrical panel interior — labeled and organized",
-    caption: "200A Panel Upgrade — Interior",
-    detail: "100→200A service upgrade. Every circuit labeled, grounding updated to current code.",
+    title: "200A Panel Upgrade — Interior",
+    summary: "100→200A service upgrade. Every circuit labeled, grounding updated to current code.",
     category: "Service Upgrades",
+    serviceHref: "/panel-upgrades",
   },
   {
+    id: "residential-service-upgrade",
     src: "/images/gallery/residential-service-upgrade.jpg",
     alt: "Residential service upgrade — Roseburg, OR",
-    caption: "Residential Service Upgrade",
-    detail: "Service entrance and meter base replacement. Homeowner needed capacity for new HVAC.",
+    title: "Residential Service Upgrade",
+    summary: "Service entrance and meter base replacement for added home electrical capacity.",
     category: "Service Upgrades",
+    location: "Roseburg, OR",
+    serviceHref: "/panel-upgrades",
   },
-  // Commercial
   {
+    id: "commercial-disconnect",
     src: "/images/gallery/commercial-disconnect-install.jpg",
     alt: "Commercial disconnect installation — Roseburg, OR",
-    caption: "Commercial Disconnect Installation",
-    detail: "Exterior disconnect installation for a commercial tenant improvement.",
+    title: "Commercial Disconnect Installation",
+    summary: "Exterior disconnect installation for a commercial tenant improvement.",
     category: "Commercial",
+    location: "Roseburg, OR",
+    serviceHref: "/commercial",
   },
   {
+    id: "commercial-service",
     src: "/images/gallery/commercial-electrical-service.jpg",
     alt: "Commercial electrical service installation — Roseburg, OR",
-    caption: "Commercial Electrical Service",
-    detail: "New service installation for a commercial building in Roseburg.",
+    title: "Commercial Electrical Service",
+    summary: "New service installation for a commercial building in Roseburg.",
     category: "Commercial",
+    location: "Roseburg, OR",
+    serviceHref: "/commercial",
   },
   {
+    id: "multi-meter-service",
     src: "/images/gallery/commercial-meter-bank-install.jpg",
     alt: "Multi-meter service wall — commercial installation",
-    caption: "Multi-Meter Service Installation",
-    detail: "Meter bank for a multi-unit commercial property. Clean conduit, properly labeled.",
+    title: "Multi-Meter Service Installation",
+    summary: "Meter bank for a multi-unit commercial property. Clean conduit, properly labeled.",
     category: "Commercial",
+    serviceHref: "/commercial",
   },
-  // Residential
   {
+    id: "new-construction-service",
     src: "/images/gallery/new-construction-service-install.jpg",
     alt: "New construction electrical service install — Douglas County",
-    caption: "New Construction Service Install",
-    detail: "Temporary and permanent service installation for a new residential build in Douglas County.",
+    title: "New Construction Service Install",
+    summary: "Temporary and permanent service installation for a new residential build in Douglas County.",
     category: "Residential",
+    location: "Douglas County, OR",
+    serviceHref: "/new-home-wiring",
   },
 ];
 
@@ -123,7 +162,6 @@ export default function ProjectsPage() {
 
   return (
     <>
-      {/* Hero */}
       <section className="bg-charcoal-deep py-16 lg:py-20 relative overflow-hidden">
         <div
           className="absolute -top-40 -right-40 w-[500px] h-[500px] rounded-full pointer-events-none"
@@ -153,12 +191,11 @@ export default function ProjectsPage() {
         </div>
       </section>
 
-      {/* Stats bar */}
       <div className="bg-charcoal border-b border-white/8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 lg:grid-cols-4 divide-x divide-white/10">
             {[
-              { label: "Generac Certified", sub: "Factory authorized installer" },
+              { label: "Generac Certified", sub: "Certified Generac installer" },
               { label: "Licensed & Insured", sub: "CCB# 228668 · Oregon" },
               { label: "4 Service Categories", sub: "Generators, panels, commercial, residential" },
               { label: "Douglas County", sub: "Roseburg and surrounding areas" },
@@ -172,7 +209,6 @@ export default function ProjectsPage() {
         </div>
       </div>
 
-      {/* Featured project */}
       <section className="py-12 lg:py-16 bg-surface">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center gap-3 mb-7">
@@ -197,25 +233,21 @@ export default function ProjectsPage() {
             </div>
             <div className="lg:pl-4">
               <h2 className="text-2xl lg:text-3xl font-extrabold text-charcoal-deep tracking-tight mb-3">
-                {featured.caption}
+                {featured.title}
               </h2>
               <p className="text-[15px] text-muted leading-relaxed mb-6">
-                {featured.detail}
+                {featured.summary}
               </p>
-              <div className="flex flex-col gap-3 text-[13px] text-charcoal">
-                {[
-                  "Concrete pad poured and leveled",
-                  "Generac 22kW air-cooled unit installed",
-                  "Automatic transfer switch wired in",
-                  "Gas contractor coordinated for hookup",
-                  "Startup, load test, and owner walkthrough",
-                ].map((item) => (
-                  <div key={item} className="flex items-center gap-2">
-                    <div className="w-1.5 h-1.5 bg-amber rounded-full shrink-0" aria-hidden="true" />
-                    {item}
-                  </div>
-                ))}
-              </div>
+              {featured.workPerformed && (
+                <div className="flex flex-col gap-3 text-[13px] text-charcoal">
+                  {featured.workPerformed.map((item) => (
+                    <div key={item} className="flex items-center gap-2">
+                      <div className="w-1.5 h-1.5 bg-amber rounded-full shrink-0" aria-hidden="true" />
+                      {item}
+                    </div>
+                  ))}
+                </div>
+              )}
               <p className="mt-6 text-[13px] text-muted">
                 Planning similar work? See{" "}
                 <Link href="/generators" className="text-amber font-semibold hover:underline">
@@ -236,7 +268,6 @@ export default function ProjectsPage() {
         </div>
       </section>
 
-      {/* Category sections */}
       {categories.map((cat) => {
         const catProjects = projects.filter((p) => p.category === cat);
         if (catProjects.length === 0) return null;
@@ -260,16 +291,16 @@ export default function ProjectsPage() {
                     : catProjects.length === 2
                     ? "grid-cols-1 sm:grid-cols-2"
                     : catProjects.length >= 4
-                    ? "grid-cols-2 lg:grid-cols-4"
+                    ? "grid-cols-1 sm:grid-cols-2 lg:grid-cols-4"
                     : "grid-cols-1 sm:grid-cols-3"
                 }`}
               >
                 {catProjects.map((project, i) => (
                   <figure
-                    key={project.src}
-                    className={`group relative rounded-sm overflow-hidden ${
+                    key={project.id}
+                    className={`group relative rounded-sm overflow-hidden bg-charcoal-deep ${
                       catProjects.length >= 4 && i === 0
-                        ? "col-span-2 aspect-[16/9]"
+                        ? "sm:col-span-2 aspect-[16/10]"
                         : "aspect-[4/3]"
                     }`}
                   >
@@ -284,20 +315,28 @@ export default function ProjectsPage() {
                           : "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                       }
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-charcoal-deep/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                    <figcaption className="absolute bottom-0 left-0 right-0 p-4 translate-y-2 opacity-0 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
-                      <p className="text-[13px] font-semibold text-white leading-snug mb-0.5">
-                        {project.caption}
-                      </p>
-                      <p className="text-[11px] text-white/70 leading-relaxed">
-                        {project.detail}
-                      </p>
-                    </figcaption>
-                    <div className="absolute top-3 left-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <div className="absolute inset-0 bg-gradient-to-t from-charcoal-deep/85 via-charcoal-deep/20 to-transparent" />
+                    <div className="absolute top-3 left-3">
                       <span className={`px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider rounded-sm ${categoryColors[cat]}`}>
                         {cat}
                       </span>
                     </div>
+                    <figcaption className="absolute bottom-0 left-0 right-0 p-4">
+                      <p className="text-[13px] font-semibold text-white leading-snug mb-0.5">
+                        {project.title}
+                      </p>
+                      <p className="text-[11px] text-white/75 leading-relaxed">
+                        {project.summary}
+                      </p>
+                      {project.serviceHref && (
+                        <Link
+                          href={project.serviceHref}
+                          className="inline-block mt-2 text-[11px] font-semibold text-amber hover:text-amber-light"
+                        >
+                          Related service →
+                        </Link>
+                      )}
+                    </figcaption>
                   </figure>
                 ))}
               </div>
@@ -308,7 +347,7 @@ export default function ProjectsPage() {
 
       <CTABanner
         headline="Need Help With a Project Like This?"
-        subtext="Send us a few details and we'll get back to you with a clear quote."
+        subtext="Call or request service — tell us what you're planning and we'll walk through scope for Roseburg and Douglas County."
         primaryLabel="Request Service"
         primaryHref="/contact"
         secondaryLabel="Call 541-817-6480"

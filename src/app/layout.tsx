@@ -137,7 +137,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
         />
       </head>
-      <body className="pb-12 lg:pb-0">
+      <body className="pb-[calc(3rem+env(safe-area-inset-bottom,0px))] lg:pb-0">
         <GoogleAnalytics />
         <Suspense fallback={null}>
           <AnalyticsBootstrap />

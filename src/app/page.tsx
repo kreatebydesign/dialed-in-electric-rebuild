@@ -295,7 +295,7 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 lg:grid-cols-4 divide-x divide-white/10">
             {[
-              { label: "Generac Certified", sub: "Factory authorized installer" },
+              { label: "Generac Certified", sub: "Certified Generac installer" },
               { label: "CCB# 228668", sub: "Oregon licensed & insured" },
               { label: "Founded 2019", sub: "Serving Douglas County" },
               { label: "Roseburg, Oregon", sub: "Same-week availability" },
@@ -421,7 +421,7 @@ export default function HomePage() {
             Electrical Services
           </h2>
           <p className="text-[15px] text-muted max-w-lg mx-auto">
-            Clean work, clear scope, first time every time.
+            Generators, panels, new home wiring, commercial work, and EV chargers — clear scope and inspector-ready installs for Roseburg and Douglas County.
           </p>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -503,16 +503,16 @@ export default function HomePage() {
             </Link>
           </div>
 
-          {/* Editorial grid */}
-          <div className="grid grid-cols-3 gap-3 lg:gap-4">
-            {/* Large lead image — spans 2 cols */}
-            <div className="col-span-2 relative rounded-sm overflow-hidden group" style={{ height: "360px" }}>
+          {/* Editorial grid — stacks on mobile, editorial split on md+ */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3 lg:gap-4">
+            {/* Large lead image — spans 2 cols on md+ */}
+            <div className="md:col-span-2 relative rounded-sm overflow-hidden group aspect-[4/3] md:aspect-auto md:h-[360px]">
               <Image
                 src={projectPhotos[0].src}
                 alt={projectPhotos[0].alt}
                 fill
                 className="object-cover group-hover:scale-105 transition-transform duration-700"
-                sizes="66vw"
+                sizes="(max-width: 768px) 100vw, 66vw"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-charcoal-deep/60 via-transparent to-transparent" />
               <div className="absolute bottom-4 left-4 flex items-center gap-2">
@@ -523,19 +523,18 @@ export default function HomePage() {
             </div>
 
             {/* Right column — two stacked */}
-            <div className="flex flex-col gap-3 lg:gap-4">
+            <div className="grid grid-cols-2 md:flex md:flex-col gap-3 lg:gap-4">
               {[projectPhotos[1], projectPhotos[2]].map((photo) => (
                 <div
                   key={photo.src}
-                  className="relative rounded-sm overflow-hidden group flex-1"
-                  style={{ minHeight: "170px" }}
+                  className="relative rounded-sm overflow-hidden group aspect-[4/3] md:aspect-auto md:flex-1 md:min-h-[170px]"
                 >
                   <Image
                     src={photo.src}
                     alt={photo.alt}
                     fill
                     className="object-cover group-hover:scale-105 transition-transform duration-700"
-                    sizes="33vw"
+                    sizes="(max-width: 768px) 50vw, 33vw"
                   />
                   <div className="absolute inset-0 bg-charcoal-deep/20 group-hover:bg-charcoal-deep/40 transition-colors" />
                   <div className="absolute bottom-2.5 left-2.5">
@@ -558,10 +557,10 @@ export default function HomePage() {
                   alt={photo.alt}
                   fill
                   className="object-cover group-hover:scale-105 transition-transform duration-700"
-                  sizes="33vw"
+                  sizes="(max-width: 768px) 100vw, 33vw"
                 />
                 <div className="absolute inset-0 bg-charcoal-deep/10 group-hover:bg-charcoal-deep/40 transition-colors" />
-                <div className="absolute bottom-2.5 left-2.5 opacity-0 group-hover:opacity-100 transition-opacity">
+                <div className="absolute bottom-2.5 left-2.5">
                   <span className="px-2 py-0.5 bg-charcoal-deep/80 text-white text-[10px] font-semibold rounded-sm uppercase tracking-wide">
                     {photo.category}
                   </span>
@@ -633,7 +632,7 @@ export default function HomePage() {
       {/* ─── 9. Final CTA ─── */}
       <CTABanner
         headline="Need Electrical Work or a Generator Quote?"
-        subtext="Send us a few details about your project and we'll get back to you."
+        subtext="Call 541-817-6480 or request service — we'll talk through the project and next steps for Roseburg and Douglas County."
         primaryLabel="Request Service"
         primaryHref="/contact"
         secondaryLabel="Call 541-817-6480"

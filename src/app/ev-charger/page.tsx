@@ -3,13 +3,14 @@ import Image from "next/image";
 import Link from "next/link";
 import CTABanner from "@/components/ui/CTABanner";
 import Button from "@/components/ui/Button";
+import FAQItem from "@/components/ui/FAQItem";
 
 export const metadata: Metadata = {
   title: {
-    absolute: "EV Charger Installation Roseburg OR | Level 2 Home Charging | Dialed In Electric",
+    absolute: "EV Charger Installation in Roseburg, OR | Level 2 Home Charging",
   },
   description:
-    "EV charger installation in Roseburg, OR. Level 2 home charging circuit — properly sized, permitted, and labeled. Works with all major electric vehicles. CCB# 228668.",
+    "Level 2 home EV charger installation in Roseburg and Douglas County. Dedicated 240V circuit, panel capacity check, permit, and labeling. Call 541-817-6480. CCB# 228668.",
   keywords: [
     "EV charger installation Roseburg OR",
     "Level 2 EV charger Roseburg",
@@ -19,9 +20,9 @@ export const metadata: Metadata = {
   ],
   alternates: { canonical: "/ev-charger" },
   openGraph: {
-    title: "EV Charger Installation Roseburg OR | Dialed In Electric",
+    title: "EV Charger Installation in Roseburg, OR | Dialed In Electric",
     description:
-      "Level 2 home EV charger installation in Roseburg, OR. Proper circuit, permit, and labeling. Works with Tesla, Ford, Chevy, Rivian, and all other EVs. CCB# 228668.",
+      "Level 2 home EV charger circuit in Roseburg and Douglas County — sized, permitted, and labeled. Panel capacity checked first. CCB# 228668.",
     url: "https://www.dialedinelectricroseburg.com/ev-charger",
   },
 };
@@ -126,26 +127,46 @@ const installScope = [
 
 const chargerTypes = [
   {
-    label: "Tesla (Model 3, Y, S, X, Cybertruck)",
-    note: "Tesla Wall Connector or NEMA 14-50 outlet",
+    label: "Tesla vehicles",
+    note: "Wall Connector hardwire or NEMA 14-50 outlet — we install the circuit your unit needs",
   },
   {
-    label: "Ford F-150 Lightning / Mustang Mach-E",
-    note: "Ford Charge Station Pro or standard NEMA 14-50",
+    label: "Ford, Chevy, Rivian, and other major EVs",
+    note: "Most use a Level 2 EVSE or NEMA 14-50 on a dedicated 240V circuit",
   },
   {
-    label: "Chevrolet Bolt, Silverado EV",
-    note: "Any Level 2 EVSE or NEMA 14-50",
-  },
-  {
-    label: "Rivian R1T / R1S",
-    note: "Rivian Home Charging System or NEMA 14-50",
-  },
-  {
-    label: "All other EVs with J1772 inlet",
-    note: "Any Level 2 EVSE works",
+    label: "J1772 inlet vehicles",
+    note: "Standard Level 2 EVSE works with the circuit we install",
   },
 ];
+
+const evFaqs = [
+  {
+    question: "Do I need a panel upgrade for an EV charger?",
+    answer:
+      "Not always. Many homes with a 200A panel have space for a dedicated 40–60A circuit. Homes on 100A service or with a full panel may need additional capacity. We evaluate your panel during the estimate and explain options before any work starts.",
+  },
+  {
+    question: "What is the difference between a NEMA 14-50 outlet and hardwiring?",
+    answer:
+      "A NEMA 14-50 is a 240V receptacle many portable or plug-in Level 2 chargers use. Hardwiring connects the charger directly to the circuit with no plug. We install whichever connection your charger requires.",
+  },
+  {
+    question: "How long does a home EV charger install take in Roseburg?",
+    answer:
+      "Most residential Level 2 circuit installs take about a half-day once the scope is clear. Permitting and inspection are included in the process.",
+  },
+];
+
+const evFaqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: evFaqs.map((faq) => ({
+    "@type": "Question",
+    name: faq.question,
+    acceptedAnswer: { "@type": "Answer", text: faq.answer },
+  })),
+};
 
 export default function EvChargerPage() {
   return (
@@ -157,6 +178,10 @@ export default function EvChargerPage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(evFaqSchema) }}
       />
 
       {/* Hero */}
@@ -201,7 +226,7 @@ export default function EvChargerPage() {
               <span className="text-amber">in Roseburg, OR</span>
             </h1>
             <p className="text-[16px] text-white/65 leading-relaxed max-w-lg mb-8">
-              Level 2 home charging circuit — properly sized, permitted, and labeled. Works with Tesla, Ford, Rivian, Chevy, and every other EV on a standard J1772 connector. CCB# 228668.
+              Level 2 home charging circuit for homes in Roseburg and Douglas County — sized for your charger, permitted, and labeled. We check panel capacity first so you know exactly what the job involves. CCB# 228668.
             </p>
             <div className="flex flex-col sm:flex-row gap-3">
               <Button as="link" href="/contact" variant="primary" size="lg">
@@ -224,7 +249,7 @@ export default function EvChargerPage() {
               { label: "CCB# 228668", sub: "Oregon licensed & insured" },
               { label: "Permit Included", sub: "Required in Oregon" },
               { label: "Level 2 Charging", sub: "40–60A dedicated circuit" },
-              { label: "All EV Brands", sub: "Tesla, Ford, Chevy, Rivian & more" },
+              { label: "All Major EVs", sub: "Dedicated 240V circuit for your charger" },
             ].map((item) => (
               <div key={item.label} className="flex flex-col items-center justify-center text-center py-5 px-4">
                 <span className="text-sm font-semibold text-amber tracking-wide">{item.label}</span>
@@ -285,7 +310,7 @@ export default function EvChargerPage() {
               <div className="p-5 bg-surface rounded-sm border border-edge">
                 <p className="text-[13px] font-semibold text-charcoal mb-1">Do I need a panel upgrade first?</p>
                 <p className="text-[13px] text-muted leading-relaxed mb-3">
-                  Most homes with a 200A panel have room for an EV charger circuit. Homes on 100A service with a full panel may need an upgrade first. We check your panel during the estimate and tell you exactly what the job involves.
+                  Many homes with a 200A panel have room for an EV charger circuit. Homes on 100A service or with a full panel may need additional capacity. We evaluate your panel during the estimate and explain what the job involves before any work starts.
                 </p>
                 <Link href="/panel-upgrades" className="text-[13px] font-semibold text-amber hover:text-amber-light transition-colors">
                   Learn about panel &amp; service upgrades →
@@ -324,16 +349,49 @@ export default function EvChargerPage() {
             <div className="mt-8 p-5 bg-white rounded-sm border border-edge">
               <p className="text-[14px] font-semibold text-charcoal mb-1">What does it cost?</p>
               <p className="text-[13px] text-muted leading-relaxed">
-                Most EV charger installs in Roseburg run between <span className="font-semibold text-charcoal">$400 and $900</span>, depending on the distance from your panel to the garage, whether conduit is needed, and whether your panel has available space. We give you an itemized quote after reviewing the job — not a number off the top of our head.
+                Most EV charger circuit installs in Roseburg run between{" "}
+                <span className="font-semibold text-charcoal">$400 and $900</span>, depending on distance from the panel to the garage, conduit needs, and available panel space. You get an itemized quote after we review the job.
               </p>
             </div>
           </div>
         </div>
       </section>
 
+      <section className="py-16 lg:py-20 bg-white">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center gap-3 mb-5">
+            <div className="h-px w-8 bg-amber" aria-hidden="true" />
+            <span className="text-amber text-[11px] font-bold tracking-[0.18em] uppercase">Common Questions</span>
+          </div>
+          <h2 className="text-2xl lg:text-3xl font-extrabold text-charcoal-deep tracking-tight mb-6">
+            EV Charger FAQ
+          </h2>
+          <div className="flex flex-col gap-3">
+            {evFaqs.map((faq) => (
+              <FAQItem key={faq.question} question={faq.question} answer={faq.answer} />
+            ))}
+          </div>
+          <p className="mt-8 text-sm text-muted">
+            Related:{" "}
+            <Link href="/panel-upgrades" className="text-amber hover:underline">
+              panel upgrades
+            </Link>
+            ,{" "}
+            <Link href="/electrical-services" className="text-amber hover:underline">
+              electrical services
+            </Link>
+            , or{" "}
+            <Link href="/service-areas/roseburg" className="text-amber hover:underline">
+              electrician in Roseburg
+            </Link>
+            .
+          </p>
+        </div>
+      </section>
+
       <CTABanner
         headline="Getting an EV in Douglas County?"
-        subtext="Tell us where your panel is and where you park. We'll give you a straight quote."
+        subtext="Tell us where your panel is and where you park. We'll follow up with a clear scope."
         primaryLabel="Get a Quote"
         primaryHref="/contact"
         secondaryLabel="Call 541-817-6480"

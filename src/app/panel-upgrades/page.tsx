@@ -98,19 +98,19 @@ function CheckIcon({ className }: { className?: string }) {
 const upgradeReasons = [
   {
     title: "You're adding a large load",
-    body: "A hot tub, EV charger, air conditioner, or shop equipment can push a 100A service past its limit. A 200A upgrade gives you room to add what you need.",
+    body: "A hot tub, EV charger, air conditioner, or shop equipment can push older or smaller services past their practical limit. A load evaluation tells you whether a 200A upgrade is needed — or whether your current service can support the new circuit.",
   },
   {
     title: "Your panel is old or damaged",
-    body: "Panels from the 1960s–1980s often used obsolete breaker brands that are known fire hazards. Federal Pacific Stab-Lok and Zinsco panels should be replaced regardless of capacity.",
+    body: "Panels from the 1960s–1980s, including some Federal Pacific Stab-Lok and Zinsco equipment, are often recommended for replacement after a professional evaluation. Capacity alone isn't the only factor — condition and breaker type matter too.",
   },
   {
     title: "You're remodeling or building an addition",
-    body: "Most additions and major remodels require a load calculation. If your current service can't support the new square footage, an upgrade is part of the permit process.",
+    body: "Most additions and major remodels require a load calculation. If your current service can't support the new square footage, an upgrade may be part of the permit process.",
   },
   {
     title: "You're installing a standby generator",
-    body: "A generator with an automatic transfer switch requires room at your main panel. If your panel is full or undersized, the generator install includes a panel upgrade.",
+    body: "A generator with an automatic transfer switch needs room and a clean connection at your main panel. If the panel is full or undersized, the generator project may include a panel upgrade — we determine that during the walkthrough.",
   },
 ];
 
@@ -223,7 +223,7 @@ export default function PanelUpgradesPage() {
               Four Reasons Homeowners in<br />Roseburg Upgrade Their Panel
             </h2>
             <p className="text-[15px] text-muted leading-relaxed mb-8">
-              A panel upgrade isn&apos;t always an emergency — but when you need one, it&apos;s usually blocking something you want to do. Here are the most common situations:
+              A panel upgrade isn&apos;t always urgent — but when capacity or equipment condition is limiting what you want to add, a professional evaluation clarifies the next step. Common situations we see in Roseburg and Douglas County:
             </p>
             <div className="flex flex-col gap-4">
               {upgradeReasons.map((reason, i) => (
@@ -299,7 +299,7 @@ export default function PanelUpgradesPage() {
                   Most residential 200A panel upgrades in Roseburg run between <span className="font-semibold text-charcoal">$1,800 and $3,500</span>, depending on whether the service entrance needs work, the meter base, and whether there&apos;s any riser or conduit involved.
                 </p>
                 <p className="text-[13px] text-muted leading-relaxed">
-                  Homes that need a meter-main combo or have an older service entrance can run higher. We give you an itemized quote after the site review — not a number off the top of our head.
+                  Homes that need a meter-main combo or have an older service entrance can run higher. You get an itemized quote after the site review.
                 </p>
               </div>
               <div className="p-6 bg-white border border-edge rounded-sm">
@@ -339,8 +339,8 @@ export default function PanelUpgradesPage() {
       </section>
 
       <CTABanner
-        headline="Need a Panel Upgrade in Roseburg?"
-        subtext="Send us a few details about your home and what you&apos;re trying to add. We&apos;ll get back to you with a clear quote."
+        headline="Need a Panel Evaluation in Roseburg?"
+        subtext="Tell us what you're trying to add — EV charger, generator, remodel, or shop load — and we'll review capacity before quoting work."
         primaryLabel="Get a Quote"
         primaryHref="/contact"
         secondaryLabel="Call 541-817-6480"

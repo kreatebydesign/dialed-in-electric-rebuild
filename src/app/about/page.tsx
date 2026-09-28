@@ -127,7 +127,7 @@ export default function AboutPage() {
           <div className="grid grid-cols-2 lg:grid-cols-4 divide-x divide-white/10">
             {[
               { label: "Licensed Since 2019", sub: "Oregon CCB# 228668" },
-              { label: "Generac Certified", sub: "Factory authorized installer" },
+              { label: "Generac Certified", sub: "Certified Generac installer" },
               { label: "Residential & Commercial", sub: "Homes, shops, new construction" },
               { label: "Douglas County", sub: "Roseburg and surrounding areas" },
             ].map((item) => (

@@ -10,10 +10,10 @@ import FAQItem from "@/components/ui/FAQItem";
 
 export const metadata: Metadata = {
   title: {
-    absolute: "Generac Generator Installation in Roseburg, OR | Dialed In Electric",
+    absolute: "Generac Standby Generator Installation in Roseburg, OR | Dialed In Electric",
   },
   description:
-    "Generac standby generator installation in Roseburg and Douglas County. Full install — pad, automatic transfer switch, gas coordination, permits, and startup. Call 541-817-6480.",
+    "Whole-home Generac standby generator installation in Roseburg and Douglas County — pad, automatic transfer switch, gas coordination, permits, and startup. Licensed. Call 541-817-6480.",
   keywords: [
     "generator installation Roseburg OR",
     "backup generator installation Roseburg",
@@ -25,9 +25,9 @@ export const metadata: Metadata = {
   ],
   alternates: { canonical: "/generators" },
   openGraph: {
-    title: "Generac Generator Installation in Roseburg, OR | Dialed In Electric",
+    title: "Generac Standby Generator Installation in Roseburg, OR | Dialed In Electric",
     description:
-      "Generac standby generator installation in Roseburg and Douglas County. Pad, transfer switch, gas coordination, permits, and startup. CCB# 228668.",
+      "Whole-home Generac standby installation in Roseburg and Douglas County. Pad, transfer switch, gas coordination, permits, and startup. CCB# 228668.",
     url: "https://www.dialedinelectricroseburg.com/generators",
     images: [{ url: "/images/gallery/generac-generator-install-01.jpg", width: 1200, height: 630 }],
   },
@@ -343,7 +343,7 @@ export default function GeneratorsPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 lg:grid-cols-4 divide-x divide-white/10">
             {[
-              { label: "Generac Certified", sub: "Factory authorized installer" },
+              { label: "Generac Certified", sub: "Certified Generac installer" },
               { label: "CCB# 228668", sub: "Oregon licensed & insured" },
               { label: "Same-Week Scheduling", sub: "Most installs within 7 days" },
               { label: "Free Site Walkthrough", sub: "Clear quote in 48 hours" },
@@ -482,11 +482,11 @@ export default function GeneratorsPage() {
               <h2 className="text-xl font-extrabold text-charcoal-deep tracking-tight">Why Generac</h2>
             </div>
             <p className="text-[15px] text-muted leading-relaxed mb-5">
-              Generac is the most-installed home standby brand in the country — and for good reason. Their systems are proven, parts are available, and the dealer network means you&apos;re never waiting months for service.
+              Generac is a widely installed home standby brand — systems are proven, parts are available, and service support is easy to find in Oregon when you need it later.
             </p>
             <ul className="flex flex-col gap-3">
               {[
-                "#1 selling home standby generator brand in the US",
+                "Widely installed home standby brand with strong parts availability",
                 "Full-load transfer in seconds — no manual intervention",
                 "Runs on natural gas or propane",
                 "Remote monitoring via the MobileLink app",
@@ -513,7 +513,7 @@ export default function GeneratorsPage() {
             </p>
             <ul className="flex flex-col gap-3">
               {[
-                "Generac certified installer — factory trained",
+                "Generac certified installer",
                 "Licensed & insured in Oregon (CCB# 228668)",
                 "We pull all permits and schedule all inspections",
                 "Local crew — Roseburg to Douglas County",
@@ -650,6 +650,40 @@ export default function GeneratorsPage() {
         </div>
       </section>
 
+      {/* ── Electrical considerations ── */}
+      <section className="py-14 lg:py-20 bg-surface border-y border-edge">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-3xl">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="h-px w-8 bg-amber" aria-hidden="true" />
+              <span className="text-amber text-[11px] font-bold tracking-[0.18em] uppercase">
+                Electrical Side of the Job
+              </span>
+            </div>
+            <h2 className="text-2xl lg:text-[34px] font-extrabold text-charcoal-deep tracking-tight mb-4">
+              Your Panel, Transfer Switch, and Service Capacity Matter
+            </h2>
+            <p className="text-[15px] text-muted leading-relaxed mb-4">
+              A standby generator connects through an automatic transfer switch at your main panel. During the site walkthrough we review breaker space, grounding, and whether your existing service can support the transfer equipment cleanly. Some homes need a panel or service upgrade as part of the same project — we tell you that up front after looking at the equipment, not after work has started.
+            </p>
+            <p className="text-[15px] text-muted leading-relaxed mb-5">
+              Already have a portable generator and want a safer hookup first? A manual transfer switch is a different path — we can walk you through which option fits your property.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-3 text-[13px]">
+              <Link href="/panel-upgrades" className="font-semibold text-amber hover:text-amber-light transition-colors">
+                Panel &amp; service upgrades →
+              </Link>
+              <Link href="/backup-power" className="font-semibold text-amber hover:text-amber-light transition-colors">
+                Manual transfer switches →
+              </Link>
+              <Link href="/service-areas/roseburg" className="font-semibold text-amber hover:text-amber-light transition-colors">
+                Electrician in Roseburg →
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* ── 8. FAQ ── */}
       <SectionWrapper variant="white" id="faq">
         <div className="max-w-3xl mx-auto">
@@ -695,7 +729,7 @@ export default function GeneratorsPage() {
       {/* ── 9. Final CTA ── */}
       <CTABanner
         headline="Thinking About a Backup Generator?"
-        subtext="Most installs in Roseburg are scheduled within a week. Send us a few details and we'll get back to you with a clear quote."
+        subtext="Tell us your address, approximate square footage, and whether you have natural gas or propane. We'll follow up with clear next steps."
         primaryLabel="Request a Free Quote"
         primaryHref="/contact"
         secondaryLabel="Call 541-817-6480"

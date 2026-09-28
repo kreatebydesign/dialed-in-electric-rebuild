@@ -183,7 +183,7 @@ export default function ElectricalServicesPage() {
               Electrical Services<br />in Roseburg, Oregon
             </h1>
             <p className="text-[16px] text-white/65 leading-relaxed max-w-lg mb-8">
-              Residential and commercial electrical for homes, new construction, shops, and businesses throughout Douglas County — including repairs, panel upgrades, generators, EV chargers, and new wiring. Licensed, insured, and available most weeks.
+              Residential and commercial electrical for homes, new construction, shops, and businesses throughout Douglas County — including repairs, panel upgrades, generators, EV chargers, and new wiring. Licensed, insured, and typically available same week. CCB# 228668.
             </p>
             <div className="flex flex-col sm:flex-row gap-3">
               <Button as="link" href="/contact" variant="primary" size="lg">
@@ -204,7 +204,7 @@ export default function ElectricalServicesPage() {
           <div className="grid grid-cols-2 lg:grid-cols-4 divide-x divide-white/10">
             {[
               { label: "CCB# 228668", sub: "Oregon licensed & insured" },
-              { label: "Generac Certified", sub: "Factory authorized installer" },
+              { label: "Generac Certified", sub: "Certified Generac installer" },
               { label: "Residential & Commercial", sub: "Homes, shops, tenant improvements" },
               { label: "Douglas County", sub: "Roseburg and surrounding areas" },
             ].map((item) => (
@@ -362,7 +362,7 @@ export default function ElectricalServicesPage() {
 
       <CTABanner
         headline="Need Electrical Work in Roseburg?"
-        subtext="Send us a few details about your project and we'll get back to you."
+        subtext="Tell us what you need — generator, panel, EV charger, new wiring, or commercial work — and we'll follow up with clear next steps."
         primaryLabel="Get a Quote"
         primaryHref="/contact"
         secondaryLabel="Call 541-817-6480"
