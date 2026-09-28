@@ -1,7 +1,12 @@
 "use client";
 
-import { useEffect } from "react";
-import { trackEvent, type AnalyticsEventName } from "@/lib/analytics";
+import { useEffect, useRef } from "react";
+import { usePathname, useSearchParams } from "next/navigation";
+import {
+  trackEvent,
+  trackPageView,
+  type AnalyticsEventName,
+} from "@/lib/analytics";
 
 const VALID_EVENTS = new Set<AnalyticsEventName>([
   "phone_click",
@@ -13,10 +18,27 @@ const VALID_EVENTS = new Set<AnalyticsEventName>([
 ]);
 
 /**
- * Delegates clicks on [data-track] elements so server-rendered
- * tel/mailto/CTA links can emit conversion events without becoming client trees.
+ * - Delegates [data-track] clicks into trackEvent → gtag
+ * - Sends page_view on App Router client navigations only (skips first mount
+ *   so gtag config's initial page_view is not duplicated)
  */
 export default function AnalyticsBootstrap() {
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const isFirstPath = useRef(true);
+
+  useEffect(() => {
+    const search = searchParams?.toString();
+    const url = search ? `${pathname}?${search}` : pathname;
+
+    if (isFirstPath.current) {
+      isFirstPath.current = false;
+      return;
+    }
+
+    trackPageView(url);
+  }, [pathname, searchParams]);
+
   useEffect(() => {
     window.dataLayer = window.dataLayer || [];
 

@@ -252,8 +252,6 @@ export default function ContactForm() {
       <button
         type="submit"
         disabled={status === "submitting"}
-        data-track="request_service_click"
-        data-track-location="contact_form_submit"
         className="inline-flex items-center justify-center h-12 px-7 w-full sm:w-auto bg-amber text-charcoal-deep font-semibold text-[15px] tracking-wide rounded-sm hover:bg-amber-dark hover:-translate-y-px hover:shadow-md transition-all duration-200 disabled:opacity-60 disabled:pointer-events-none"
       >
         {status === "submitting" ? "Sending…" : "Send Request"}

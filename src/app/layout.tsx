@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import MobileCallBar from "@/components/layout/MobileCallBar";
 import AnalyticsBootstrap from "@/components/analytics/AnalyticsBootstrap";
+import GoogleAnalytics from "@/components/analytics/GoogleAnalytics";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -136,7 +138,10 @@ export default function RootLayout({
         />
       </head>
       <body className="pb-12 lg:pb-0">
-        <AnalyticsBootstrap />
+        <GoogleAnalytics />
+        <Suspense fallback={null}>
+          <AnalyticsBootstrap />
+        </Suspense>
         <Header />
         <main>{children}</main>
         <Footer />
