@@ -161,7 +161,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
         />
       </head>
-      <body className="pb-12 lg:pb-0 antialiased bg-[var(--proto-bg)] text-[var(--proto-text)]">
+      <body className="proto-site-body antialiased bg-[var(--proto-bg)] text-[var(--proto-text)]">
         <IntroBootShell />
         <HomeIntroGate />
         <GoogleAnalytics />
