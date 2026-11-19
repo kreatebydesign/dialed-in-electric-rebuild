@@ -12,6 +12,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Social tooling (CommonJS + sharp render scripts, not part of the Next app bundle)
+    "social-content/**",
   ]),
 ]);
 

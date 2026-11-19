@@ -7,7 +7,7 @@ type CTABannerProps = {
   primaryHref: string;
   secondaryLabel?: string;
   secondaryHref?: string;
-  variant?: "amber" | "dark";
+  variant?: "light" | "dark" | "amber";
 };
 
 export default function CTABanner({
@@ -19,24 +19,20 @@ export default function CTABanner({
   secondaryHref,
   variant = "dark",
 }: CTABannerProps) {
-  const isAmber = variant === "amber";
+  const isLight = variant === "light" || variant === "amber";
 
   return (
-    <section className={`py-16 lg:py-20 ${isAmber ? "bg-amber" : "bg-charcoal-deep"}`}>
+    <section
+      className={`py-16 lg:py-20 border-t border-edge ${
+        isLight ? "bg-surface-raised" : "bg-obsidian grain"
+      }`}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h2
-          className={`text-3xl lg:text-4xl font-bold tracking-tight mb-3 ${
-            isAmber ? "text-charcoal-deep" : "text-white"
-          }`}
-        >
+        <h2 className="text-3xl lg:text-4xl font-bold tracking-tight mb-3 text-white text-balance">
           {headline}
         </h2>
         {subtext && (
-          <p
-            className={`text-base lg:text-lg max-w-2xl mx-auto mb-8 ${
-              isAmber ? "text-charcoal/70" : "text-white/60"
-            }`}
-          >
+          <p className="text-base lg:text-lg max-w-2xl mx-auto mb-8 text-white/55">
             {subtext}
           </p>
         )}
@@ -44,7 +40,7 @@ export default function CTABanner({
           <Button
             as="link"
             href={primaryHref}
-            variant={isAmber ? "secondary" : "primary"}
+            variant="primary"
             size="lg"
             data-track="request_service_click"
             data-track-location="cta_banner"
@@ -55,7 +51,7 @@ export default function CTABanner({
             <Button
               as="tel"
               href={secondaryHref}
-              variant={isAmber ? "outline-dark" : "outline-white"}
+              variant="outline-white"
               size="lg"
               data-track="phone_click"
               data-track-location="cta_banner"

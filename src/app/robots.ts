@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: "/",
       disallow: ["/api/"],
     },
-    sitemap: "https://www.dialedinelectricroseburg.com/sitemap.xml",
+    sitemap: "https://dialedinelectricroseburg.com/sitemap.xml",
   };
 }

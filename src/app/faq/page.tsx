@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import CTABanner from "@/components/ui/CTABanner";
+import PrototypePageClosing from "@/components/prototype/PrototypePageClosing";
+import PrototypePageHero from "@/components/prototype/PrototypePageHero";
+import { ProtoInnerShell, ProtoSection } from "@/components/prototype/PrototypeInner";
 import FAQItem from "@/components/ui/FAQItem";
-import Button from "@/components/ui/Button";
 
 export const metadata: Metadata = {
   title: {
@@ -15,7 +16,7 @@ export const metadata: Metadata = {
     title: "FAQ | Dialed In Electric — Roseburg, OR",
     description:
       "Generator installation, panel upgrades, permits, and scheduling questions answered by Dialed In Electric in Roseburg, OR.",
-    url: "https://www.dialedinelectricroseburg.com/faq",
+    url: "https://dialedinelectricroseburg.com/faq",
   },
 };
 
@@ -23,17 +24,17 @@ const faqs = [
   {
     question: "What size Generac generator do I need for my home?",
     answer:
-      "Most homes in the 1,500–3,000 sq ft range run well on a 14–22kW unit, which covers HVAC, refrigerator, well pump, lights, and outlets. Larger homes or those with electric heat may need 24–26kW. We size the generator during the site walkthrough based on your panel, load list, and fuel supply — never a guess.",
+      "Most homes in the 1,500–3,000 sq ft range run well on a 14–22kW unit, which covers HVAC, refrigerator, well pump, lights, and outlets. Larger homes or those with electric heat may need 24–26kW. We size the generator during the site walkthrough based on your panel, load list, and fuel supply.",
   },
   {
     question: "How long does Generac generator installation take in Roseburg?",
     answer:
-      "Most residential installs are completed in one to two days. If a concrete pad needs to cure, we schedule the pad pour and return for electrical and gas work. From your first call to a running generator is typically one to two weeks.",
+      "Many residential installs finish in one to two days on site. If a concrete pad needs to cure, we schedule the pour separately. Overall timing depends on permits, equipment lead times, and fuel coordination.",
   },
   {
     question: "Do I need a permit for a standby generator in Oregon?",
     answer:
-      "Yes. Generator installations in Oregon require an electrical permit, and gas work needs a separate permit through your local jurisdiction. We pull all required permits, schedule inspections, and handle the paperwork.",
+      "Yes. Generator installations in Oregon require an electrical permit, and gas work needs a separate permit through your local jurisdiction. We pull required permits, schedule inspections, and handle the paperwork.",
   },
   {
     question: "What fuel does a Generac standby generator use?",
@@ -43,7 +44,7 @@ const faqs = [
   {
     question: "How much does generator installation cost in Roseburg?",
     answer:
-      "A typical whole-home Generac installation in Roseburg runs between $8,000 and $16,000 installed — depending on generator size, pad work, gas line distance, and transfer switch configuration. We provide a clear, itemized quote after a site walkthrough.",
+      "Cost depends on generator size, transfer switch type, pad work, conduit runs, and fuel setup. We provide an itemized quote after a site walkthrough with your load list and installation details.",
   },
   {
     question: "What's the difference between a standby and a portable generator?",
@@ -73,12 +74,12 @@ const faqs = [
   {
     question: "How soon can you start a job in Roseburg?",
     answer:
-      "Most projects get on the calendar within a week of accepting a proposal. Generator installs and panel upgrades are often same-week when materials and permits allow.",
+      "After you accept a proposal, we coordinate materials, permits when required, and schedule the install. Timing depends on scope, utility coordination, and equipment lead times.",
   },
   {
-    question: "Do you provide free estimates?",
+    question: "How do I get a quote?",
     answer:
-      "Yes. Call or email with a few project details and we will review the scope, answer questions, and provide a clear written quote before any work begins.",
+      "Call or email with a short description of the project and location. We review the scope, answer questions, and provide a written quote before work begins.",
   },
   {
     question: "What areas do you serve?",
@@ -113,82 +114,49 @@ export default function FAQPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
 
-      <section className="bg-charcoal-deep py-16 lg:py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center gap-2 mb-4 text-[12px] text-white/40">
-            <Link href="/" className="hover:text-white/70 transition-colors">
-              Home
-            </Link>
-            <span>/</span>
-            <span className="text-white/60">FAQ</span>
-          </div>
-          <div className="flex items-center gap-3 mb-4">
-            <div className="h-px w-8 bg-amber" aria-hidden="true" />
-            <span className="text-amber text-[11px] font-bold tracking-[0.18em] uppercase">
-              Roseburg &amp; Douglas County
-            </span>
-          </div>
-          <h1 className="text-4xl sm:text-5xl font-extrabold text-white tracking-tight mb-4 max-w-3xl">
-            Frequently Asked Questions
-          </h1>
-          <p className="text-[16px] text-white/60 leading-relaxed max-w-2xl mb-8">
-            Straight answers about Generac generator installation, panel upgrades, permits, and electrical service from Dialed In Electric in Roseburg, OR.
-          </p>
-          <Button as="tel" href="tel:15418176480" variant="primary" size="lg">
-            Call 541-817-6480
-          </Button>
-        </div>
-      </section>
+      <PrototypePageHero
+        eyebrow="FAQ"
+        title={
+          <>
+            QUESTIONS
+            <br />
+            ANSWERED.
+          </>
+        }
+        lead="Generators, panel upgrades, permits, and electrical service in Roseburg and Douglas County. CCB# 228668."
+        image="/images/gallery/generator-install-side-yard.jpg"
+        imagePosition="center 40%"
+      />
 
-      <section className="py-16 lg:py-24 bg-white">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col gap-3">
+      <ProtoInnerShell>
+        <ProtoSection eyebrow="COMMON QUESTIONS">
+          <div className="proto-faq">
             {faqs.map((faq) => (
               <FAQItem key={faq.question} question={faq.question} answer={faq.answer} />
             ))}
           </div>
-          <p className="mt-10 text-sm text-muted">
-            Looking for service details? See{" "}
-            <Link href="/generators" className="text-amber hover:underline">
-              Generac installation
-            </Link>
-            ,{" "}
-            <Link href="/backup-power" className="text-amber hover:underline">
-              backup power / transfer switches
-            </Link>
-            ,{" "}
-            <Link href="/panel-upgrades" className="text-amber hover:underline">
-              panel upgrades
-            </Link>
-            ,{" "}
-            <Link href="/ev-charger" className="text-amber hover:underline">
-              EV chargers
-            </Link>
-            ,{" "}
-            <Link href="/new-home-wiring" className="text-amber hover:underline">
-              new home wiring
-            </Link>
-            ,{" "}
-            <Link href="/commercial" className="text-amber hover:underline">
-              commercial electrical
-            </Link>
-            , or{" "}
-            <Link href="/service-areas" className="text-amber hover:underline">
-              Douglas County service areas
-            </Link>
-            .
+          <p className="proto-inner-lead" style={{ marginTop: 40 }}>
+            Related services:{" "}
+            <Link href="/generators">Generac installation</Link>,{" "}
+            <Link href="/backup-power">backup power</Link>,{" "}
+            <Link href="/panel-upgrades">panel upgrades</Link>,{" "}
+            <Link href="/ev-charger">EV chargers</Link>,{" "}
+            <Link href="/new-home-wiring">new home wiring</Link>,{" "}
+            <Link href="/commercial">commercial electrical</Link>, and{" "}
+            <Link href="/service-areas">service areas</Link>.
           </p>
-        </div>
-      </section>
+          <div className="proto-inner-actions">
+            <a className="proto-btn" href="tel:15418176480">
+              541 817 6480 <span>↗</span>
+            </a>
+            <Link className="proto-textlink" href="/contact">
+              REQUEST SERVICE <span className="arrow">→</span>
+            </Link>
+          </div>
+        </ProtoSection>
+      </ProtoInnerShell>
 
-      <CTABanner
-        headline="Still have a question?"
-        subtext="Call or email Dialed In Electric. We'll walk through your project and give you a clear next step."
-        primaryLabel="Request Service"
-        primaryHref="/contact"
-        secondaryLabel="Call 541-817-6480"
-        secondaryHref="tel:15418176480"
-      />
+      <PrototypePageClosing trackLocation="faq_close" />
     </>
   );
 }

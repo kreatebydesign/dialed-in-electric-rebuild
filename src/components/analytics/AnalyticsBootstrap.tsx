@@ -14,6 +14,7 @@ const VALID_EVENTS = new Set<AnalyticsEventName>([
   "request_service_click",
   "quote_form_start",
   "quote_form_submit_error",
+  "quote_form_submit_success",
 ]);
 
 /**

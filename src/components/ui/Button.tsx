@@ -19,29 +19,20 @@ type ButtonAsTel = BaseProps &
 
 type ButtonProps = ButtonAsButton | ButtonAsLink | ButtonAsTel;
 
-// All variants share: consistent height via py, rounded-sm, tracking, semibold
 const baseClasses =
-  "inline-flex items-center justify-center font-semibold tracking-wide rounded-sm transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber focus-visible:ring-offset-2 cursor-pointer whitespace-nowrap select-none";
+  "inline-flex items-center justify-center font-semibold tracking-wide rounded-sm transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 focus-visible:ring-offset-2 focus-visible:ring-offset-obsidian cursor-pointer whitespace-nowrap select-none";
 
 const variantClasses: Record<string, string> = {
-  // Amber fill — dark text, darkens + lifts on hover
   primary:
-    "bg-amber text-charcoal-deep hover:bg-amber-dark hover:-translate-y-px hover:shadow-md",
-
-  // Charcoal fill — white text, for use on light or amber backgrounds
+    "bg-white text-charcoal-deep hover:bg-white/90 hover:-translate-y-px hover:shadow-[0_8px_24px_rgba(0,0,0,0.35)]",
   secondary:
-    "bg-charcoal-deep text-white hover:bg-charcoal",
-
-  // For dark/photo backgrounds: subtle white fill at rest, solid white fill on hover
+    "bg-charcoal-mid text-white border border-edge hover:bg-charcoal hover:border-edge-strong",
   "outline-white":
-    "bg-white/8 text-white border border-white/75 hover:bg-white hover:text-charcoal-deep hover:border-white",
-
-  // For light backgrounds: transparent, charcoal border 25%, charcoal fill + white text on hover
+    "bg-transparent text-white border border-white/50 hover:bg-white hover:text-charcoal-deep hover:border-white",
   "outline-dark":
-    "bg-transparent text-charcoal border border-charcoal/25 hover:bg-charcoal-deep hover:text-white hover:border-charcoal-deep",
+    "bg-transparent text-charcoal-deep border border-charcoal/25 hover:bg-charcoal-deep hover:text-white hover:border-charcoal-deep",
 };
 
-// Consistent height: sm=36px, md=40px, lg=48px
 const sizeClasses: Record<string, string> = {
   sm: "h-9 px-4 text-xs gap-1.5",
   md: "h-10 px-5 text-sm gap-2",

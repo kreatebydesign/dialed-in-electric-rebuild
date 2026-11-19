@@ -1,9 +1,17 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import SectionWrapper from "@/components/ui/SectionWrapper";
-import CTABanner from "@/components/ui/CTABanner";
-import Button from "@/components/ui/Button";
+import PrototypePageHero from "@/components/prototype/PrototypePageHero";
+import PrototypeInquiryBand from "@/components/prototype/PrototypeInquiryBand";
+import PrototypePageClosing from "@/components/prototype/PrototypePageClosing";
+import {
+  ProtoActions,
+  ProtoFactRow,
+  ProtoInnerShell,
+  ProtoPoints,
+  ProtoSection,
+  ProtoSplit,
+} from "@/components/prototype/PrototypeInner";
 import FAQItem from "@/components/ui/FAQItem";
 
 // ── Metadata ────────────────────────────────────────────────────────────────
@@ -19,7 +27,7 @@ export const metadata: Metadata = {
     "backup generator installation Roseburg",
     "Generac standby generator Roseburg",
     "whole home generator Roseburg",
-    "Generac Certified electrician Roseburg",
+    "Generac generator installer Roseburg",
     "generator installer Douglas County OR",
     "automatic standby generator Roseburg",
   ],
@@ -28,8 +36,8 @@ export const metadata: Metadata = {
     title: "Generac Standby Generator Installation in Roseburg, OR | Dialed In Electric",
     description:
       "Whole-home Generac standby installation in Roseburg and Douglas County. Pad, transfer switch, gas coordination, permits, and startup. CCB# 228668.",
-    url: "https://www.dialedinelectricroseburg.com/generators",
-    images: [{ url: "/images/gallery/generac-generator-install-01.jpg", width: 1200, height: 630 }],
+    url: "https://dialedinelectricroseburg.com/generators",
+    images: [{ url: "/images/gallery/generator-install-side-yard.jpg", width: 1200, height: 630 }],
   },
 };
 
@@ -43,7 +51,7 @@ const serviceSchema = {
     "Generac standby generator installation in Roseburg, OR. We handle the full install — site review, concrete pad, automatic transfer switch, electrical wiring, gas coordination, startup, and homeowner walkthrough.",
   provider: {
     "@type": "LocalBusiness",
-    "@id": "https://www.dialedinelectricroseburg.com/#business",
+    "@id": "https://dialedinelectricroseburg.com/#business",
     name: "Dialed In Electric Inc.",
     telephone: "+15418176480",
     address: {
@@ -66,7 +74,7 @@ const serviceSchema = {
     },
   ],
   serviceType: "Generator Installation",
-  url: "https://www.dialedinelectricroseburg.com/generators",
+  url: "https://dialedinelectricroseburg.com/generators",
 };
 
 const breadcrumbSchema = {
@@ -77,19 +85,19 @@ const breadcrumbSchema = {
       "@type": "ListItem",
       position: 1,
       name: "Home",
-      item: "https://www.dialedinelectricroseburg.com/",
+      item: "https://dialedinelectricroseburg.com/",
     },
     {
       "@type": "ListItem",
       position: 2,
       name: "Electrical Services",
-      item: "https://www.dialedinelectricroseburg.com/electrical-services",
+      item: "https://dialedinelectricroseburg.com/electrical-services",
     },
     {
       "@type": "ListItem",
       position: 3,
       name: "Generac Generator Installation",
-      item: "https://www.dialedinelectricroseburg.com/generators",
+      item: "https://dialedinelectricroseburg.com/generators",
     },
   ],
 };
@@ -135,7 +143,7 @@ const faqSchema = {
       name: "How much does generator installation cost in Roseburg, Oregon?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "A typical whole-home Generac standby generator installation in Roseburg runs between $8,000 and $16,000 installed, depending on generator size, pad work, gas line distance, and transfer switch configuration. We provide a clear, itemized quote after a site walkthrough — no vague estimates.",
+        text: "Total installed cost depends on generator size, pad work, gas line distance, and transfer switch layout. We provide an itemized quote after a site walkthrough so you can see each part of the scope before approving work.",
       },
     },
     {
@@ -164,8 +172,8 @@ const installScope = [
 const installProcess = [
   { step: "01", title: "Call or request a quote online", body: "Tell us your address, rough square footage, and whether you have natural gas or propane. That's all we need to get started." },
   { step: "02", title: "Site walkthrough & sizing", body: "We visit your property, review your panel, walk the generator placement, and nail down the size and scope." },
-  { step: "03", title: "Scope & proposal within 48 hrs", body: "You get a clear, itemized quote — generator model, pad work if needed, transfer switch, wiring, gas coordination, and permits." },
-  { step: "04", title: "Scheduling — usually within a week", body: "Most Roseburg installs are on the calendar within five to seven business days of accepting the proposal." },
+  { step: "03", title: "Scope & written proposal", body: "You receive an itemized scope covering generator model, pad work if needed, transfer switch, wiring, gas coordination, and permits." },
+  { step: "04", title: "Schedule the install", body: "We set the install date once equipment, permits, and gas or propane coordination are aligned with your approval." },
   { step: "05", title: "Pad, transfer gear & wiring", body: "Installation day: pad work if needed, transfer switch at the panel, all wiring run and labeled." },
   { step: "06", title: "Gas connection", body: "Coordination with your licensed gas provider happens alongside or immediately after the electrical install." },
   { step: "07", title: "Startup, testing & orientation", body: "We run a full load test, confirm automatic transfer is working, and walk you through how to operate and monitor the system." },
@@ -190,7 +198,7 @@ const faqs = [
   },
   {
     question: "How much does generator installation cost in Roseburg?",
-    answer: "A typical whole-home Generac installation in Roseburg runs between $8,000 and $16,000 installed — depending on generator size, pad work, gas line distance, and transfer switch configuration. We provide a clear, itemized quote after a site walkthrough. No vague estimates, no surprise add-ons.",
+    answer: "Total cost depends on generator size, pad work, gas line distance, and transfer switch layout. We provide an itemized quote after a site walkthrough so each line item is clear before you approve the job.",
   },
   {
     question: "What's the difference between a standby and a portable generator?",
@@ -198,48 +206,50 @@ const faqs = [
   },
 ];
 
-// ── Icons ─────────────────────────────────────────────────────────────────────
+const outageReasons = [
+  {
+    title: "Storms and grid outages",
+    body: "Ice, wind, and winter storms knock out power across Douglas County. A standby generator keeps heat, lights, and critical circuits on automatically.",
+  },
+  {
+    title: "Wildfire season shutoffs",
+    body: "Utility companies sometimes cut power during high fire danger. Those outages can last multiple days without notice.",
+  },
+  {
+    title: "Rural and well properties",
+    body: "No grid power often means no well water. A generator protects the pump, freezers, and medical equipment, not just the lights.",
+  },
+];
 
-function BoltIcon({ className }: { className?: string }) {
-  return (
-    <svg className={className} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-      <path d="M13 2L4.5 13.5H11L10 22L19.5 10.5H13L13 2Z" />
-    </svg>
-  );
-}
+const whyGenerac = [
+  { title: "Proven standby platform", body: "Generac is a widely installed home standby brand with strong parts availability in Oregon." },
+  { title: "Automatic transfer", body: "Whole-home transfer equipment switches essential loads without manual cords or switching." },
+  { title: "Natural gas or propane", body: "We size fuel supply with your licensed gas provider based on what is available at your property." },
+];
 
-function CheckIcon({ className }: { className?: string }) {
-  return (
-    <svg className={className} viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-    </svg>
-  );
-}
+const whyDialedIn = [
+  { title: "Full install scope", body: "Pad, transfer switch, wiring, gas coordination, startup, and permits when the job requires them." },
+  { title: "Local crew", body: "Based in Roseburg (CCB# 228668). We know Douglas County utilities, inspectors, and typical site constraints." },
+  { title: "Labeled, inspectable work", body: "Panels and circuits are labeled. We coordinate inspections when permits apply." },
+];
 
-function ShieldIcon() {
-  return (
-    <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.6} strokeLinecap="round" strokeLinejoin="round">
-      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-    </svg>
-  );
-}
-
-function HomeIcon() {
-  return (
-    <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.6} strokeLinecap="round" strokeLinejoin="round">
-      <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
-      <polyline points="9 22 9 12 15 12 15 22" />
-    </svg>
-  );
-}
-
-function TreeIcon() {
-  return (
-    <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.6} strokeLinecap="round" strokeLinejoin="round">
-      <path d="M17 14V2M3 14h18M3 18h18M7 18v4M17 18v4M7 10l5-5 5 5" />
-    </svg>
-  );
-}
+const fieldPhotos = [
+  {
+    src: "/images/gallery/generator-install-side-yard.jpg",
+    alt: "Generac standby generator installed in a residential side yard, Roseburg OR",
+    position: "center 40%",
+  },
+  {
+    src: "/images/projects/generac-transfer-equipment.jpg",
+    alt: "Automatic transfer switch and generator interconnect equipment",
+    position: "center 35%",
+  },
+  {
+    src: "/images/gallery/propane-generator-tank-install.jpg",
+    alt: "Propane tank and generator pad at a Douglas County home",
+    position: "center 45%",
+  },
+];
 
 // ── Page ──────────────────────────────────────────────────────────────────────
 
@@ -260,482 +270,146 @@ export default function GeneratorsPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
 
-      {/* ── 1. Hero ── */}
-      <section className="relative min-h-[68vh] flex items-center overflow-hidden bg-charcoal-deep">
-        {/* Background photo */}
-        <div className="absolute inset-0">
-          <Image
-            src="/images/gallery/generac-generator-install-01.jpg"
-            alt="Generac standby generator installed by Dialed In Electric in Roseburg, OR"
-            fill
-            className="object-cover object-center"
-            sizes="100vw"
-            priority
+      <PrototypePageHero
+        eyebrow="Generac generators"
+        title={
+          <>
+            STANDBY
+            <br />
+            GENERATORS.
+          </>
+        }
+        lead="Generac standby generator installation for homes and businesses throughout Roseburg and Douglas County. Site review, pad, wiring, transfer switch, gas coordination, and startup. CCB# 228668."
+        image="/images/gallery/generator-install-side-yard.jpg"
+        imagePosition="center 40%"
+      />
+
+      <PrototypeInquiryBand trackLocation="generators_inquiry" />
+
+      <ProtoFactRow
+        items={[
+          { label: "Generac standby", sub: "Whole-home automatic systems" },
+          { label: "CCB# 228668", sub: "Oregon licensed and insured" },
+          { label: "Douglas County", sub: "Roseburg and surrounding areas" },
+          { label: "Full install scope", sub: "Pad, wiring, transfer switch, startup" },
+        ]}
+      />
+
+      <ProtoInnerShell>
+        <ProtoSection
+          eyebrow="WHY STANDBY POWER"
+          title="Outages are common in Douglas County"
+          lead="Winter storms, downed lines, and wildfire-season shutoffs can leave rural properties without power for days. On a well, that also means no water until the grid returns."
+        >
+          <ProtoPoints items={outageReasons} />
+        </ProtoSection>
+
+        <ProtoSection eyebrow="INSTALL SCOPE" title="What we handle on site">
+          <ProtoSplit
+            image="/images/gallery/generator-install-side-yard.jpg"
+            imageAlt="Generac standby generator on pad with utility clearances, Roseburg OR"
+            imagePosition="center 40%"
+          >
+            <p className="proto-inner-lead">
+              Installations cover the full project from first visit through startup, not only placing the generator. Typical scope items:
+            </p>
+            <ProtoPoints
+              items={installScope.map((item) => ({
+                title: item.label,
+                body: item.detail,
+              }))}
+            />
+          </ProtoSplit>
+        </ProtoSection>
+
+        <ProtoSection eyebrow="PRODUCT & CREW" title="Generac standby systems, installed locally">
+          <p className="proto-inner-lead">
+            We primarily install Generac standby generators for homes and businesses in Roseburg and Douglas County.
+          </p>
+          <ProtoPoints items={whyGenerac} />
+          <ProtoPoints items={whyDialedIn} />
+        </ProtoSection>
+
+        <ProtoSection eyebrow="PROCESS" title="From first call to startup">
+          <p className="proto-inner-lead">
+            Site review, equipment selection, permit coordination when required, installation, and startup testing.
+          </p>
+          <ProtoPoints
+            items={installProcess.map((step) => ({
+              title: step.title,
+              body: step.body,
+            }))}
           />
-          <div
-            className="absolute inset-0"
-            style={{
-              background:
-                "linear-gradient(105deg, #0F0F11 0%, #0F0F11 38%, rgba(15,15,17,0.88) 58%, rgba(15,15,17,0.4) 100%)",
-            }}
-          />
-          <div className="absolute inset-0 bg-charcoal-deep/75 lg:hidden" />
-        </div>
+          <ProtoActions>
+            <Link className="proto-btn" href="/contact">
+              REQUEST INSTALLATION ESTIMATE <span>↗</span>
+            </Link>
+            <a className="proto-textlink" href="tel:15418176480">
+              541 817 6480 <span className="arrow">↗</span>
+            </a>
+          </ProtoActions>
+        </ProtoSection>
 
-        {/* Amber left accent */}
-        <div className="absolute left-0 top-0 bottom-0 w-1 bg-amber z-10" aria-hidden="true" />
-
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-          <div className="max-w-[600px] py-20 lg:py-28">
-            {/* Breadcrumb */}
-            <div className="flex items-center gap-2 mb-5 text-[12px] text-white/40">
-              <Link href="/" className="hover:text-white/70 transition-colors">Home</Link>
-              <span>/</span>
-              <Link href="/electrical-services" className="hover:text-white/70 transition-colors">Services</Link>
-              <span>/</span>
-              <span className="text-white/60">Generators</span>
-            </div>
-
-            {/* Eyebrow */}
-            <div className="flex items-center gap-3 mb-5">
-              <div className="h-px w-8 bg-amber" aria-hidden="true" />
-              <span className="text-amber text-[11px] font-bold tracking-[0.18em] uppercase">
-                Generac Certified · Roseburg &amp; Douglas County
-              </span>
-            </div>
-
-            {/* H1 */}
-            <h1 className="text-4xl sm:text-5xl lg:text-[58px] font-extrabold text-white leading-[1.05] tracking-tight mb-5">
-              Generac Standby Generator<br />
-              <span className="text-amber">Installation</span> in Roseburg, OR
-            </h1>
-
-            <p className="text-[17px] text-white/65 leading-relaxed max-w-xl mb-9">
-              Generac standby generator installation for homes and businesses throughout Roseburg and Douglas County. We handle the full install — site review, pad, wiring, transfer switch, gas hookup, and startup. Licensed &amp; insured. CCB# 228668.
-            </p>
-
-            <div className="flex flex-col sm:flex-row gap-3 mb-9">
-              <Button as="link" href="/contact" variant="primary" size="lg">
-                <BoltIcon className="w-4 h-4" />
-                Request a Free Quote
-              </Button>
-              <Button as="tel" href="tel:15418176480" variant="outline-white" size="lg">
-                Call 541-817-6480
-              </Button>
-            </div>
-
-            <div className="flex flex-wrap gap-x-6 gap-y-2">
-              {["Generac Certified", "Same-Week Scheduling", "Permits Handled", "Fully Licensed"].map(
-                (item) => (
-                  <div key={item} className="flex items-center gap-1.5 text-[13px] text-white/50">
-                    <CheckIcon className="w-3.5 h-3.5 text-amber shrink-0" />
-                    {item}
-                  </div>
-                )
-              )}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ── 2. Trust Bar ── */}
-      <div className="bg-charcoal border-b border-white/8">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 lg:grid-cols-4 divide-x divide-white/10">
-            {[
-              { label: "Generac Certified", sub: "Certified Generac installer" },
-              { label: "CCB# 228668", sub: "Oregon licensed & insured" },
-              { label: "Same-Week Scheduling", sub: "Most installs within 7 days" },
-              { label: "Free Site Walkthrough", sub: "Clear quote in 48 hours" },
-            ].map((item) => (
-              <div key={item.label} className="flex flex-col items-center justify-center text-center py-5 px-4">
-                <span className="text-sm font-semibold text-amber tracking-wide">{item.label}</span>
-                <span className="text-[11px] text-white/40 mt-0.5 tracking-wide">{item.sub}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* ── 3. Why Backup Power Matters ── */}
-      <SectionWrapper variant="white">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          <div>
-            <div className="flex items-center gap-3 mb-5">
-              <div className="h-px w-8 bg-amber" aria-hidden="true" />
-              <span className="text-amber text-[11px] font-bold tracking-[0.18em] uppercase">
-                Why It Matters
-              </span>
-            </div>
-            <h2 className="text-3xl lg:text-[42px] font-extrabold text-charcoal-deep leading-[1.08] tracking-tight mb-5">
-              Power Outages in Douglas County Are Not Rare
-            </h2>
-            <p className="text-[16px] text-muted leading-relaxed mb-4">
-              Oregon winters bring ice storms, downed lines, and multi-day outages across Roseburg, Sutherlin, and the surrounding communities. Wildfire season adds smoke-related grid shutoffs. Rural properties on well systems lose water the moment the power goes out.
-            </p>
-            <p className="text-[16px] text-muted leading-relaxed mb-8">
-              A Generac standby generator starts automatically within seconds of detecting an outage — no manual switching, no extension cords, no running to the garage. Your home keeps running. Your food stays cold. Your well pump keeps working.
-            </p>
-            <Button as="link" href="/contact" variant="primary" size="md">
-              Talk to Us About Your Property
-            </Button>
-          </div>
-
-          {/* Three reason cards */}
-          <div className="grid gap-4">
-            {[
-              {
-                icon: <ShieldIcon />,
-                title: "Storms & Grid Outages",
-                body: "Ice, wind, and winter storms knock out power across Douglas County. A standby generator keeps your heat, lights, and critical systems on automatically.",
-              },
-              {
-                icon: <TreeIcon />,
-                title: "Wildfire Season",
-                body: "Utility companies preemptively cut power during high fire danger. Those shutoffs can last days. A generator keeps you running regardless.",
-              },
-              {
-                icon: <HomeIcon />,
-                title: "Rural & Well Properties",
-                body: "No power means no water on a well system. A generator protects your well pump, sump, freezers, and medical equipment — not just the lights.",
-              },
-            ].map((card) => (
-              <div key={card.title} className="flex gap-4 p-5 border border-edge rounded-sm hover:border-amber/40 transition-colors">
-                <span className="shrink-0 text-amber mt-0.5">{card.icon}</span>
-                <div>
-                  <h3 className="text-[14px] font-bold text-charcoal mb-1.5">{card.title}</h3>
-                  <p className="text-[13px] text-muted leading-relaxed">{card.body}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </SectionWrapper>
-
-      {/* ── 4. What's Included — Full Install Scope ── */}
-      <section className="py-16 lg:py-24 bg-surface">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
-
-            {/* Photo */}
-            <div className="relative rounded-sm overflow-hidden aspect-[4/3] lg:aspect-auto lg:h-[520px]">
-              <Image
-                src="/images/gallery/generator-install-side-yard.jpg"
-                alt="Complete generator installation — pad, transfer switch, and wiring in Roseburg, OR"
-                fill
-                className="object-cover"
-                sizes="(max-width: 1024px) 100vw, 50vw"
-              />
-              <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-amber" aria-hidden="true" />
-              {/* Stat overlay */}
-              <div className="absolute top-4 left-4 bg-charcoal-deep/85 backdrop-blur-sm border border-white/10 rounded-sm px-4 py-3">
-                <p className="text-[22px] font-extrabold text-amber leading-none">&lt; 30s</p>
-                <p className="text-[11px] text-white/60 mt-1">Automatic switchover time</p>
-              </div>
-            </div>
-
-            {/* Scope list */}
-            <div>
-              <div className="flex items-center gap-3 mb-5">
-                <div className="h-px w-8 bg-amber" aria-hidden="true" />
-                <span className="text-amber text-[11px] font-bold tracking-[0.18em] uppercase">
-                  What&apos;s Included
-                </span>
-              </div>
-              <h2 className="text-3xl lg:text-[40px] font-extrabold text-charcoal-deep tracking-tight leading-tight mb-4">
-                Everything Included.<br />Nothing Left to Coordinate.
-              </h2>
-              <p className="text-[15px] text-muted leading-relaxed mb-8">
-                Every installation covers the full project from first visit to passing inspection — not just dropping off the generator. Here&apos;s what&apos;s included:
-              </p>
-
-              <ul className="flex flex-col divide-y divide-edge">
-                {installScope.map((item) => (
-                  <li key={item.label} className="flex gap-4 py-4 first:pt-0">
-                    <CheckIcon className="w-4 h-4 text-amber shrink-0 mt-1" />
-                    <div>
-                      <p className="text-[14px] font-semibold text-charcoal">{item.label}</p>
-                      <p className="text-[13px] text-muted mt-0.5 leading-relaxed">{item.detail}</p>
-                    </div>
-                  </li>
-                ))}
-              </ul>
-
-              <div className="mt-8">
-                <Button as="link" href="/contact" variant="primary" size="lg">
-                  <BoltIcon className="w-4 h-4" />
-                  Get a Free Walkthrough Quote
-                </Button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ── 5. Why Generac + Why Us ── */}
-      <SectionWrapper variant="white">
-        <div className="grid lg:grid-cols-2 gap-10 lg:gap-14">
-          {/* Why Generac */}
-          <div className="p-7 lg:p-8 border border-edge rounded-sm border-l-2 border-l-amber">
-            <div className="flex items-center gap-3 mb-4">
-              <BoltIcon className="w-5 h-5 text-amber" />
-              <h2 className="text-xl font-extrabold text-charcoal-deep tracking-tight">Why Generac</h2>
-            </div>
-            <p className="text-[15px] text-muted leading-relaxed mb-5">
-              Generac is a widely installed home standby brand — systems are proven, parts are available, and service support is easy to find in Oregon when you need it later.
-            </p>
-            <ul className="flex flex-col gap-3">
-              {[
-                "Widely installed home standby brand with strong parts availability",
-                "Full-load transfer in seconds — no manual intervention",
-                "Runs on natural gas or propane",
-                "Remote monitoring via the MobileLink app",
-                "Quiet, compact, and designed for residential installs",
-                "Parts and service widely available in Oregon",
-              ].map((item) => (
-                <li key={item} className="flex items-start gap-2.5 text-[13px] text-charcoal">
-                  <CheckIcon className="w-3.5 h-3.5 text-amber shrink-0 mt-0.5" />
-                  {item}
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Why Dialed In */}
-          <div className="p-7 lg:p-8 bg-charcoal-deep rounded-sm relative overflow-hidden">
-            <div className="absolute top-0 left-0 right-0 h-0.5 bg-amber" aria-hidden="true" />
-            <div className="flex items-center gap-3 mb-4">
-              <BoltIcon className="w-5 h-5 text-amber" />
-              <h2 className="text-xl font-extrabold text-white tracking-tight">Why Dialed In Electric</h2>
-            </div>
-            <p className="text-[15px] text-white/60 leading-relaxed mb-5">
-              We&apos;re Generac certified — not just a general electrician who occasionally installs a generator. We&apos;ve done this work in Roseburg since 2019 and we know the local utility coordination, permit requirements, and gas provider relationships that make installs go smoothly.
-            </p>
-            <ul className="flex flex-col gap-3">
-              {[
-                "Generac certified installer",
-                "Licensed & insured in Oregon (CCB# 228668)",
-                "We pull all permits and schedule all inspections",
-                "Local crew — Roseburg to Douglas County",
-                "Same-week scheduling on most installs",
-                "Work that passes inspection the first time, labeled and organized",
-              ].map((item) => (
-                <li key={item} className="flex items-start gap-2.5 text-[13px] text-white/80">
-                  <CheckIcon className="w-3.5 h-3.5 text-amber shrink-0 mt-0.5" />
-                  {item}
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      </SectionWrapper>
-
-      {/* ── 6. Installation Process ── */}
-      <section className="py-16 lg:py-24 bg-charcoal-deep relative overflow-hidden">
-        <div
-          className="absolute -top-40 -right-40 w-[480px] h-[480px] rounded-full pointer-events-none"
-          style={{ background: "radial-gradient(circle, rgba(245,166,35,0.07) 0%, transparent 70%)" }}
-          aria-hidden="true"
-        />
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-          <div className="text-center mb-12 lg:mb-14">
-            <div className="flex items-center justify-center gap-3 mb-4">
-              <div className="h-px w-8 bg-amber" aria-hidden="true" />
-              <span className="text-amber text-[11px] font-bold tracking-[0.18em] uppercase">How It Works</span>
-              <div className="h-px w-8 bg-amber" aria-hidden="true" />
-            </div>
-            <h2 className="text-3xl lg:text-[40px] font-extrabold text-white tracking-tight mb-3">
-              From Quote to Running Generator
-            </h2>
-            <p className="text-[15px] text-white/55 max-w-lg mx-auto">
-              Every install follows the same clean process — no surprises, no handoffs to subcontractors.
-            </p>
-          </div>
-
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 lg:gap-5 mb-12">
-            {installProcess.map((step, i) => (
-              <div
-                key={step.step}
-                className={`p-5 border border-white/10 rounded-sm hover:border-amber/30 transition-colors ${
-                  i === installProcess.length - 1 ? "sm:col-span-2 lg:col-span-1 xl:col-span-1" : ""
-                }`}
-              >
-                <span className="block text-[11px] font-bold text-amber tracking-[0.18em] uppercase mb-2">
-                  Step {step.step}
-                </span>
-                <h3 className="text-[14px] font-bold text-white mb-2 leading-snug">{step.title}</h3>
-                <p className="text-[12px] text-white/50 leading-relaxed">{step.body}</p>
-              </div>
-            ))}
-          </div>
-
-          <div className="text-center">
-            <Button as="link" href="/contact" variant="primary" size="lg">
-              <BoltIcon className="w-4 h-4" />
-              Start the Process — Get a Free Quote
-            </Button>
-          </div>
-        </div>
-      </section>
-
-      {/* ── 7. Project Photos ── */}
-      <section className="py-16 lg:py-24 bg-charcoal">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-end justify-between mb-8 lg:mb-10">
-            <div>
-              <div className="flex items-center gap-3 mb-3">
-                <div className="h-px w-8 bg-amber" aria-hidden="true" />
-                <span className="text-amber text-[11px] font-bold tracking-[0.18em] uppercase">Real Work</span>
-              </div>
-              <h2 className="text-3xl lg:text-[38px] font-extrabold text-white tracking-tight">
-                Generator Installs From the Field
-              </h2>
-            </div>
-            <Link
-              href="/projects"
-              className="hidden sm:flex items-center gap-1.5 text-[13px] font-semibold text-amber hover:text-amber-light transition-colors shrink-0"
+        <ProtoSection eyebrow="FIELD PHOTOS" title="Recent generator work">
+          <div className="proto-inner-split" style={{ gridTemplateColumns: "1fr" }}>
+            <div
+              className="proto-inner-split-media"
+              style={{ display: "grid", gap: 16, gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))" }}
             >
-              All projects
-              <svg className="w-3.5 h-3.5" viewBox="0 0 16 16" fill="currentColor">
-                <path d="M8.293 3.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L10.586 9H3a1 1 0 010-2h7.586L8.293 4.707a1 1 0 010-1.414z" />
-              </svg>
+              {fieldPhotos.map((photo) => (
+                <Image
+                  key={photo.src}
+                  src={photo.src}
+                  alt={photo.alt}
+                  width={1600}
+                  height={1200}
+                  className="proto-inner-photo"
+                  style={{ objectPosition: photo.position }}
+                  sizes="(max-width: 900px) 100vw, 33vw"
+                />
+              ))}
+            </div>
+          </div>
+          <p style={{ marginTop: 20 }}>
+            <Link href="/projects" className="proto-textlink">
+              More project photos <span className="arrow">→</span>
+            </Link>
+          </p>
+        </ProtoSection>
+
+        <ProtoSection eyebrow="PANEL & TRANSFER" title="Electrical capacity and switching">
+          <p className="proto-inner-lead">
+            A standby generator connects through an automatic transfer switch at your main panel. During the walkthrough we review breaker space, grounding, and whether your service can support the transfer equipment cleanly.
+          </p>
+          <p className="proto-inner-lead">
+            Some homes need a panel or service upgrade in the same project. If you already run a portable generator, a manual transfer switch may be a better first step.
+          </p>
+          <div className="proto-inner-actions">
+            <Link className="proto-textlink" href="/panel-upgrades">
+              Panel upgrades <span className="arrow">→</span>
+            </Link>
+            <Link className="proto-textlink" href="/backup-power">
+              Manual transfer switches <span className="arrow">→</span>
+            </Link>
+            <Link className="proto-textlink" href="/service-areas/roseburg">
+              Roseburg service area <span className="arrow">→</span>
             </Link>
           </div>
+        </ProtoSection>
 
-          {/* Photo layout: 2+2 */}
-          <div className="grid grid-cols-2 gap-3 lg:gap-4">
-            <div className="relative aspect-[4/3] rounded-sm overflow-hidden group">
-              <Image
-                src="/images/gallery/generac-generator-install-01.jpg"
-                alt="Generac standby generator and automatic transfer switch — Roseburg, OR"
-                fill
-                className="object-cover group-hover:scale-105 transition-transform duration-700"
-                sizes="50vw"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-charcoal-deep/50 via-transparent to-transparent" />
-              <div className="absolute bottom-3 left-3">
-                <span className="px-2.5 py-1 bg-amber text-charcoal text-[11px] font-bold rounded-sm uppercase tracking-wide">
-                  Generac Install
-                </span>
-              </div>
-            </div>
-            <div className="relative aspect-[4/3] rounded-sm overflow-hidden group">
-              <Image
-                src="/images/gallery/generac-generator-install-02.jpg"
-                alt="Completed Generac generator system with clean wiring"
-                fill
-                className="object-cover group-hover:scale-105 transition-transform duration-700"
-                sizes="50vw"
-              />
-            </div>
-            <div className="relative aspect-[4/3] rounded-sm overflow-hidden group">
-              <Image
-                src="/images/gallery/propane-generator-tank-install.jpg"
-                alt="Propane tank and generator pad installation — Roseburg residential"
-                fill
-                className="object-cover group-hover:scale-105 transition-transform duration-700"
-                sizes="50vw"
-              />
-            </div>
-            <div className="relative aspect-[4/3] rounded-sm overflow-hidden group">
-              <Image
-                src="/images/gallery/generator-install-side-yard.jpg"
-                alt="Generator installed in side yard — residential Douglas County"
-                fill
-                className="object-cover group-hover:scale-105 transition-transform duration-700"
-                sizes="50vw"
-              />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ── Electrical considerations ── */}
-      <section className="py-14 lg:py-20 bg-surface border-y border-edge">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl">
-            <div className="flex items-center gap-3 mb-4">
-              <div className="h-px w-8 bg-amber" aria-hidden="true" />
-              <span className="text-amber text-[11px] font-bold tracking-[0.18em] uppercase">
-                Electrical Side of the Job
-              </span>
-            </div>
-            <h2 className="text-2xl lg:text-[34px] font-extrabold text-charcoal-deep tracking-tight mb-4">
-              Your Panel, Transfer Switch, and Service Capacity Matter
-            </h2>
-            <p className="text-[15px] text-muted leading-relaxed mb-4">
-              A standby generator connects through an automatic transfer switch at your main panel. During the site walkthrough we review breaker space, grounding, and whether your existing service can support the transfer equipment cleanly. Some homes need a panel or service upgrade as part of the same project — we tell you that up front after looking at the equipment, not after work has started.
-            </p>
-            <p className="text-[15px] text-muted leading-relaxed mb-5">
-              Already have a portable generator and want a safer hookup first? A manual transfer switch is a different path — we can walk you through which option fits your property.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-3 text-[13px]">
-              <Link href="/panel-upgrades" className="font-semibold text-amber hover:text-amber-light transition-colors">
-                Panel &amp; service upgrades →
-              </Link>
-              <Link href="/backup-power" className="font-semibold text-amber hover:text-amber-light transition-colors">
-                Manual transfer switches →
-              </Link>
-              <Link href="/service-areas/roseburg" className="font-semibold text-amber hover:text-amber-light transition-colors">
-                Electrician in Roseburg →
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ── 8. FAQ ── */}
-      <SectionWrapper variant="white" id="faq">
-        <div className="max-w-3xl mx-auto">
-          <div className="text-center mb-10">
-            <div className="flex items-center justify-center gap-3 mb-4">
-              <div className="h-px w-8 bg-amber" aria-hidden="true" />
-              <span className="text-amber text-[11px] font-bold tracking-[0.18em] uppercase">Common Questions</span>
-              <div className="h-px w-8 bg-amber" aria-hidden="true" />
-            </div>
-            <h2 className="text-3xl lg:text-[38px] font-extrabold text-charcoal-deep tracking-tight mb-3">
-              Generator FAQ
-            </h2>
-            <p className="text-[15px] text-muted max-w-md mx-auto">
-              Straight answers. If your question isn&apos;t here,{" "}
-              <Link href="/contact" className="text-amber hover:underline font-medium">
-                call us directly
-              </Link>
-              . Related:{" "}
-              <Link href="/backup-power" className="text-amber hover:underline font-medium">
-                portable transfer switches
-              </Link>
-              {" · "}
-              <Link href="/panel-upgrades" className="text-amber hover:underline font-medium">
-                panel upgrades
-              </Link>
-              .
-            </p>
-          </div>
-
-          <div className="border-t border-edge">
-            {faqs.map((faq, i) => (
-              <FAQItem
-                key={faq.question}
-                question={faq.question}
-                answer={faq.answer}
-                defaultOpen={i === 0}
-              />
+        <ProtoSection eyebrow="FAQ" title="Generator questions" id="faq">
+          <div className="proto-faq">
+            {faqs.map((faq) => (
+              <FAQItem key={faq.question} question={faq.question} answer={faq.answer} />
             ))}
           </div>
-        </div>
-      </SectionWrapper>
-
-      {/* ── 9. Final CTA ── */}
-      <CTABanner
-        headline="Thinking About a Backup Generator?"
-        subtext="Tell us your address, approximate square footage, and whether you have natural gas or propane. We'll follow up with clear next steps."
-        primaryLabel="Request a Free Quote"
-        primaryHref="/contact"
-        secondaryLabel="Call 541-817-6480"
-        secondaryHref="tel:15418176480"
-        variant="dark"
-      />
+          <p className="proto-inner-lead" style={{ marginTop: 32 }}>
+            Related: <Link href="/backup-power">backup power</Link>, <Link href="/panel-upgrades">panel upgrades</Link>,{" "}
+            <Link href="/service-areas">service areas</Link>.
+          </p>
+        </ProtoSection>
+      </ProtoInnerShell>
+      <PrototypePageClosing trackLocation="generators_close" />
     </>
   );
 }

@@ -1,53 +1,25 @@
 "use client";
 
-import { FormEvent, useState } from "react";
+import { FormEvent, useRef, useState } from "react";
+import { shouldFireQuoteSubmitSuccess } from "@/lib/analytics-events";
 import { trackEvent } from "@/lib/analytics";
+import {
+  BUSINESS_EMAIL,
+  BUSINESS_PHONE_DISPLAY,
+  BUSINESS_PHONE_TEL,
+  CONTACT_SERVICES,
+} from "@/lib/contact/constants";
 
-type Status = "idle" | "handoff" | "error";
+type Status = "idle" | "submitting" | "success" | "error";
 
-const BUSINESS_EMAIL = "Dialedinelectric@gmail.com";
-
-const SERVICES = [
-  "Generac generator installation",
-  "Manual transfer switch / backup power",
-  "Panel or service upgrade",
-  "New home / construction wiring",
-  "Commercial electrical",
-  "EV charger installation",
-  "Other electrical work",
-] as const;
-
-function buildMailto(payload: {
-  name: string;
-  phone: string;
-  email: string;
-  service: string;
-  message: string;
-}) {
-  const subject = encodeURIComponent(
-    `Service request — ${payload.service || "Electrical work"} — ${payload.name}`
-  );
-  const body = encodeURIComponent(
-    [
-      `Name: ${payload.name}`,
-      `Phone: ${payload.phone}`,
-      payload.email ? `Email: ${payload.email}` : null,
-      payload.service ? `Service: ${payload.service}` : null,
-      "",
-      "Project details:",
-      payload.message,
-    ]
-      .filter(Boolean)
-      .join("\n")
-  );
-  return `mailto:${BUSINESS_EMAIL}?subject=${subject}&body=${body}`;
-}
+type ApiSuccess = { ok: true; delivered: boolean; messageId?: string };
+type ApiError = { ok: false; code?: string; message?: string };
 
 export default function ContactForm() {
   const [status, setStatus] = useState<Status>("idle");
   const [errorMessage, setErrorMessage] = useState("");
   const [started, setStarted] = useState(false);
-  const [mailtoHref, setMailtoHref] = useState("");
+  const successTracked = useRef(false);
 
   function markStarted() {
     if (started) return;
@@ -55,10 +27,11 @@ export default function ContactForm() {
     trackEvent("quote_form_start", { location: "contact_page" });
   }
 
-  function onSubmit(e: FormEvent<HTMLFormElement>) {
+  async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setErrorMessage("");
+    if (status === "submitting") return;
 
+    setErrorMessage("");
     const form = e.currentTarget;
     const data = new FormData(form);
     const payload = {
@@ -70,12 +43,6 @@ export default function ContactForm() {
       website: String(data.get("website") || "").trim(),
     };
 
-    // Honeypot — bots only
-    if (payload.website) {
-      setStatus("handoff");
-      return;
-    }
-
     if (!payload.name || !payload.phone || !payload.message) {
       setStatus("error");
       setErrorMessage("Please include your name, phone number, and a short project description.");
@@ -86,199 +53,177 @@ export default function ContactForm() {
       return;
     }
 
-    const href = buildMailto(payload);
-    setMailtoHref(href);
-    setStatus("handoff");
+    setStatus("submitting");
 
-    // Mailto opens the visitor's email app — this is a handoff, not confirmed delivery.
-    // Do not fire quote_form_submit_success.
-    window.location.href = href;
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      let json: ApiSuccess | ApiError | null = null;
+      try {
+        json = (await res.json()) as ApiSuccess | ApiError;
+      } catch {
+        json = null;
+      }
+
+      if (!res.ok || !json || !json.ok) {
+        setStatus("error");
+        const message =
+          json && !json.ok && json.message
+            ? json.message
+            : "We could not send your request. Please call or email us directly.";
+        setErrorMessage(message);
+        trackEvent("quote_form_submit_error", {
+          location: "contact_page",
+          reason: json && !json.ok ? json.code || "api_error" : "http_error",
+        });
+        return;
+      }
+
+      setStatus("success");
+      if (
+        shouldFireQuoteSubmitSuccess({
+          delivered: json.delivered,
+          messageId: json.messageId,
+          alreadyTracked: successTracked.current,
+        })
+      ) {
+        successTracked.current = true;
+        trackEvent("quote_form_submit_success", { location: "contact_page" });
+      }
+      form.reset();
+    } catch {
+      setStatus("error");
+      setErrorMessage("Network error. Check your connection or call us directly.");
+      trackEvent("quote_form_submit_error", {
+        location: "contact_page",
+        reason: "network",
+      });
+    }
   }
 
-  if (status === "handoff") {
+  if (status === "success") {
     return (
-        <div
-        className="bg-white border border-edge rounded-sm p-7 lg:p-8 relative overflow-hidden"
-        role="status"
-        aria-live="polite"
-      >
-        <div className="absolute top-0 left-0 right-0 h-0.5 bg-amber" aria-hidden="true" />
-        <p className="text-[15px] font-extrabold text-charcoal-deep mb-2">
-          Finish in your email app
+      <div className="proto-form-handoff" role="status" aria-live="polite">
+        <h2>Request received</h2>
+        <p>
+          Your message was sent to Dialed In Electric. We will follow up using the phone number you
+          provided, usually within one business day.
         </p>
-        <p className="text-[14px] text-muted leading-relaxed mb-4">
-          Your email app should open with a message addressed to{" "}
-          <span className="font-semibold text-charcoal">{BUSINESS_EMAIL}</span>. Send that
-          message to complete your request.
-        </p>
-        <p className="text-[14px] text-muted leading-relaxed mb-5">
-          If nothing opened, tap the button below, or call / email us directly.
-        </p>
-        <div className="flex flex-col sm:flex-row gap-3 mb-5">
-          {mailtoHref && (
-            <a
-              href={mailtoHref}
-              data-track="email_click"
-              data-track-location="contact_form_handoff"
-              className="inline-flex items-center justify-center h-12 px-7 bg-amber text-charcoal-deep font-semibold text-[15px] tracking-wide rounded-sm hover:bg-amber-dark transition-colors"
-            >
-              Open Email Again
-            </a>
-          )}
+        <p>If the matter is urgent, call us directly.</p>
+        <div className="proto-form-actions">
           <a
-            href="tel:15418176480"
+            href={`tel:${BUSINESS_PHONE_TEL}`}
+            className="proto-btn"
             data-track="phone_click"
-            data-track-location="contact_form_handoff"
-            className="inline-flex items-center justify-center h-12 px-7 bg-transparent text-charcoal border border-charcoal/25 font-semibold text-[15px] tracking-wide rounded-sm hover:bg-charcoal-deep hover:text-white hover:border-charcoal-deep transition-colors"
+            data-track-location="contact_form_success"
           >
-            Call 541-817-6480
+            {BUSINESS_PHONE_DISPLAY} <span>↗</span>
           </a>
         </div>
-        <p className="text-[13px] text-muted mb-4">
-          Or email{" "}
-          <a
-            href={`mailto:${BUSINESS_EMAIL}`}
-            data-track="email_click"
-            data-track-location="contact_form_handoff"
-            className="text-amber font-semibold hover:underline"
-          >
-            {BUSINESS_EMAIL}
-          </a>
-        </p>
         <button
           type="button"
           onClick={() => {
             setStatus("idle");
-            setMailtoHref("");
+            successTracked.current = false;
           }}
-          className="text-[13px] font-semibold text-charcoal underline underline-offset-2 hover:text-amber"
+          className="proto-textlink border-0 bg-transparent cursor-pointer p-0"
         >
-          Edit request details
+          Send another request <span className="arrow">→</span>
         </button>
       </div>
     );
   }
 
   return (
-    <form
-      onSubmit={onSubmit}
-      onFocus={markStarted}
-      className="bg-white border border-edge rounded-sm p-7 lg:p-8 relative overflow-hidden"
-      noValidate
-    >
-      <div className="absolute top-0 left-0 right-0 h-0.5 bg-amber" aria-hidden="true" />
-      <h2 className="text-[15px] font-extrabold text-charcoal-deep mb-1">Request a Quote</h2>
-      <p className="text-[13px] text-muted leading-relaxed mb-6">
-        Tell us about the job. We&apos;ll open your email app with the details filled in — or call{" "}
-        <a
-          href="tel:15418176480"
-          data-track="phone_click"
-          data-track-location="contact_form"
-          className="text-amber font-semibold hover:underline"
-        >
-          541-817-6480
-        </a>{" "}
-        now.
+    <form onSubmit={onSubmit} onFocus={markStarted} className="proto-form" noValidate>
+      <h2 id="contact-form-heading">Service request</h2>
+      <p className="proto-form-intro">
+        Share a few details about the job. We deliver your request directly to our inbox. Oregon
+        CCB# 228668.
       </p>
 
-      {/* Honeypot — leave empty */}
       <div className="absolute -left-[9999px] opacity-0" aria-hidden="true">
         <label htmlFor="website">Website</label>
         <input id="website" name="website" type="text" tabIndex={-1} autoComplete="off" />
       </div>
 
-      <div className="grid sm:grid-cols-2 gap-4 mb-4">
-        <div>
-          <label htmlFor="name" className="block text-[12px] font-semibold text-charcoal mb-1.5">
-            Name <span className="text-amber">*</span>
+      <div className="proto-form-grid">
+        <div className="proto-field">
+          <label htmlFor="name">
+            Name <span aria-hidden="true">*</span>
           </label>
-          <input
-            id="name"
-            name="name"
-            type="text"
+          <input id="name" name="name" type="text" required autoComplete="name" disabled={status === "submitting"} />
+        </div>
+        <div className="proto-field">
+          <label htmlFor="phone">
+            Phone <span aria-hidden="true">*</span>
+          </label>
+          <input id="phone" name="phone" type="tel" required autoComplete="tel" disabled={status === "submitting"} />
+        </div>
+        <div className="proto-field proto-field--full">
+          <label htmlFor="email">Email</label>
+          <input id="email" name="email" type="email" autoComplete="email" disabled={status === "submitting"} />
+        </div>
+        <div className="proto-field proto-field--full">
+          <label htmlFor="service">Service needed</label>
+          <select id="service" name="service" defaultValue="" disabled={status === "submitting"}>
+            <option value="">Select a service (optional)</option>
+            {CONTACT_SERVICES.map((s) => (
+              <option key={s} value={s}>
+                {s}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div className="proto-field proto-field--full">
+          <label htmlFor="message">
+            Project details <span aria-hidden="true">*</span>
+          </label>
+          <textarea
+            id="message"
+            name="message"
             required
-            autoComplete="name"
-            className="w-full h-11 px-3 rounded-sm border border-edge bg-surface text-[14px] text-charcoal focus:outline-none focus:ring-2 focus:ring-amber focus:border-amber"
+            rows={4}
+            disabled={status === "submitting"}
+            placeholder="Location, panel or generator details, and any timing notes."
           />
         </div>
-        <div>
-          <label htmlFor="phone" className="block text-[12px] font-semibold text-charcoal mb-1.5">
-            Phone <span className="text-amber">*</span>
-          </label>
-          <input
-            id="phone"
-            name="phone"
-            type="tel"
-            required
-            autoComplete="tel"
-            className="w-full h-11 px-3 rounded-sm border border-edge bg-surface text-[14px] text-charcoal focus:outline-none focus:ring-2 focus:ring-amber focus:border-amber"
-          />
-        </div>
-      </div>
-
-      <div className="mb-4">
-        <label htmlFor="email" className="block text-[12px] font-semibold text-charcoal mb-1.5">
-          Email
-        </label>
-        <input
-          id="email"
-          name="email"
-          type="email"
-          autoComplete="email"
-          className="w-full h-11 px-3 rounded-sm border border-edge bg-surface text-[14px] text-charcoal focus:outline-none focus:ring-2 focus:ring-amber focus:border-amber"
-        />
-      </div>
-
-      <div className="mb-4">
-        <label htmlFor="service" className="block text-[12px] font-semibold text-charcoal mb-1.5">
-          Service needed
-        </label>
-        <select
-          id="service"
-          name="service"
-          defaultValue=""
-          className="w-full h-11 px-3 rounded-sm border border-edge bg-surface text-[14px] text-charcoal focus:outline-none focus:ring-2 focus:ring-amber focus:border-amber"
-        >
-          <option value="" disabled>
-            Select a service
-          </option>
-          {SERVICES.map((s) => (
-            <option key={s} value={s}>
-              {s}
-            </option>
-          ))}
-        </select>
-      </div>
-
-      <div className="mb-5">
-        <label htmlFor="message" className="block text-[12px] font-semibold text-charcoal mb-1.5">
-          Project details <span className="text-amber">*</span>
-        </label>
-        <textarea
-          id="message"
-          name="message"
-          required
-          rows={4}
-          placeholder="Address/area, what you need, and any timing notes."
-          className="w-full px-3 py-2.5 rounded-sm border border-edge bg-surface text-[14px] text-charcoal focus:outline-none focus:ring-2 focus:ring-amber focus:border-amber resize-y min-h-[110px]"
-        />
       </div>
 
       {status === "error" && (
-        <p className="text-[13px] mb-4 text-red-700" role="alert">
-          {errorMessage}
-        </p>
+        <div role="alert">
+          <p className="proto-form-error">{errorMessage}</p>
+          <div className="proto-form-actions">
+            <a
+              href={`tel:${BUSINESS_PHONE_TEL}`}
+              className="proto-btn"
+              data-track="phone_click"
+              data-track-location="contact_form_error"
+            >
+              {BUSINESS_PHONE_DISPLAY} <span>↗</span>
+            </a>
+            <a
+              href={`mailto:${BUSINESS_EMAIL}`}
+              className="proto-textlink"
+              data-track="email_click"
+              data-track-location="contact_form_error"
+            >
+              {BUSINESS_EMAIL} <span className="arrow">↗</span>
+            </a>
+          </div>
+        </div>
       )}
 
-      <button
-        type="submit"
-        className="inline-flex items-center justify-center h-12 px-7 w-full sm:w-auto bg-amber text-charcoal-deep font-semibold text-[15px] tracking-wide rounded-sm hover:bg-amber-dark hover:-translate-y-px hover:shadow-md transition-all duration-200"
-      >
-        Send Request
+      <button type="submit" className="proto-btn" disabled={status === "submitting"}>
+        {status === "submitting" ? "SENDING…" : "SUBMIT REQUEST"}
+        <span>↗</span>
       </button>
-      <p className="text-[12px] text-muted mt-4">
-        Opens your email to {BUSINESS_EMAIL} · Oregon CCB# 228668 · Serving Roseburg and Douglas
-        County
+      <p className="proto-form-foot">
+        Delivered securely to our team at {BUSINESS_EMAIL}. Roseburg and Douglas County.
       </p>
     </form>
   );

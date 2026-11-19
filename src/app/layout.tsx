@@ -1,16 +1,27 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
-import { Inter } from "next/font/google";
+import { Barlow_Condensed, DM_Sans } from "next/font/google";
 import "./globals.css";
-import Header from "@/components/layout/Header";
-import Footer from "@/components/layout/Footer";
-import MobileCallBar from "@/components/layout/MobileCallBar";
+import PrototypeNav from "@/components/prototype/PrototypeNav";
+import PrototypeFooter from "@/components/prototype/PrototypeFooter";
+import PrototypeMobileBar from "@/components/layout/PrototypeMobileBar";
+import HomeIntroGate from "@/components/layout/HomeIntroGate";
+import IntroBootShell from "@/components/intro/IntroBootShell";
 import AnalyticsBootstrap from "@/components/analytics/AnalyticsBootstrap";
 import GoogleAnalytics from "@/components/analytics/GoogleAnalytics";
+import { INTRO_BOOT_CSS, INTRO_BOOT_SCRIPT } from "@/lib/intro-boot";
+import { SITE_URL } from "@/lib/site";
 
-const inter = Inter({
+const dmSans = DM_Sans({
   subsets: ["latin"],
-  variable: "--font-inter",
+  variable: "--font-body",
+  display: "swap",
+  weight: ["400", "500", "600", "700"],
+});
+
+const barlowCondensed = Barlow_Condensed({
+  subsets: ["latin"],
+  variable: "--font-display",
   display: "swap",
   weight: ["400", "500", "600", "700", "800"],
 });
@@ -29,19 +40,31 @@ export const metadata: Metadata = {
     "electrician Roseburg Oregon",
     "electrical contractor Roseburg OR",
     "panel upgrade Roseburg",
+    "electrical service upgrade Roseburg",
+    "meter base replacement Roseburg",
+    "200 amp service upgrade Roseburg",
     "CCB 228668",
   ],
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "48x48" },
+      { url: "/icon.svg", type: "image/svg+xml" },
+    ],
+    apple: [{ url: "/brand/dialed-in-bolt.png", sizes: "180x180" }],
+  },
   authors: [{ name: "Dialed In Electric Inc." }],
   creator: "Dialed In Electric Inc.",
-  metadataBase: new URL("https://www.dialedinelectricroseburg.com"),
-  // Canonicals are set per-page. Do not inherit "/" onto child routes.
+  metadataBase: new URL(SITE_URL),
+  alternates: {
+    canonical: "/",
+  },
   verification: {
     google: "dkQWFvw6CPfAhk-sDHzwxHYWHZNfK524ME-pf8pmJmI",
   },
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://www.dialedinelectricroseburg.com",
+    url: SITE_URL,
     siteName: "Dialed In Electric",
     title: "Electrician & Generac Installer in Roseburg, OR | Dialed In Electric",
     description:
@@ -51,7 +74,7 @@ export const metadata: Metadata = {
         url: "/images/og-default.jpg",
         width: 1200,
         height: 630,
-        alt: "Dialed In Electric — Roseburg, OR",
+        alt: "Dialed In Electric — licensed electrician in Roseburg, Oregon",
       },
     ],
   },
@@ -72,18 +95,17 @@ export const metadata: Metadata = {
   },
 };
 
-/** Only include fields verified in project content — no invented geo, hours, ratings, or priceRange. */
 const structuredData = {
   "@context": "https://schema.org",
   "@graph": [
     {
       "@type": ["Electrician", "LocalBusiness"],
-      "@id": "https://www.dialedinelectricroseburg.com/#business",
+      "@id": `${SITE_URL}/#business`,
       name: "Dialed In Electric Inc.",
       alternateName: "Dialed In Electric",
       description:
         "Licensed electrical contractor in Roseburg, OR specializing in Generac standby generator installation, panel upgrades, new home wiring, and commercial electrical services.",
-      url: "https://www.dialedinelectricroseburg.com",
+      url: SITE_URL,
       telephone: "+15418176480",
       email: "Dialedinelectric@gmail.com",
       foundingDate: "2019",
@@ -111,14 +133,14 @@ const structuredData = {
         "Oakland, OR",
       ],
       hasCredential: "Oregon CCB# 228668",
-      image: "https://www.dialedinelectricroseburg.com/images/logo/dialed-in-electric-logo.png",
+      image: `${SITE_URL}/brand/dialed-in-logo-white.png`,
     },
     {
       "@type": "WebSite",
-      "@id": "https://www.dialedinelectricroseburg.com/#website",
-      url: "https://www.dialedinelectricroseburg.com",
+      "@id": `${SITE_URL}/#website`,
+      url: SITE_URL,
       name: "Dialed In Electric",
-      publisher: { "@id": "https://www.dialedinelectricroseburg.com/#business" },
+      publisher: { "@id": `${SITE_URL}/#business` },
       inLanguage: "en-US",
     },
   ],
@@ -130,22 +152,26 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={inter.variable}>
+    <html lang="en" className={`${dmSans.variable} ${barlowCondensed.variable}`}>
       <head>
+        <script dangerouslySetInnerHTML={{ __html: INTRO_BOOT_SCRIPT }} />
+        <style dangerouslySetInnerHTML={{ __html: INTRO_BOOT_CSS }} />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
         />
       </head>
-      <body className="pb-[calc(3rem+env(safe-area-inset-bottom,0px))] lg:pb-0">
+      <body className="pb-12 lg:pb-0 antialiased bg-[var(--proto-bg)] text-[var(--proto-text)]">
+        <IntroBootShell />
+        <HomeIntroGate />
         <GoogleAnalytics />
         <Suspense fallback={null}>
           <AnalyticsBootstrap />
         </Suspense>
-        <Header />
+        <PrototypeNav />
         <main>{children}</main>
-        <Footer />
-        <MobileCallBar />
+        <PrototypeFooter />
+        <PrototypeMobileBar />
       </body>
     </html>
   );

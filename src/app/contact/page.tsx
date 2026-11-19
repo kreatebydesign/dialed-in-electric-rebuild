@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import ContactForm from "@/components/contact/ContactForm";
+import PrototypePageHero from "@/components/prototype/PrototypePageHero";
 
 export const metadata: Metadata = {
   title: {
@@ -19,38 +20,9 @@ export const metadata: Metadata = {
     title: "Contact Dialed In Electric | Roseburg, OR Electrician",
     description:
       "Call 541-817-6480, email, or send a service request. Generator installation, panel upgrades, and electrical service throughout Douglas County. CCB# 228668.",
-    url: "https://www.dialedinelectricroseburg.com/contact",
+    url: "https://dialedinelectricroseburg.com/contact",
   },
 };
-
-function CheckIcon({ className }: { className?: string }) {
-  return (
-    <svg className={className} viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-      <path
-        fillRule="evenodd"
-        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 01-1.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-        clipRule="evenodd"
-      />
-    </svg>
-  );
-}
-
-function PhoneIcon() {
-  return (
-    <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8 19.79 19.79 0 011.03 2.18 2 2 0 013 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L7.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14.92v2z" />
-    </svg>
-  );
-}
-
-function MailIcon() {
-  return (
-    <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
-      <polyline points="22,6 12,13 2,6" />
-    </svg>
-  );
-}
 
 const serviceAreas = [
   { name: "Roseburg", slug: "roseburg" },
@@ -70,222 +42,140 @@ const serviceAreas = [
 const steps = [
   {
     n: "01",
-    title: "Reach Out",
-    body: "Call, email, or send the form with a few details about your project.",
+    title: "Reach out",
+    body: "Call, use the form below, or email with a short description of the job and where the work is located.",
   },
   {
     n: "02",
-    title: "We Review the Work",
-    body: "We'll talk through the scope and answer any questions before giving you a price.",
+    title: "Review the scope",
+    body: "We ask questions about the panel, service size, generator location, or job specifics so we understand the work.",
   },
   {
     n: "03",
-    title: "Schedule the Work",
-    body: "We'll get you on the calendar and keep you updated throughout the process.",
+    title: "Schedule the work",
+    body: "When the scope is clear and you are ready to move forward, we set a date and keep you updated through completion.",
   },
 ];
 
 export default function ContactPage() {
   return (
     <>
-      {/* Hero */}
-      <section className="bg-charcoal-deep py-16 lg:py-24 relative overflow-hidden">
-        <div
-          className="absolute -top-40 -right-40 w-[500px] h-[500px] rounded-full pointer-events-none"
-          style={{ background: "radial-gradient(circle, rgba(245,166,35,0.06) 0%, transparent 70%)" }}
-          aria-hidden="true"
-        />
-        <div className="absolute left-0 top-0 bottom-0 w-1 bg-amber" aria-hidden="true" />
+      <PrototypePageHero
+        eyebrow="Contact"
+        title={
+          <>
+            GET IN
+            <br />
+            TOUCH.
+          </>
+        }
+        lead="Call or send a request for generator installs, panel and service work, or electrical projects in Roseburg and Douglas County. CCB# 228668."
+        image="/images/gallery/commercial-electrical-service.jpg"
+      />
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-          <div className="flex items-center gap-2 mb-5 text-[12px] text-white/40">
-            <Link href="/" className="hover:text-white/70 transition-colors">Home</Link>
-            <span>/</span>
-            <span className="text-white/60">Contact</span>
-          </div>
-          <div className="flex items-center gap-3 mb-4">
-            <div className="h-px w-8 bg-amber" aria-hidden="true" />
-            <span className="text-amber text-[11px] font-bold tracking-[0.18em] uppercase">
-              CCB# 228668 · Roseburg, OR
-            </span>
-          </div>
-          <h1 className="text-4xl sm:text-5xl lg:text-[56px] font-extrabold text-white leading-[1.06] tracking-tight mb-4 max-w-2xl">
-            Need Electrical Work or a Generator Quote?
-          </h1>
-          <p className="text-[16px] text-white/60 leading-relaxed max-w-xl">
-            Call, email, or send a quick request. Dialed In Electric serves Roseburg and Douglas County — generators, panels, new construction, commercial, and EV chargers.
-          </p>
-        </div>
-      </section>
+      <section className="proto-contact" aria-labelledby="contact-form-heading">
+        <div className="proto-contact-grid">
+          <div className="proto-contact-main">
+            <ContactForm />
 
-      {/* Main contact section */}
-      <section className="py-16 lg:py-24 bg-surface">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-5 gap-8 lg:gap-16">
-
-            {/* Left — form + call/email */}
-            <div className="lg:col-span-3 flex flex-col gap-5">
-              <ContactForm />
-
-              {/* Call card */}
-              <div className="bg-charcoal-deep rounded-sm p-7 lg:p-8 relative overflow-hidden">
-                <div className="absolute top-0 left-0 right-0 h-0.5 bg-amber" aria-hidden="true" />
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="flex items-center justify-center w-9 h-9 bg-amber/15 rounded-sm text-amber shrink-0">
-                    <PhoneIcon />
-                  </div>
-                  <h2 className="text-[15px] font-extrabold text-white">Call Dialed In Electric</h2>
-                </div>
-                <p className="text-[14px] text-white/55 leading-relaxed mb-6">
-                  Need help with a generator, panel upgrade, or electrical project? Give us a call and we&apos;ll talk through the next step.
-                </p>
-                <a
-                  href="tel:15418176480"
-                  data-track="phone_click"
-                  data-track-location="contact_page"
-                  className="inline-flex items-center justify-center gap-2 h-12 px-7 bg-amber text-charcoal-deep font-semibold text-[15px] tracking-wide rounded-sm hover:bg-amber-dark hover:-translate-y-px hover:shadow-md transition-all duration-200 w-full sm:w-auto"
-                >
-                  <PhoneIcon />
-                  Call 541-817-6480
-                </a>
-                <p className="text-[12px] text-white/35 mt-4">
-                  Same-day response most days · Or email anytime
-                </p>
-              </div>
-
-              {/* Email card */}
-              <div className="bg-white border border-edge rounded-sm p-7 lg:p-8 relative overflow-hidden">
-                <div className="absolute top-0 left-0 right-0 h-0.5 bg-edge" aria-hidden="true" />
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="flex items-center justify-center w-9 h-9 bg-surface rounded-sm text-charcoal shrink-0">
-                    <MailIcon />
-                  </div>
-                  <h2 className="text-[15px] font-extrabold text-charcoal-deep">Email Us</h2>
-                </div>
-                <p className="text-[14px] text-muted leading-relaxed mb-6">
-                  Prefer email? Send us the details of your project and we&apos;ll get back to you.
-                </p>
+            <div className="proto-contact-phone">
+              <p>
+                Prefer to talk through the job on the phone? Call Dialed In Electric directly. If we
+                are on a job site, leave a message and we will return your call.
+              </p>
+              <a
+                className="proto-btn"
+                href="tel:15418176480"
+                data-track="phone_click"
+                data-track-location="contact_page"
+              >
+                541 817 6480 <span>↗</span>
+              </a>
+              <p className="proto-form-foot" style={{ marginTop: 14 }}>
+                Email:{" "}
                 <a
                   href="mailto:Dialedinelectric@gmail.com"
+                  className="proto-textlink"
                   data-track="email_click"
                   data-track-location="contact_page"
-                  className="inline-flex items-center justify-center gap-2 h-12 px-7 bg-transparent text-charcoal border border-charcoal/25 font-semibold text-[15px] tracking-wide rounded-sm hover:bg-charcoal-deep hover:text-white hover:border-charcoal-deep transition-all duration-200 w-full sm:w-auto"
                 >
-                  <MailIcon />
-                  Email Us
+                  Dialedinelectric@gmail.com
                 </a>
-                <p className="text-[12px] text-muted mt-4">Dialedinelectric@gmail.com</p>
-              </div>
-            </div>
-
-            {/* Right sidebar */}
-            <div className="lg:col-span-2 flex flex-col gap-5">
-
-              {/* Address */}
-              <div className="bg-white border border-edge rounded-sm p-5">
-                <p className="text-[11px] font-bold text-charcoal/50 tracking-[0.18em] uppercase mb-3">Address</p>
-                <address className="not-italic text-[14px] text-charcoal leading-relaxed">
-                  <span className="font-semibold">Dialed In Electric Inc.</span><br />
-                  2819 Cleveland Hill Rd<br />
-                  Roseburg, OR 97471
-                </address>
-              </div>
-
-              {/* Service areas */}
-              <div className="bg-white border border-edge rounded-sm p-5">
-                <p className="text-[11px] font-bold text-charcoal/50 tracking-[0.18em] uppercase mb-3">
-                  Service Areas
-                </p>
-                <ul className="grid grid-cols-2 gap-y-2 gap-x-3">
-                  {serviceAreas.map((area) => (
-                    <li key={area.slug}>
-                      <Link
-                        href={`/service-areas/${area.slug}`}
-                        className="flex items-center gap-2 text-[13px] text-charcoal hover:text-amber transition-colors"
-                      >
-                        <CheckIcon className="w-3.5 h-3.5 text-amber shrink-0" />
-                        {area.name}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-                <p className="text-[12px] text-muted mt-3">
-                  Serving{" "}
-                  <Link href="/service-areas" className="text-amber font-semibold hover:underline">
-                    all of Douglas County, OR
-                  </Link>
-                </p>
-              </div>
-
-              {/* License */}
-              <div className="bg-surface border border-edge rounded-sm p-5">
-                <p className="text-[11px] font-bold text-charcoal/50 tracking-[0.18em] uppercase mb-3">Licensing</p>
-                <div className="flex flex-col gap-1.5 text-[13px] text-charcoal">
-                  <p><span className="font-semibold">CCB#</span> 228668</p>
-                  <p><span className="font-semibold">Oregon</span> licensed &amp; insured</p>
-                  <p><span className="font-semibold">Generac</span> factory certified</p>
-                </div>
-              </div>
-
-              <div className="bg-white border border-edge rounded-sm p-5">
-                <p className="text-[11px] font-bold text-charcoal/50 tracking-[0.18em] uppercase mb-3">
-                  Popular Services
-                </p>
-                <ul className="flex flex-col gap-2 text-[13px]">
-                  <li>
-                    <Link href="/generators" className="text-charcoal hover:text-amber transition-colors">
-                      Generac generator installation
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="/panel-upgrades" className="text-charcoal hover:text-amber transition-colors">
-                      Panel &amp; service upgrades
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="/ev-charger" className="text-charcoal hover:text-amber transition-colors">
-                      EV charger installation
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="/electrical-services" className="text-charcoal hover:text-amber transition-colors">
-                      All electrical services
-                    </Link>
-                  </li>
-                </ul>
-              </div>
+              </p>
             </div>
           </div>
+
+          <aside className="proto-contact-aside">
+            <div className="proto-contact-block">
+              <h2>Office</h2>
+              <address>
+                Dialed In Electric Inc.
+                <br />
+                2819 Cleveland Hill Rd
+                <br />
+                Roseburg, OR 97471
+              </address>
+            </div>
+
+            <div className="proto-contact-block">
+              <h2>Service areas</h2>
+              <ul className="proto-contact-areas">
+                {serviceAreas.map((area) => (
+                  <li key={area.slug}>
+                    <Link href={`/service-areas/${area.slug}`}>{area.name}</Link>
+                  </li>
+                ))}
+              </ul>
+              <p className="proto-form-foot" style={{ marginTop: 16 }}>
+                <Link href="/service-areas" className="proto-textlink">
+                  Douglas County overview <span className="arrow">→</span>
+                </Link>
+              </p>
+            </div>
+
+            <div className="proto-contact-block">
+              <h2>Licensing</h2>
+              <p>
+                CCB# 228668
+                <br />
+                Oregon licensed and insured
+                <br />
+                Generac standby generator installs
+              </p>
+            </div>
+
+            <div className="proto-contact-block">
+              <h2>Common requests</h2>
+              <ul className="proto-contact-links">
+                <li>
+                  <Link href="/generators">Generac standby generator installation</Link>
+                </li>
+                <li>
+                  <Link href="/panel-upgrades">Panel and 200-amp service upgrades</Link>
+                </li>
+                <li>
+                  <Link href="/ev-charger">EV charger installation</Link>
+                </li>
+                <li>
+                  <Link href="/electrical-services">Residential and commercial electrical</Link>
+                </li>
+              </ul>
+            </div>
+          </aside>
         </div>
-      </section>
 
-      {/* What happens next */}
-      <section className="py-16 lg:py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-xl mb-10">
-            <div className="flex items-center gap-3 mb-4">
-              <div className="h-px w-8 bg-amber" aria-hidden="true" />
-              <span className="text-amber text-[11px] font-bold tracking-[0.18em] uppercase">What Happens Next</span>
-            </div>
-            <h2 className="text-3xl lg:text-[38px] font-extrabold text-charcoal-deep tracking-tight">
-              Simple Process, No Surprises
-            </h2>
-          </div>
-          <div className="grid sm:grid-cols-3 gap-6 lg:gap-8">
+        <section className="proto-contact-steps" aria-labelledby="contact-next-heading">
+          <h2 id="contact-next-heading">What happens next</h2>
+          <div className="proto-contact-step-list">
             {steps.map((step) => (
-              <div
-                key={step.n}
-                className="flex flex-col gap-4 p-6 bg-surface rounded-sm border border-edge border-t-2 border-t-amber"
-              >
-                <span className="text-[11px] font-bold text-amber tracking-widest">{step.n}</span>
-                <div>
-                  <h3 className="text-[15px] font-bold text-charcoal-deep mb-2">{step.title}</h3>
-                  <p className="text-[13px] text-muted leading-relaxed">{step.body}</p>
-                </div>
-              </div>
+              <article key={step.n}>
+                <span>{step.n}</span>
+                <h3>{step.title}</h3>
+                <p>{step.body}</p>
+              </article>
             ))}
           </div>
-        </div>
+        </section>
       </section>
     </>
   );
