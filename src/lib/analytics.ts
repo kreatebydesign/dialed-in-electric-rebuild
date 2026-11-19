@@ -4,7 +4,7 @@
  * Do not add a second GTM/GA stack alongside this.
  */
 
-export const GA_MEASUREMENT_ID = "G-CELWZ8FRQG";
+export const GA_MEASUREMENT_ID = "G-CEWZ8FRQG0";
 
 export type AnalyticsEventName =
   | "phone_click"
