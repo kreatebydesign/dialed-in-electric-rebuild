@@ -723,10 +723,30 @@
 }
 
 .proto-intro img,
+.proto-intro-logo,
 .die-intro-boot__logo {
   width: min(230px, 45vw);
+  height: auto;
   filter: invert(1);
+}
+
+/* First-paint boot shell: logo visible immediately (no opacity-0 keyframe delay). */
+#die-intro-boot .die-intro-boot__logo {
+  animation: none;
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Approved cinematic logo animation — React intro layer only. */
+.proto-intro:not(#die-intro-boot):not(.proto-intro--from-boot) .proto-intro-logo {
   animation: proto-logo-in 1.5s ease both;
+}
+
+.proto-intro.proto-intro--from-boot .proto-intro-logo {
+  animation: none;
+  opacity: 1;
+  transform: scale(1);
+  filter: invert(1);
 }
 
 .proto-intro .pulse {

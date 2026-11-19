@@ -1,7 +1,6 @@
 "use client";
 
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
-import Image from "next/image";
 import {
   dispatchIntroEnd,
   introWasSeen,
@@ -21,11 +20,17 @@ export default function PrototypeIntro({ active }: PrototypeIntroProps) {
     if (!active) return true;
     return !document.documentElement.hasAttribute("data-intro-active");
   });
+  const [fromBoot] = useState(
+    () =>
+      typeof document !== "undefined" &&
+      document.documentElement.hasAttribute("data-intro-active")
+  );
+  const introRef = useRef<HTMLDivElement>(null);
   const timer = useRef<number | undefined>(undefined);
 
   const end = useCallback(() => {
     setHidden(true);
-    document.documentElement.removeAttribute("data-intro-react-ready");
+    document.getElementById("die-intro-boot")?.classList.remove("die-intro-boot--handoff");
     markIntroSeen();
     dispatchIntroEnd();
   }, []);
@@ -45,13 +50,20 @@ export default function PrototypeIntro({ active }: PrototypeIntroProps) {
       document.documentElement.setAttribute("data-intro-active", "true");
     }
 
-    document.documentElement.setAttribute("data-intro-react-ready", "true");
     timer.current = window.setTimeout(end, INTRO_MS);
 
     return () => {
       if (timer.current) window.clearTimeout(timer.current);
     };
   }, [active, end]);
+
+  useLayoutEffect(() => {
+    if (hidden || !active) return;
+    const boot = document.getElementById("die-intro-boot");
+    if (boot && fromBoot) {
+      boot.classList.add("die-intro-boot--handoff");
+    }
+  }, [hidden, active, fromBoot]);
 
   useEffect(() => {
     if (hidden) return;
@@ -65,17 +77,24 @@ export default function PrototypeIntro({ active }: PrototypeIntroProps) {
   if (!active || hidden) return null;
 
   return (
-    <div className={`proto-intro${hidden ? " skip" : ""}`} aria-hidden="true">
+    <div
+      ref={introRef}
+      className={`proto-intro${fromBoot ? " proto-intro--from-boot" : ""}${hidden ? " skip" : ""}`}
+      aria-hidden="true"
+    >
       <button type="button" className="proto-skipbutton" onClick={end}>
         SKIP INTRO ↗
       </button>
-      <Image
+      {/* Plain img matches boot shell for instant handoff (no Next image pipeline delay). */}
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
         src="/brand/dialed-in-original.png"
         alt=""
         width={230}
         height={230}
-        className="w-[min(230px,45vw)] h-auto"
-        priority
+        className="proto-intro-logo"
+        decoding="sync"
+        fetchPriority="high"
       />
       <div className="pulse" />
       <p>ROSEBURG, OREGON · EST. 2019</p>

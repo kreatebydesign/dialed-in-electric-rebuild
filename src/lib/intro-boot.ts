@@ -9,9 +9,9 @@ export const INTRO_BOOT_CSS = `
 #die-intro-boot{display:none}
 html[data-intro-active]:not([data-intro-done]) #die-intro-boot{display:flex}
 html[data-intro-active]:not([data-intro-done]) body>:not(#die-intro-boot){visibility:hidden!important}
-html[data-intro-react-ready] #die-intro-boot{display:none!important}
 html[data-intro-active]:not([data-intro-done]){background:#08090a}
 html[data-intro-active]:not([data-intro-done]) body{overflow:hidden}
+#die-intro-boot.die-intro-boot--handoff{visibility:hidden;pointer-events:none}
 @media (prefers-reduced-motion:reduce){
   html[data-intro-active] #die-intro-boot{display:none!important}
 }
