@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import PrototypePageClosing from "@/components/prototype/PrototypePageClosing";
-import CityServiceAreaContent from "@/components/prototype/CityServiceAreaContent";
+import CityServiceAreaContent, {
+  type CityHighlightLink,
+} from "@/components/prototype/CityServiceAreaContent";
+import { DEFAULT_OG_IMAGE } from "@/lib/site";
 
 // ─── City data ────────────────────────────────────────────────────────────────
 
@@ -14,6 +17,9 @@ type CityData = {
   intro: string;
   localNote: string;
   primaryService: string; // featured service context for this area
+  highlightTitle?: string;
+  highlightBody?: string;
+  highlightLinks?: CityHighlightLink[];
 };
 
 const cities: CityData[] = [
@@ -29,6 +35,14 @@ const cities: CityData[] = [
     localNote:
       "We know the local inspectors and utility requirements, which means less time waiting on permit approvals and inspection scheduling.",
     primaryService: "Generator Installation",
+    highlightTitle: "Roseburg headquarters",
+    highlightBody:
+      "Our shop and crew are at 2819 Cleveland Hill Rd in Roseburg. The projects page shows field photos from generator installs, panel work, and service upgrades across Douglas County.",
+    highlightLinks: [
+      { label: "View project photos", href: "/projects" },
+      { label: "Generac standby generators", href: "/generators" },
+      { label: "Panel and service upgrades", href: "/panel-upgrades" },
+    ],
   },
   {
     name: "Sutherlin",
@@ -42,6 +56,13 @@ const cities: CityData[] = [
     localNote:
       "We travel to Sutherlin regularly from Roseburg for generator and panel work.",
     primaryService: "Generator Installation",
+    highlightTitle: "Generators and backup power",
+    highlightBody:
+      "Standby generator installs and transfer equipment are common requests from Sutherlin homeowners, especially where wells and outages are a concern. Review our generator and backup power pages for scope details.",
+    highlightLinks: [
+      { label: "Generac installation scope", href: "/generators" },
+      { label: "Manual transfer switches", href: "/backup-power" },
+    ],
   },
   {
     name: "Winston",
@@ -55,6 +76,13 @@ const cities: CityData[] = [
     localNote:
       "Winston homeowners with older panels often find they need an upgrade when adding a new HVAC system or generator — we can handle both in the same visit.",
     primaryService: "Panel Upgrades",
+    highlightTitle: "Panel and service work",
+    highlightBody:
+      "Panel and service upgrades are a frequent starting point in Winston before larger loads like HVAC or a standby generator. Our panel upgrade page explains permits, labeling, and typical 200-amp work.",
+    highlightLinks: [
+      { label: "Panel and 200-amp upgrades", href: "/panel-upgrades" },
+      { label: "Full electrical services", href: "/electrical-services" },
+    ],
   },
   {
     name: "Green",
@@ -206,6 +234,7 @@ export async function generateMetadata({
       title: `Electrician in ${city.name}, OR | Dialed In Electric`,
       description: city.metaDescription,
       url: `https://dialedinelectricroseburg.com/service-areas/${city.slug}`,
+      images: [DEFAULT_OG_IMAGE],
     },
   };
 }
@@ -254,7 +283,18 @@ export default async function CityPage({
       />
 
       <CityServiceAreaContent
-        city={city}
+        city={{
+          name: city.name,
+          slug: city.slug,
+          region: city.region,
+          distance: city.distance,
+          intro: city.intro,
+          localNote: city.localNote,
+          primaryService: city.primaryService,
+          highlightTitle: city.highlightTitle,
+          highlightBody: city.highlightBody,
+          highlightLinks: city.highlightLinks,
+        }}
         otherCities={cities.filter((c) => c.slug !== city.slug).map((c) => ({ name: c.name, slug: c.slug }))}
       />
       <PrototypePageClosing trackLocation={`service_area_${city.slug}_close`} />

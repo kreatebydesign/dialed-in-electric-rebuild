@@ -341,10 +341,20 @@ export default function GeneratorsPage() {
             }))}
           />
           <ProtoActions>
-            <Link className="proto-btn" href="/contact">
+            <Link
+              className="proto-btn"
+              href="/contact"
+              data-track="request_service_click"
+              data-track-location="generators_estimate"
+            >
               REQUEST INSTALLATION ESTIMATE <span>↗</span>
             </Link>
-            <a className="proto-textlink" href="tel:15418176480">
+            <a
+              className="proto-textlink"
+              href="tel:15418176480"
+              data-track="phone_click"
+              data-track-location="generators_estimate"
+            >
               541 817 6480 <span className="arrow">↗</span>
             </a>
           </ProtoActions>

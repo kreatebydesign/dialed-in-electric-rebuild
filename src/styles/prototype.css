@@ -749,11 +749,12 @@
   filter: invert(1);
 }
 
-.proto-intro .pulse {
+.proto-intro .pulse,
+#die-intro-boot .pulse {
   height: 1px;
   width: min(270px, 65vw);
   background: linear-gradient(90deg, transparent, #f4f4f4, transparent);
-  animation: proto-pulse 2.4s ease-in-out both;
+  animation: proto-pulse 3.2s ease-in-out both;
 }
 
 .proto-intro p {

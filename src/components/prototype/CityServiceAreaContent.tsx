@@ -8,6 +8,8 @@ import {
   ProtoSection,
 } from "@/components/prototype/PrototypeInner";
 
+export type CityHighlightLink = { label: string; href: string };
+
 export type CityContent = {
   name: string;
   slug: string;
@@ -16,6 +18,9 @@ export type CityContent = {
   intro: string;
   localNote: string;
   primaryService: string;
+  highlightTitle?: string;
+  highlightBody?: string;
+  highlightLinks?: CityHighlightLink[];
 };
 
 const services = [
@@ -83,16 +88,49 @@ export default function CityServiceAreaContent({
           <ProtoLinkList items={services} />
         </ProtoSection>
 
+        {city.highlightBody ? (
+          <ProtoSection
+            eyebrow="FOCUS"
+            title={city.highlightTitle || `Electrical work near ${city.name}`}
+          >
+            <p className="proto-inner-lead">{city.highlightBody}</p>
+            {city.highlightLinks && city.highlightLinks.length > 0 ? (
+              <ul className="proto-inner-linklist" style={{ marginTop: 20 }}>
+                {city.highlightLinks.map((item) => (
+                  <li key={item.href}>
+                    <Link href={item.href}>
+                      <span>{item.label}</span>
+                      <span className="arrow" aria-hidden="true">
+                        →
+                      </span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            ) : null}
+          </ProtoSection>
+        ) : null}
+
         <ProtoSection eyebrow="LOCAL NOTES" title={`Working in ${city.name}`}>
           <p className="proto-inner-lead" style={{ marginBottom: 16 }}>
             We are based in Roseburg ({city.distance}). {city.localNote}
           </p>
           <ProtoPoints items={whyUs} />
           <div className="proto-inner-actions">
-            <Link className="proto-btn" href="/contact">
+            <Link
+              className="proto-btn"
+              href="/contact"
+              data-track="request_service_click"
+              data-track-location={`service_area_${city.slug}_inline`}
+            >
               REQUEST SERVICE <span>↗</span>
             </Link>
-            <a className="proto-textlink" href="tel:15418176480">
+            <a
+              className="proto-textlink"
+              href="tel:15418176480"
+              data-track="phone_click"
+              data-track-location={`service_area_${city.slug}_inline`}
+            >
               541 817 6480 <span className="arrow">↗</span>
             </a>
           </div>

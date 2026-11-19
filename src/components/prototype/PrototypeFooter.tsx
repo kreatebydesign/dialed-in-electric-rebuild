@@ -1,4 +1,9 @@
 import Link from "next/link";
+import {
+  BUSINESS_EMAIL,
+  BUSINESS_PHONE_DISPLAY,
+  BUSINESS_PHONE_TEL,
+} from "@/lib/contact/constants";
 
 export default function PrototypeFooter() {
   const year = new Date().getFullYear();
@@ -7,6 +12,22 @@ export default function PrototypeFooter() {
     <footer>
       <div className="proto-footer-bar">
         <span>DIALED IN ELECTRIC INC. · ROSEBURG, OREGON</span>
+        <a
+          href={`tel:${BUSINESS_PHONE_TEL}`}
+          className="hover:text-white transition-colors"
+          data-track="phone_click"
+          data-track-location="footer"
+        >
+          {BUSINESS_PHONE_DISPLAY} ↗
+        </a>
+        <a
+          href={`mailto:${BUSINESS_EMAIL}`}
+          className="hover:text-white transition-colors normal-case tracking-normal"
+          data-track="email_click"
+          data-track-location="footer"
+        >
+          {BUSINESS_EMAIL}
+        </a>
         <span>OREGON CCB #228668</span>
         <Link href="/privacy" className="hover:text-white transition-colors">
           Privacy

@@ -11,6 +11,7 @@ import {
   ProtoSection,
   ProtoSplit,
 } from "@/components/prototype/PrototypeInner";
+import { DEFAULT_OG_IMAGE } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: {
@@ -30,6 +31,7 @@ export const metadata: Metadata = {
     description:
       "Licensed electrical contractor in Roseburg, OR since 2019. Standby generator installation, residential and commercial work throughout Douglas County. CCB# 228668.",
     url: "https://dialedinelectricroseburg.com/about",
+    images: [DEFAULT_OG_IMAGE],
   },
 };
 
@@ -165,10 +167,20 @@ export default function AboutPage() {
             </li>
           </ul>
           <div className="proto-inner-actions">
-            <Link className="proto-btn" href="/contact">
+            <Link
+              className="proto-btn"
+              href="/contact"
+              data-track="request_service_click"
+              data-track-location="about_inline"
+            >
               REQUEST SERVICE <span>↗</span>
             </Link>
-            <a className="proto-textlink" href="tel:15418176480">
+            <a
+              className="proto-textlink"
+              href="tel:15418176480"
+              data-track="phone_click"
+              data-track-location="about_inline"
+            >
               541 817 6480 <span className="arrow">↗</span>
             </a>
           </div>

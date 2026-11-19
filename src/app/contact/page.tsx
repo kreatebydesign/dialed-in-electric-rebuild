@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import ContactForm from "@/components/contact/ContactForm";
 import PrototypePageHero from "@/components/prototype/PrototypePageHero";
+import { DEFAULT_OG_IMAGE } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: {
@@ -21,6 +22,7 @@ export const metadata: Metadata = {
     description:
       "Call 541-817-6480, email, or send a service request. Generator installation, panel upgrades, and electrical service throughout Douglas County. CCB# 228668.",
     url: "https://dialedinelectricroseburg.com/contact",
+    images: [DEFAULT_OG_IMAGE],
   },
 };
 

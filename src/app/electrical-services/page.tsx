@@ -11,7 +11,6 @@ import {
   ProtoPoints,
   ProtoSection,
 } from "@/components/prototype/PrototypeInner";
-
 export const metadata: Metadata = {
   title: {
     absolute: "Electrical Services Roseburg OR | Panel, Wiring, EV Charger | Dialed In Electric",
@@ -33,6 +32,14 @@ export const metadata: Metadata = {
     description:
       "Panel upgrades, new home wiring, commercial wiring, generator installation, and EV chargers. Licensed electrician in Roseburg, OR. CCB# 228668.",
     url: "https://dialedinelectricroseburg.com/electrical-services",
+    images: [
+      {
+        url: "/images/gallery/commercial-electrical-service.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Commercial electrical service work in Roseburg, Oregon",
+      },
+    ],
   },
 };
 
@@ -74,6 +81,25 @@ const commercialPoints = [
   { title: "Shops and warehouses", body: "Machine circuits, lighting, and service work." },
   { title: "Service entrances", body: "Metering, disconnects, and panel additions." },
   { title: "Coordination", body: "We work with GCs and other trades on schedule." },
+];
+
+const repairPoints = [
+  {
+    title: "Tripped breakers and overloads",
+    body: "We trace why a breaker keeps tripping, check connection points, and advise whether the circuit or panel needs an upgrade.",
+  },
+  {
+    title: "Flickering lights or partial power",
+    body: "Loose connections, damaged conductors, and service equipment issues can cause intermittent power. We test at the panel and the affected circuits.",
+  },
+  {
+    title: "Dead outlets and circuits",
+    body: "Isolated outages are often a single failed device, breaker, or junction. We locate the fault and repair or replace what failed.",
+  },
+  {
+    title: "Load evaluation before big changes",
+    body: "Adding HVAC, a hot tub, EV charger, or generator starts with whether your panel and service can support the load. Panel upgrade work is documented on our panel upgrades page.",
+  },
 ];
 
 const fieldPhotos = [
@@ -131,6 +157,29 @@ export default function ElectricalServicesPage() {
           <ProtoPoints items={residentialPoints} />
         </ProtoSection>
 
+        <ProtoSection eyebrow="REPAIRS" title="Troubleshooting and service calls">
+          <p className="proto-inner-lead">
+            Not every job is a full install. Homeowners and businesses call us for troubleshooting,
+            repairs, and honest answers about whether equipment needs replacement versus a smaller fix.
+          </p>
+          <ProtoPoints items={repairPoints} />
+          <p style={{ marginTop: 20 }}>
+            Related services:{" "}
+            <Link href="/panel-upgrades" className="proto-textlink">
+              Panel upgrades <span className="arrow">→</span>
+            </Link>
+            ,{" "}
+            <Link href="/generators" className="proto-textlink">
+              Standby generators <span className="arrow">→</span>
+            </Link>
+            ,{" "}
+            <Link href="/backup-power" className="proto-textlink">
+              Backup power <span className="arrow">→</span>
+            </Link>
+            .
+          </p>
+        </ProtoSection>
+
         <ProtoSection eyebrow="COMMERCIAL" title="Shops and tenant work">
           <ProtoPoints items={commercialPoints} />
         </ProtoSection>
@@ -138,7 +187,12 @@ export default function ElectricalServicesPage() {
         <ProtoSection eyebrow="PROCESS" title="How we work">
           <ProtoPoints items={workSteps} />
           <div className="proto-inner-actions">
-            <Link className="proto-btn" href="/contact">
+            <Link
+              className="proto-btn"
+              href="/contact"
+              data-track="request_service_click"
+              data-track-location="electrical_services_process"
+            >
               REQUEST SERVICE <span>↗</span>
             </Link>
           </div>

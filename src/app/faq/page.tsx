@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import PrototypePageClosing from "@/components/prototype/PrototypePageClosing";
+import { DEFAULT_OG_IMAGE } from "@/lib/site";
 import PrototypePageHero from "@/components/prototype/PrototypePageHero";
 import { ProtoInnerShell, ProtoSection } from "@/components/prototype/PrototypeInner";
 import FAQItem from "@/components/ui/FAQItem";
@@ -17,6 +18,7 @@ export const metadata: Metadata = {
     description:
       "Generator installation, panel upgrades, permits, and scheduling questions answered by Dialed In Electric in Roseburg, OR.",
     url: "https://dialedinelectricroseburg.com/faq",
+    images: [DEFAULT_OG_IMAGE],
   },
 };
 
@@ -146,10 +148,20 @@ export default function FAQPage() {
             <Link href="/service-areas">service areas</Link>.
           </p>
           <div className="proto-inner-actions">
-            <a className="proto-btn" href="tel:15418176480">
+            <a
+              className="proto-btn"
+              href="tel:15418176480"
+              data-track="phone_click"
+              data-track-location="faq_inline"
+            >
               541 817 6480 <span>↗</span>
             </a>
-            <Link className="proto-textlink" href="/contact">
+            <Link
+              className="proto-textlink"
+              href="/contact"
+              data-track="request_service_click"
+              data-track-location="faq_inline"
+            >
               REQUEST SERVICE <span className="arrow">→</span>
             </Link>
           </div>

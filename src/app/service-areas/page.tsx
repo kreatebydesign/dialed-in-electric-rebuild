@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import PrototypePageClosing from "@/components/prototype/PrototypePageClosing";
+import { DEFAULT_OG_IMAGE } from "@/lib/site";
 import PrototypePageHero from "@/components/prototype/PrototypePageHero";
 import {
   ProtoFactRow,
@@ -27,6 +28,7 @@ export const metadata: Metadata = {
     description:
       "Licensed electrician serving Roseburg and all of Douglas County. Generator installs, panel upgrades, residential and commercial electrical throughout the region.",
     url: "https://dialedinelectricroseburg.com/service-areas",
+    images: [DEFAULT_OG_IMAGE],
   },
 };
 
@@ -92,10 +94,20 @@ export default function ServiceAreasPage() {
             form with location details.
           </p>
           <div className="proto-inner-actions">
-            <a className="proto-btn" href="tel:15418176480">
+            <a
+              className="proto-btn"
+              href="tel:15418176480"
+              data-track="phone_click"
+              data-track-location="service_areas_inline"
+            >
               541 817 6480 <span>↗</span>
             </a>
-            <Link className="proto-textlink" href="/contact">
+            <Link
+              className="proto-textlink"
+              href="/contact"
+              data-track="request_service_click"
+              data-track-location="service_areas_inline"
+            >
               REQUEST SERVICE <span className="arrow">→</span>
             </Link>
           </div>

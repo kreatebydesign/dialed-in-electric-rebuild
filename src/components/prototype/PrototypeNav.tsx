@@ -51,6 +51,12 @@ export default function PrototypeNav() {
             href={link.href}
             onClick={() => setOpen(false)}
             aria-current={pathname === link.href ? "page" : undefined}
+            {...(link.href === "/contact"
+              ? {
+                  "data-track": "request_service_click",
+                  "data-track-location": "header_nav",
+                }
+              : {})}
           >
             {link.label}
           </Link>

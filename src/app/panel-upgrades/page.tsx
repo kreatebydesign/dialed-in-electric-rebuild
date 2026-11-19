@@ -31,6 +31,14 @@ export const metadata: Metadata = {
     description:
       "Electrical panel and 200-amp service upgrades in Roseburg and Douglas County. Permits and inspection included. CCB# 228668.",
     url: "https://dialedinelectricroseburg.com/panel-upgrades",
+    images: [
+      {
+        url: "/images/projects/panel-service-work.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Panel and service upgrade work in Roseburg, Oregon",
+      },
+    ],
   },
 };
 
@@ -212,7 +220,12 @@ export default function PanelUpgradesPage() {
             </Link>
           </div>
           <ProtoActions>
-            <Link className="proto-btn" href="/contact">
+            <Link
+              className="proto-btn"
+              href="/contact"
+              data-track="request_service_click"
+              data-track-location="panel_upgrades_review"
+            >
               REQUEST PANEL REVIEW <span>↗</span>
             </Link>
           </ProtoActions>

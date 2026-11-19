@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import HomeApproved from "@/components/prototype/HomeApproved";
+import { DEFAULT_OG_IMAGE } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: {
@@ -15,6 +16,7 @@ export const metadata: Metadata = {
     description:
       "Standby generator installs, 200-amp service upgrades, and panel work for Roseburg and Douglas County homeowners and businesses.",
     url: "https://dialedinelectricroseburg.com",
+    images: [DEFAULT_OG_IMAGE],
   },
 };
 

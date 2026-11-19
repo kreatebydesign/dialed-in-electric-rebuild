@@ -3,12 +3,11 @@
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import {
   dispatchIntroEnd,
+  introRemainingMs,
   introWasSeen,
   markIntroSeen,
   prefersReducedMotion,
 } from "@/lib/home-intro";
-
-const INTRO_MS = 3250;
 
 type PrototypeIntroProps = {
   active: boolean;
@@ -50,7 +49,7 @@ export default function PrototypeIntro({ active }: PrototypeIntroProps) {
       document.documentElement.setAttribute("data-intro-active", "true");
     }
 
-    timer.current = window.setTimeout(end, INTRO_MS);
+    timer.current = window.setTimeout(end, introRemainingMs());
 
     return () => {
       if (timer.current) window.clearTimeout(timer.current);
