@@ -3,12 +3,14 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { PORTFOLIO_PHOTOS, getFeaturedPhoto, type PortfolioPhoto } from "@/lib/projects-portfolio";
 import {
-  FEATURED_PORTFOLIO_ID,
-  PORTFOLIO_PHOTOS,
-  getFeaturedPhoto,
-  type PortfolioPhoto,
-} from "@/lib/projects-portfolio";
+  IconArrowNE,
+  IconArrowRight,
+  IconChevronLeft,
+  IconChevronRight,
+  IconClose,
+} from "@/components/ui/ProtoIcons";
 import { useRevealObserver } from "@/hooks/useReveal";
 
 export default function ProjectsPortfolio() {
@@ -105,7 +107,8 @@ export default function ProjectsPortfolio() {
             <p className="proto-portfolio-caption">{photo.caption}</p>
             {photo.serviceHref && (
               <Link className="proto-textlink mt-4 inline-flex" href={photo.serviceHref}>
-                RELATED SERVICE <span className="arrow">→</span>
+                RELATED SERVICE
+                <IconArrowRight className="proto-icon proto-icon--cta" />
               </Link>
             )}
           </div>
@@ -116,7 +119,7 @@ export default function ProjectsPortfolio() {
               aria-label="Previous photograph"
               onClick={() => step(-1)}
             >
-              ←
+              <IconChevronLeft className="proto-icon" size={20} />
             </button>
             <button
               type="button"
@@ -124,7 +127,7 @@ export default function ProjectsPortfolio() {
               aria-label="Next photograph"
               onClick={() => step(1)}
             >
-              →
+              <IconChevronRight className="proto-icon" size={20} />
             </button>
           </div>
         </div>
@@ -136,7 +139,10 @@ export default function ProjectsPortfolio() {
           aria-label={`View fullscreen: ${photo.caption}`}
         >
           <PortfolioImage photo={photo} sizes="(max-width: 900px) 100vw, min(92vw, 1400px)" />
-          <span className="proto-portfolio-expand">VIEW FULLSCREEN ↗</span>
+          <span className="proto-portfolio-expand">
+            VIEW FULLSCREEN
+            <IconArrowNE className="proto-icon proto-icon--ne" size={11} />
+          </span>
         </button>
 
         <nav className="proto-portfolio-index" aria-label="Photograph list">
@@ -179,7 +185,8 @@ export default function ProjectsPortfolio() {
               className="proto-textlink border-0 bg-transparent cursor-pointer"
               onClick={closeFullscreen}
             >
-              CLOSE <span className="arrow">×</span>
+              CLOSE
+              <IconClose className="proto-icon" size={14} />
             </button>
           </div>
           <div className="proto-portfolio-lightbox-stage">
@@ -189,7 +196,7 @@ export default function ProjectsPortfolio() {
               onClick={() => step(-1)}
               aria-label="Previous photograph"
             >
-              ‹
+              <IconChevronLeft className="proto-icon" size={22} />
             </button>
             <PortfolioImage photo={photo} sizes="100vw" priority />
             <button
@@ -198,7 +205,7 @@ export default function ProjectsPortfolio() {
               onClick={() => step(1)}
               aria-label="Next photograph"
             >
-              ›
+              <IconChevronRight className="proto-icon" size={22} />
             </button>
           </div>
         </div>

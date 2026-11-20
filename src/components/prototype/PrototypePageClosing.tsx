@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ProtoNeMark } from "@/components/ui/ProtoDecor";
 
 type PrototypePageClosingProps = {
   trackLocation?: string;
@@ -28,7 +29,10 @@ export default function PrototypePageClosing({
           data-track="phone_click"
           data-track-location={trackLocation}
         >
-          541 817 6480 ↗
+          <span className="proto-phone-big__label">
+            541 817 6480
+            <ProtoNeMark size={14} />
+          </span>
         </a>
         <Link
           className="proto-btn"
@@ -36,7 +40,8 @@ export default function PrototypePageClosing({
           data-track="request_service_click"
           data-track-location={trackLocation}
         >
-          REQUEST SERVICE <span>↗</span>
+          REQUEST SERVICE
+          <ProtoNeMark />
         </Link>
       </div>
     </section>

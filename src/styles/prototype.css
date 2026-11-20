@@ -98,6 +98,9 @@
 }
 
 .proto-navphone {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
   border-left: 1px solid #666;
   padding-left: 30px;
   font-size: 12px;
@@ -138,7 +141,7 @@
   position: absolute;
   inset: 0;
   background: linear-gradient(90deg, #08090bf0 0%, #08090bb5 30%, #08090b2a 76%),
-    linear-gradient(0deg, #08090bb5, transparent 45%);
+    linear-gradient(0deg, #08090bea 0%, #08090b66 28%, transparent 52%);
   pointer-events: none;
 }
 
@@ -205,6 +208,54 @@
   text-transform: uppercase;
 }
 
+.proto-icon {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.22s ease, opacity 0.22s ease;
+}
+
+.proto-icon--ne {
+  margin-left: 4px;
+  opacity: 0.92;
+}
+
+.proto-btn .proto-icon--ne {
+  margin-left: 0;
+}
+
+.proto-icon--cta {
+  margin-left: 2px;
+}
+
+.proto-icon--phone {
+  margin-left: 10px;
+  vertical-align: middle;
+}
+
+.proto-textlink .proto-icon--cta {
+  width: 14px;
+  height: 14px;
+}
+
+.proto-textlink:hover .proto-icon--cta {
+  transform: translateX(4px);
+}
+
+.proto-btn:hover .proto-icon--ne {
+  transform: translate(2px, -2px);
+}
+
+.proto-navphone .proto-icon--ne,
+.proto-mobile-bar__action .proto-icon--ne {
+  margin-left: 6px;
+}
+
+.proto-textlink span.arrow {
+  display: inline-flex;
+}
+
 .proto-textlink span.arrow {
   font-size: 21px;
   font-weight: 400;
@@ -247,6 +298,91 @@
   letter-spacing: 0.15em;
   font-weight: 800;
   text-transform: uppercase;
+}
+
+/* Dark editorial bridge between hero and expertise */
+.proto-keel {
+  position: relative;
+  z-index: 2;
+  background: var(--proto-bg);
+  border-top: 1px solid rgb(255 255 255 / 7%);
+  border-bottom: 1px solid var(--proto-line);
+  padding: clamp(26px, 4.5vw, 42px) 5vw clamp(22px, 3.5vw, 34px);
+}
+
+.proto-keel__inner {
+  max-width: 1240px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  column-gap: clamp(20px, 3.2vw, 44px);
+  row-gap: clamp(14px, 2vw, 18px);
+  align-items: center;
+}
+
+.proto-keel__services {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: contents;
+}
+
+.proto-keel__services li {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+}
+
+.proto-keel__services li:nth-child(2) {
+  border-left: 1px solid rgb(255 255 255 / 11%);
+  border-right: 1px solid rgb(255 255 255 / 11%);
+  padding: 0 clamp(20px, 3.2vw, 44px);
+}
+
+.proto-keel__link {
+  font-family: var(--font-display), "Arial Narrow", sans-serif;
+  font-size: clamp(19px, 2.05vw, 32px);
+  line-height: 0.92;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #f0f0ee;
+  text-decoration: none;
+  padding: 8px 0;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  letter-spacing: 0.01em;
+  transition: color 0.22s ease;
+  width: 100%;
+}
+
+.proto-keel__link:hover {
+  color: var(--proto-accent);
+}
+
+.proto-keel__link:focus-visible {
+  outline: 2px solid var(--proto-accent);
+  outline-offset: 3px;
+  border-radius: 1px;
+}
+
+.proto-keel__region {
+  margin: 0;
+  grid-column: 1 / -1;
+  justify-self: end;
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #7d8083;
+  line-height: 1.55;
+  text-align: right;
+}
+
+@media (min-width: 1100px) {
+  .proto-keel__link {
+    white-space: nowrap;
+  }
 }
 
 .proto-section-intro {
@@ -377,55 +513,143 @@
   color: #ddd;
 }
 
-.proto-project {
-  min-height: 750px;
-  position: relative;
-  display: flex;
-  align-items: flex-end;
-  padding: 90px 5vw;
-  overflow: hidden;
+/* Homepage project photography showcase */
+.proto-home-gallery {
+  padding: clamp(48px, 6vw, 72px) 5vw clamp(56px, 7vw, 80px);
+  background: var(--proto-bg);
+  border-top: 1px solid var(--proto-line);
 }
 
-.proto-project-image {
-  position: absolute;
-  inset: 0;
-  filter: brightness(0.55);
-  transition: transform 0.9s;
+.proto-home-gallery__header {
+  max-width: 640px;
+  margin: 0 auto 28px;
 }
 
-.proto-project:hover .proto-project-image {
-  transform: scale(1.035);
+.proto-home-gallery__count {
+  opacity: 0.85;
 }
 
-.proto-project::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(90deg, #08090bd0, #08090b0a 90%),
-    linear-gradient(0deg, #08090bc9, transparent 60%);
-  pointer-events: none;
+.proto-home-gallery__title {
+  margin: 12px 0 10px;
+  font-family: var(--font-display), "Arial Narrow", sans-serif;
+  font-size: clamp(22px, 2.4vw, 30px);
+  line-height: 1;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #f2f2f0;
 }
 
-.proto-project-inner {
-  z-index: 2;
+.proto-home-gallery__lead {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.75;
+  color: #a8abae;
+  max-width: 480px;
+}
+
+.proto-home-gallery__stage {
+  max-width: 1320px;
+  margin: 0 auto;
+}
+
+.proto-home-gallery__frame {
   position: relative;
   width: 100%;
+  aspect-ratio: 3 / 2;
+  overflow: hidden;
+  border: 1px solid rgb(255 255 255 / 9%);
+  background: #101214;
+}
+
+.proto-home-gallery__photo {
+  animation: proto-gallery-fade 0.45s ease;
+}
+
+@keyframes proto-gallery-fade {
+  from {
+    opacity: 0.55;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.proto-home-gallery__frame[data-reduce-motion="true"] .proto-home-gallery__photo {
+  animation: none;
+}
+
+.proto-home-gallery__nav {
+  position: absolute;
+  top: 50%;
+  z-index: 2;
+  transform: translateY(-50%);
+  width: 48px;
+  height: 48px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgb(255 255 255 / 22%);
+  background: rgb(8 9 10 / 52%);
+  color: #f4f4f2;
+  cursor: pointer;
+  backdrop-filter: blur(6px);
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.proto-home-gallery__nav--prev {
+  left: clamp(10px, 2vw, 18px);
+}
+
+.proto-home-gallery__nav--next {
+  right: clamp(10px, 2vw, 18px);
+}
+
+.proto-home-gallery__nav:hover {
+  background: rgb(242 242 240 / 92%);
+  color: #111;
+  border-color: transparent;
+}
+
+.proto-home-gallery__nav:focus-visible {
+  outline: 2px solid var(--proto-accent);
+  outline-offset: 2px;
+}
+
+.proto-home-gallery__footer {
+  max-width: 1320px;
+  margin: 20px auto 0;
   display: flex;
-  align-items: end;
+  flex-wrap: wrap;
+  align-items: center;
   justify-content: space-between;
-  gap: 30px;
+  gap: 16px 24px;
 }
 
-.proto-project h2 {
-  font-size: clamp(72px, 10vw, 150px);
-  line-height: 0.8;
-  margin: 23px 0;
+.proto-project-dots {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 22px;
 }
 
-.proto-project p {
-  max-width: 450px;
-  font-size: 13px;
-  line-height: 1.8;
+.proto-project-dots button {
+  width: 36px;
+  height: 3px;
+  padding: 0;
+  border: 0;
+  border-radius: 1px;
+  background: rgb(255 255 255 / 28%);
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.proto-project-dots button.is-active {
+  background: #f2f2f0;
+}
+
+.proto-project-dots button:hover {
+  background: rgb(255 255 255 / 55%);
 }
 
 .proto-project-controls {
@@ -494,7 +718,9 @@
 }
 
 .proto-portfolio-expand {
-  display: block;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   margin-top: 14px;
   font-size: 10px;
   letter-spacing: 0.16em;
@@ -637,6 +863,11 @@
   align-items: center;
   justify-content: center;
   transition: background 0.2s, color 0.2s;
+  flex-shrink: 0;
+}
+
+.proto-round .proto-icon {
+  margin: 0;
 }
 
 .proto-round:hover {
@@ -673,6 +904,12 @@
   margin: 25px 0;
 }
 
+.proto-phone-big__label {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
 .proto-footer-bar {
   border-top: 1px solid var(--proto-line);
   padding: 30px 5vw;
@@ -707,6 +944,29 @@
 
 .proto-kxd-credit a:hover {
   color: #f4f4f1;
+}
+
+.proto-kxd-credit__attribution {
+  margin: 0;
+  max-width: 22rem;
+  font-size: 10px;
+  line-height: 1.55;
+  letter-spacing: 0.06em;
+  text-transform: none;
+  color: #6e7174;
+}
+
+.proto-kxd-credit__attribution a {
+  color: #b8bbbe;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+@media (min-width: 640px) {
+  .proto-kxd-credit__attribution {
+    text-align: right;
+    margin-left: auto;
+  }
 }
 
 .proto-intro {
@@ -1340,9 +1600,10 @@
 }
 
 .proto-mobile-bar__action {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
+  gap: 6px;
   min-height: 48px;
   padding: 12px 16px;
   font-size: 11px;
@@ -1448,8 +1709,63 @@
     line-height: 1.8;
   }
 
+  .proto-keel {
+    padding: 28px 6vw 24px;
+  }
+
+  .proto-keel__inner {
+    grid-template-columns: 1fr;
+    row-gap: 4px;
+  }
+
+  .proto-keel__services li:nth-child(2) {
+    border: 0;
+    padding: 0;
+  }
+
+  .proto-keel__link {
+    font-size: clamp(24px, 6.8vw, 32px);
+    padding: 8px 0;
+    min-height: 48px;
+    white-space: normal;
+  }
+
+  .proto-keel__region {
+    justify-self: start;
+    text-align: left;
+    padding-top: 16px;
+    border-top: 1px solid var(--proto-line);
+    letter-spacing: 0.2em;
+  }
+
   .proto-section-intro {
-    padding: 90px 6vw 50px;
+    padding-top: 72px;
+  }
+
+  .proto-home-gallery {
+    padding: 40px 6vw 52px;
+  }
+
+  .proto-home-gallery__header {
+    margin-bottom: 22px;
+  }
+
+  .proto-home-gallery__frame {
+    aspect-ratio: 4 / 3;
+  }
+
+  .proto-home-gallery__nav {
+    width: 44px;
+    height: 44px;
+  }
+
+  .proto-round {
+    width: 46px;
+    height: 46px;
+  }
+
+  .proto-section-intro {
+    padding: 72px 6vw 50px;
     grid-template-columns: 1fr;
   }
 
@@ -1468,16 +1784,6 @@
 
   .proto-service-controls {
     padding: 0 6vw 20px;
-  }
-
-  .proto-project {
-    min-height: 620px;
-    padding: 60px 6vw;
-  }
-
-  .proto-project-inner {
-    align-items: flex-start;
-    flex-direction: column;
   }
 
   .proto-closing {
@@ -1554,6 +1860,26 @@
 
   .proto-page-body {
     padding-bottom: calc(100px + env(safe-area-inset-bottom, 0px));
+  }
+
+  .proto-kxd-credit__attribution {
+    text-align: left;
+    max-width: none;
+    font-size: 10px;
+    line-height: 1.5;
+    letter-spacing: 0.04em;
+  }
+}
+
+@media (max-width: 380px) {
+  .proto-kxd-credit__attribution {
+    max-width: 18.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .proto-home-gallery__photo {
+    animation: none !important;
   }
 }
 

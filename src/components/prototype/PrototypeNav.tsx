@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
+import { IconArrowNE, IconMenu } from "@/components/ui/ProtoIcons";
 
 const links = [
   { label: "Expertise", href: "/electrical-services" },
@@ -78,7 +79,8 @@ export default function PrototypeNav() {
         data-track="phone_click"
         data-track-location="header_desktop"
       >
-        541 817 6480 ↗
+        541 817 6480
+        <IconArrowNE className="proto-icon proto-icon--ne" size={11} />
       </a>
 
       <button
@@ -88,7 +90,7 @@ export default function PrototypeNav() {
         aria-expanded={open}
         onClick={() => setOpen(!open)}
       >
-        ☰
+        <IconMenu className="proto-icon" size={22} />
       </button>
     </header>
   );

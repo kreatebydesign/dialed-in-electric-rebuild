@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { ProtoNeMark, ProtoTextArrow } from "@/components/ui/ProtoDecor";
 import Link from "next/link";
 import PrototypePageClosing from "@/components/prototype/PrototypePageClosing";
 import PrototypePageHero from "@/components/prototype/PrototypePageHero";
@@ -137,7 +138,7 @@ export default function AboutPage() {
           <ProtoLinkList items={services.map((s) => ({ label: s.label, href: s.href }))} />
           <p style={{ marginTop: 20 }}>
             <Link href="/electrical-services" className="proto-textlink">
-              All electrical services <span className="arrow">→</span>
+              All electrical services <ProtoTextArrow />
             </Link>
           </p>
         </ProtoSection>
@@ -149,7 +150,7 @@ export default function AboutPage() {
           <ProtoBulletGrid items={serviceAreas} />
           <p style={{ marginTop: 20 }}>
             <Link href="/service-areas" className="proto-textlink">
-              Service area overview <span className="arrow">→</span>
+              Service area overview <ProtoTextArrow />
             </Link>
           </p>
         </ProtoSection>
@@ -173,7 +174,7 @@ export default function AboutPage() {
               data-track="request_service_click"
               data-track-location="about_inline"
             >
-              REQUEST SERVICE <span>↗</span>
+              REQUEST SERVICE <ProtoNeMark />
             </Link>
             <a
               className="proto-textlink"
@@ -181,7 +182,7 @@ export default function AboutPage() {
               data-track="phone_click"
               data-track-location="about_inline"
             >
-              541 817 6480 <span className="arrow">↗</span>
+              541 817 6480 <ProtoNeMark />
             </a>
           </div>
         </ProtoSection>

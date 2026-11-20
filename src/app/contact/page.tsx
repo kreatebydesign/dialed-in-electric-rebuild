@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { ProtoNeMark, ProtoTextArrow } from "@/components/ui/ProtoDecor";
 import Link from "next/link";
 import ContactForm from "@/components/contact/ContactForm";
 import PrototypePageHero from "@/components/prototype/PrototypePageHero";
@@ -91,7 +92,7 @@ export default function ContactPage() {
                 data-track="phone_click"
                 data-track-location="contact_page"
               >
-                541 817 6480 <span>↗</span>
+                541 817 6480 <ProtoNeMark />
               </a>
               <p className="proto-form-foot" style={{ marginTop: 14 }}>
                 Email:{" "}
@@ -130,7 +131,7 @@ export default function ContactPage() {
               </ul>
               <p className="proto-form-foot" style={{ marginTop: 16 }}>
                 <Link href="/service-areas" className="proto-textlink">
-                  Douglas County overview <span className="arrow">→</span>
+                  Douglas County overview <ProtoTextArrow />
                 </Link>
               </p>
             </div>

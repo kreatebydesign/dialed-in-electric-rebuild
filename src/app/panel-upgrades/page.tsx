@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { ProtoNeMark, ProtoTextArrow } from "@/components/ui/ProtoDecor";
 import Link from "next/link";
 import PrototypePageHero from "@/components/prototype/PrototypePageHero";
 import PrototypeInquiryBand from "@/components/prototype/PrototypeInquiryBand";
@@ -213,10 +214,10 @@ export default function PanelUpgradesPage() {
           />
           <div className="proto-inner-actions">
             <Link className="proto-textlink" href="/ev-charger">
-              EV charger installation <span className="arrow">→</span>
+              EV charger installation <ProtoTextArrow />
             </Link>
             <Link className="proto-textlink" href="/generators">
-              Generac standby generators <span className="arrow">→</span>
+              Generac standby generators <ProtoTextArrow />
             </Link>
           </div>
           <ProtoActions>
@@ -226,7 +227,7 @@ export default function PanelUpgradesPage() {
               data-track="request_service_click"
               data-track-location="panel_upgrades_review"
             >
-              REQUEST PANEL REVIEW <span>↗</span>
+              REQUEST PANEL REVIEW <ProtoNeMark />
             </Link>
           </ProtoActions>
         </ProtoSection>

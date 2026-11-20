@@ -1,5 +1,6 @@
 import Link from "next/link";
 import PrototypePageHero from "@/components/prototype/PrototypePageHero";
+import { ProtoNeMark, ProtoTextArrow } from "@/components/ui/ProtoDecor";
 import {
   ProtoFactRow,
   ProtoInnerShell,
@@ -100,9 +101,7 @@ export default function CityServiceAreaContent({
                   <li key={item.href}>
                     <Link href={item.href}>
                       <span>{item.label}</span>
-                      <span className="arrow" aria-hidden="true">
-                        →
-                      </span>
+                      <ProtoTextArrow />
                     </Link>
                   </li>
                 ))}
@@ -123,7 +122,8 @@ export default function CityServiceAreaContent({
               data-track="request_service_click"
               data-track-location={`service_area_${city.slug}_inline`}
             >
-              REQUEST SERVICE <span>↗</span>
+              REQUEST SERVICE
+              <ProtoNeMark />
             </Link>
             <a
               className="proto-textlink"
@@ -131,7 +131,8 @@ export default function CityServiceAreaContent({
               data-track="phone_click"
               data-track-location={`service_area_${city.slug}_inline`}
             >
-              541 817 6480 <span className="arrow">↗</span>
+              541 817 6480
+              <ProtoNeMark />
             </a>
           </div>
         </ProtoSection>
@@ -142,16 +143,15 @@ export default function CityServiceAreaContent({
               <li key={c.slug}>
                 <Link href={`/service-areas/${c.slug}`}>
                   <span>{c.name}</span>
-                  <span className="arrow" aria-hidden="true">
-                    →
-                  </span>
+                  <ProtoTextArrow />
                 </Link>
               </li>
             ))}
           </ul>
           <p style={{ marginTop: 20 }}>
             <Link href="/service-areas" className="proto-textlink">
-              Douglas County overview <span className="arrow">→</span>
+              Douglas County overview
+              <ProtoTextArrow />
             </Link>
           </p>
         </ProtoSection>

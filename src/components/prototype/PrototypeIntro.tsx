@@ -8,6 +8,7 @@ import {
   markIntroSeen,
   prefersReducedMotion,
 } from "@/lib/home-intro";
+import { ProtoNeMark } from "@/components/ui/ProtoDecor";
 
 type PrototypeIntroProps = {
   active: boolean;
@@ -82,7 +83,8 @@ export default function PrototypeIntro({ active }: PrototypeIntroProps) {
       aria-hidden="true"
     >
       <button type="button" className="proto-skipbutton" onClick={end}>
-        SKIP INTRO ↗
+        SKIP INTRO
+        <ProtoNeMark size={10} />
       </button>
       {/* Plain img matches boot shell for instant handoff (no Next image pipeline delay). */}
       {/* eslint-disable-next-line @next/next/no-img-element */}

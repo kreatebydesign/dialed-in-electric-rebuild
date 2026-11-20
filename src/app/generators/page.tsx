@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { ProtoNeMark, ProtoTextArrow } from "@/components/ui/ProtoDecor";
 import Image from "next/image";
 import Link from "next/link";
 import PrototypePageHero from "@/components/prototype/PrototypePageHero";
@@ -347,7 +348,7 @@ export default function GeneratorsPage() {
               data-track="request_service_click"
               data-track-location="generators_estimate"
             >
-              REQUEST INSTALLATION ESTIMATE <span>↗</span>
+              REQUEST INSTALLATION ESTIMATE <ProtoNeMark />
             </Link>
             <a
               className="proto-textlink"
@@ -355,7 +356,7 @@ export default function GeneratorsPage() {
               data-track="phone_click"
               data-track-location="generators_estimate"
             >
-              541 817 6480 <span className="arrow">↗</span>
+              541 817 6480 <ProtoNeMark />
             </a>
           </ProtoActions>
         </ProtoSection>
@@ -382,7 +383,7 @@ export default function GeneratorsPage() {
           </div>
           <p style={{ marginTop: 20 }}>
             <Link href="/projects" className="proto-textlink">
-              More project photos <span className="arrow">→</span>
+              More project photos <ProtoTextArrow />
             </Link>
           </p>
         </ProtoSection>
@@ -396,13 +397,13 @@ export default function GeneratorsPage() {
           </p>
           <div className="proto-inner-actions">
             <Link className="proto-textlink" href="/panel-upgrades">
-              Panel upgrades <span className="arrow">→</span>
+              Panel upgrades <ProtoTextArrow />
             </Link>
             <Link className="proto-textlink" href="/backup-power">
-              Manual transfer switches <span className="arrow">→</span>
+              Manual transfer switches <ProtoTextArrow />
             </Link>
             <Link className="proto-textlink" href="/service-areas/roseburg">
-              Roseburg service area <span className="arrow">→</span>
+              Roseburg service area <ProtoTextArrow />
             </Link>
           </div>
         </ProtoSection>

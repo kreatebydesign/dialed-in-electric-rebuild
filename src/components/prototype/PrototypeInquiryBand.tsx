@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ProtoNeMark, ProtoTextArrow } from "@/components/ui/ProtoDecor";
 
 type PrototypeInquiryBandProps = {
   label?: string;
@@ -19,7 +20,8 @@ export default function PrototypeInquiryBand({
           data-track="phone_click"
           data-track-location={trackLocation}
         >
-          541 817 6480 <span>↗</span>
+          541 817 6480
+          <ProtoNeMark />
         </a>
         <Link
           className="proto-textlink"
@@ -27,7 +29,8 @@ export default function PrototypeInquiryBand({
           data-track="request_service_click"
           data-track-location={trackLocation}
         >
-          REQUEST SERVICE <span className="arrow">→</span>
+          REQUEST SERVICE
+          <ProtoTextArrow />
         </Link>
       </div>
     </div>

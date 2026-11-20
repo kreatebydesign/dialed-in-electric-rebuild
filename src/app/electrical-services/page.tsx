@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { ProtoNeMark, ProtoTextArrow } from "@/components/ui/ProtoDecor";
 import Image from "next/image";
 import Link from "next/link";
 import PrototypePageClosing from "@/components/prototype/PrototypePageClosing";
@@ -166,15 +167,15 @@ export default function ElectricalServicesPage() {
           <p style={{ marginTop: 20 }}>
             Related services:{" "}
             <Link href="/panel-upgrades" className="proto-textlink">
-              Panel upgrades <span className="arrow">→</span>
+              Panel upgrades <ProtoTextArrow />
             </Link>
             ,{" "}
             <Link href="/generators" className="proto-textlink">
-              Standby generators <span className="arrow">→</span>
+              Standby generators <ProtoTextArrow />
             </Link>
             ,{" "}
             <Link href="/backup-power" className="proto-textlink">
-              Backup power <span className="arrow">→</span>
+              Backup power <ProtoTextArrow />
             </Link>
             .
           </p>
@@ -193,7 +194,7 @@ export default function ElectricalServicesPage() {
               data-track="request_service_click"
               data-track-location="electrical_services_process"
             >
-              REQUEST SERVICE <span>↗</span>
+              REQUEST SERVICE <ProtoNeMark />
             </Link>
           </div>
         </ProtoSection>
@@ -217,7 +218,7 @@ export default function ElectricalServicesPage() {
           </div>
           <p style={{ marginTop: 20 }}>
             <Link href="/projects" className="proto-textlink">
-              More project photos <span className="arrow">→</span>
+              More project photos <ProtoTextArrow />
             </Link>
           </p>
         </ProtoSection>

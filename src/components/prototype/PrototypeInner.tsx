@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { ReactNode } from "react";
+import { ProtoTextArrow } from "@/components/ui/ProtoDecor";
 
 export function ProtoInnerShell({ children }: { children: ReactNode }) {
   return <div className="proto-inner-shell">{children}</div>;
@@ -83,9 +84,7 @@ export function ProtoLinkList({
           <Link href={item.href}>
             <span>{item.label}</span>
             {item.note && <small>{item.note}</small>}
-            <span className="arrow" aria-hidden="true">
-              →
-            </span>
+            <ProtoTextArrow />
           </Link>
         </li>
       ))}

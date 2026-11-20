@@ -9,6 +9,7 @@ import {
   BUSINESS_PHONE_TEL,
   CONTACT_SERVICES,
 } from "@/lib/contact/constants";
+import { ProtoNeMark, ProtoTextArrow } from "@/components/ui/ProtoDecor";
 
 type Status = "idle" | "submitting" | "success" | "error";
 
@@ -121,7 +122,8 @@ export default function ContactForm() {
             data-track="phone_click"
             data-track-location="contact_form_success"
           >
-            {BUSINESS_PHONE_DISPLAY} <span>↗</span>
+            {BUSINESS_PHONE_DISPLAY}
+            <ProtoNeMark />
           </a>
         </div>
         <button
@@ -132,7 +134,8 @@ export default function ContactForm() {
           }}
           className="proto-textlink border-0 bg-transparent cursor-pointer p-0"
         >
-          Send another request <span className="arrow">→</span>
+          Send another request
+          <ProtoTextArrow />
         </button>
       </div>
     );
@@ -204,7 +207,8 @@ export default function ContactForm() {
               data-track="phone_click"
               data-track-location="contact_form_error"
             >
-              {BUSINESS_PHONE_DISPLAY} <span>↗</span>
+              {BUSINESS_PHONE_DISPLAY}
+            <ProtoNeMark />
             </a>
             <a
               href={`mailto:${BUSINESS_EMAIL}`}
@@ -212,7 +216,8 @@ export default function ContactForm() {
               data-track="email_click"
               data-track-location="contact_form_error"
             >
-              {BUSINESS_EMAIL} <span className="arrow">↗</span>
+              {BUSINESS_EMAIL}
+              <ProtoNeMark />
             </a>
           </div>
         </div>
@@ -220,7 +225,7 @@ export default function ContactForm() {
 
       <button type="submit" className="proto-btn" disabled={status === "submitting"}>
         {status === "submitting" ? "SENDING…" : "SUBMIT REQUEST"}
-        <span>↗</span>
+        <ProtoNeMark />
       </button>
       <p className="proto-form-foot">
         Delivered securely to our team at {BUSINESS_EMAIL}. Roseburg and Douglas County.

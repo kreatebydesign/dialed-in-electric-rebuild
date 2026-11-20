@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { ProtoNeMark, ProtoTextArrow } from "@/components/ui/ProtoDecor";
 import Link from "next/link";
 import PrototypePageClosing from "@/components/prototype/PrototypePageClosing";
 import { DEFAULT_OG_IMAGE } from "@/lib/site";
@@ -100,7 +101,7 @@ export default function ServiceAreasPage() {
               data-track="phone_click"
               data-track-location="service_areas_inline"
             >
-              541 817 6480 <span>↗</span>
+              541 817 6480 <ProtoNeMark />
             </a>
             <Link
               className="proto-textlink"
@@ -108,7 +109,7 @@ export default function ServiceAreasPage() {
               data-track="request_service_click"
               data-track-location="service_areas_inline"
             >
-              REQUEST SERVICE <span className="arrow">→</span>
+              REQUEST SERVICE <ProtoTextArrow />
             </Link>
           </div>
         </ProtoSection>

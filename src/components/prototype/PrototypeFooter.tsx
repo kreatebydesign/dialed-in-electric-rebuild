@@ -4,6 +4,7 @@ import {
   BUSINESS_PHONE_DISPLAY,
   BUSINESS_PHONE_TEL,
 } from "@/lib/contact/constants";
+import { IconArrowNE } from "@/components/ui/ProtoIcons";
 
 export default function PrototypeFooter() {
   const year = new Date().getFullYear();
@@ -18,7 +19,8 @@ export default function PrototypeFooter() {
           data-track="phone_click"
           data-track-location="footer"
         >
-          {BUSINESS_PHONE_DISPLAY} ↗
+          {BUSINESS_PHONE_DISPLAY}
+          <IconArrowNE className="proto-icon proto-icon--ne" size={11} />
         </a>
         <a
           href={`mailto:${BUSINESS_EMAIL}`}
@@ -35,21 +37,16 @@ export default function PrototypeFooter() {
       </div>
       <div className="proto-kxd-credit">
         <span>© {year} Dialed In Electric Inc.</span>
-        <div className="text-right">
-          <span className="block text-[9px] tracking-[0.2em] text-[#5c5f62] mb-1">
-            DIGITAL EXPERIENCE
-          </span>
-          <span>
-            Designed &amp; Developed by{" "}
-            <a
-              href="https://www.kreatebydesign.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Kreate by Design
-            </a>
-          </span>
-        </div>
+        <p className="proto-kxd-credit__attribution">
+          Digital experience designed and developed by{" "}
+          <a
+            href="https://www.kreatebydesign.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Kreate by Design
+          </a>
+        </p>
       </div>
     </footer>
   );

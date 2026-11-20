@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { IconArrowNE } from "@/components/ui/ProtoIcons";
 
 export default function PrototypeMobileBar() {
   return (
@@ -11,7 +12,8 @@ export default function PrototypeMobileBar() {
         data-track-location="mobile_call_bar"
         className="proto-mobile-bar__action"
       >
-        Call ↗
+        Call
+        <IconArrowNE className="proto-icon proto-icon--ne" size={11} />
       </a>
       <Link
         href="/contact"
@@ -19,7 +21,8 @@ export default function PrototypeMobileBar() {
         data-track-location="mobile_call_bar"
         className="proto-mobile-bar__action proto-mobile-bar__action--primary"
       >
-        Request ↗
+        Request
+        <IconArrowNE className="proto-icon proto-icon--ne" size={11} />
       </Link>
     </div>
   );
